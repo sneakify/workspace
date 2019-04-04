@@ -40,7 +40,7 @@ public class MainFrame extends JFrame implements ActionListener {//implements Vi
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     // navigation bar
-    this.makeNavigationBar();
+    this.makeNavigationBar(); // TODO
     this.add(this.navigationPanel, BorderLayout.NORTH); // TODO may need to fix alignment
 
     // content panels
