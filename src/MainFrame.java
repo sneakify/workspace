@@ -1,9 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 
-import javax.smartcardio.Card;
 import javax.swing.*;
 
 /**
@@ -37,11 +35,13 @@ public class MainFrame extends JFrame implements ActionListener {//implements Vi
   public MainFrame() {
 
     // frame
+    this.setVisible(true);
+    this.setSize(500, 500); // TODO
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     // navigation bar
     this.makeNavigationBar();
-    this.add(this.navigationPanel); // TODO may need to fix alignment
+    this.add(this.navigationPanel, BorderLayout.NORTH); // TODO may need to fix alignment
 
     // content panels
     this.mainPanel = new JPanel(new CardLayout());
@@ -56,6 +56,16 @@ public class MainFrame extends JFrame implements ActionListener {//implements Vi
     this.mainPanel.add(this.buyPanel, BUY);
     this.mainPanel.add(this.sellPanel, SELL);
     this.mainPanel.add(this.settingsPanel, SETTINGS);
+
+
+    // TODO remove
+    this.browsePanel.setBackground(Color.BLUE);
+    this.portfolioPanel.setBackground(Color.CYAN);
+    this.settingsPanel.setBackground(Color.GREEN);
+
+    this.mainPanel.setSize(400, 500);
+    this.add(this.mainPanel);
+
   }
 
   /**
