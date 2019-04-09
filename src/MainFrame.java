@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
- * TODO
+ * Overall frame that contains a navigation panel and displays the appropriate content panel.
  */
 public class MainFrame extends JFrame implements ActionListener {//implements View { //fixme commented out to test main
   // Navigation Panel & Buttons
@@ -23,6 +23,9 @@ public class MainFrame extends JFrame implements ActionListener {//implements Vi
   protected SellPanel sellPanel;
   protected SettingsPanel settingsPanel;
 
+  // Current Content Panel being displayed
+  private ContentPanel curPanel;
+
   private final static String BROWSE = "BROWSE";
   private final static String PORTFOLIO = "PORTFOLIO";
   private final static String BUY = "BUY";
@@ -30,26 +33,31 @@ public class MainFrame extends JFrame implements ActionListener {//implements Vi
   private final static String SETTINGS = "SETTINGS";
 
   /**
-   * TODO
+   * Constructor. Instantiates navigation panel and content panels. Adds panels to this frame.
    */
   public MainFrame() {
 
     // frame
     this.setVisible(true);
-    this.setSize(500, 500); // TODO
+    this.setSize(500, 500); // TODO may want to abstract
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     // navigation bar
-    this.makeNavigationBar(); // TODO
+    this.makeNavigationBar();
     this.add(this.navigationPanel, BorderLayout.NORTH); // TODO may need to fix alignment
 
-    // content panels
+    // container for content panels
     this.mainPanel = new JPanel(new CardLayout());
+    this.mainPanel.setSize(400, 500);
+    this.add(this.mainPanel);
+
+    // content panels
     this.browsePanel = new BrowsePanel();
     this.portfolioPanel = new PortfolioPanel();
     this.buyPanel = new BuyPanel();
     this.sellPanel = new SellPanel();
     this.settingsPanel = new SettingsPanel();
+
     // add content panels to main panel
     this.mainPanel.add(this.browsePanel, BROWSE);
     this.mainPanel.add(this.portfolioPanel, PORTFOLIO);
@@ -57,19 +65,19 @@ public class MainFrame extends JFrame implements ActionListener {//implements Vi
     this.mainPanel.add(this.sellPanel, SELL);
     this.mainPanel.add(this.settingsPanel, SETTINGS);
 
+    // current panel upon construction should be Browse Panel
+    this.curPanel = this.browsePanel;
 
-    // TODO remove
-    this.browsePanel.setBackground(Color.BLUE);
+
+    // TODO remove. testing purposes only
     this.portfolioPanel.setBackground(Color.CYAN);
     this.settingsPanel.setBackground(Color.GREEN);
-
-    this.mainPanel.setSize(400, 500);
-    this.add(this.mainPanel);
 
   }
 
   /**
-   * TODO
+   * Initializes navigation panel and adds 4 buttons: back, browse, portfolio, settings. Adds
+   * listener for each button. Sets visibility of back button to false by default.
    */
   private void makeNavigationBar() {
     // initialize navigation panel
@@ -97,18 +105,51 @@ public class MainFrame extends JFrame implements ActionListener {//implements Vi
   public void actionPerformed(ActionEvent e) {
     CardLayout cl = (CardLayout) this.mainPanel.getLayout();
 
+    // clicked Back button
     if (e.getSource() == this.backButton) {
-      /* TODO
+      /*
       - if in BUY, go to BROWSE
       - if in SELL, go to PORTFOLIO
-      - if in SETTINGS, ???
+      - if in SETTINGS, BROWSE TODO change to something other than BROWSE?
        */
+      if (this.curPanel == this.buyPanel || this.curPanel == this.settingsPanel) {
+        cl.show(this.mainPanel, this.BROWSE);
+        this.curPanel = this.browsePanel;
+      } else if (this.curPanel == this.sellPanel) {
+        cl.show(this.mainPanel, this.PORTFOLIO);
+        this.curPanel = this.portfolioPanel;
+      }
+
+      // clicked Browse button
     } else if (e.getSource() == this.browseButton) {
-      cl.show(this.mainPanel, BROWSE);
+      cl.show(this.mainPanel, this.BROWSE);
+      this.curPanel = this.browsePanel;
+
+      // clicked Portfolio button
     } else if (e.getSource() == this.portfolioButton) {
-      cl.show(this.mainPanel, PORTFOLIO);
+      cl.show(this.mainPanel, this.PORTFOLIO);
+      this.curPanel = this.portfolioPanel;
+
+      // clicked Settings button
     } else if (e.getSource() == this.settingsButton) {
-      cl.show(this.mainPanel, SETTINGS);
+      cl.show(this.mainPanel, this.SETTINGS);
+      this.curPanel = this.settingsPanel;
+    }
+
+    // enable or disable Back button depending on current content panel
+    this.setBackButton();
+  }
+
+  /**
+   * Determines whether to enable Back button. Only enables button for Buy, Sell, & Settings panels.
+   */
+  private void setBackButton() {
+    if (this.curPanel == this.buyPanel
+            || this.curPanel == this.sellPanel
+            || this.curPanel == this.settingsPanel) {
+      this.backButton.setEnabled(true);
+    } else {
+      this.backButton.setEnabled(false);
     }
   }
 }
