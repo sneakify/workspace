@@ -36,5 +36,17 @@ public class BrowsePanel extends ContentPanel {
 
     // filter input fields
     // TODO
+    this.songFilter = new JTextField(10);
+    this.artistFilter = new JTextField(10);
+    this.genreFilter = new JComboBox<String>();
+    // this.updateGenres(); TODO make this method
+
+    // add components to panel TODO spacing
+    this.add(songLabel);
+    this.add(this.songFilter);
+    this.add(artistLabel);
+    this.add(this.artistFilter);
+    this.add(genreLabel);
+    this.add(this.genreFilter);
   }
 }
