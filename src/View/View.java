@@ -1,9 +1,11 @@
+package View;
+
 /**
  * TODO
  */
 public interface View {
   /**
-   * Onve a view is constructed, this method is called to make the view visible to the user.
+   * Once a view is constructed, this method is called to make the view visible to the user.
    */
   void makeVisible();
 
@@ -11,4 +13,6 @@ public interface View {
    * Repaints the last updated frame.
    */
   void refresh();
+
+
 }
