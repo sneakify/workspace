@@ -1,3 +1,5 @@
+package code.View;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,7 +10,7 @@ import javax.swing.border.EmptyBorder;
 /**
  * Overall frame that contains a navigation panel and displays the appropriate content panel.
  */
-public class MainFrame extends JFrame implements ActionListener {//implements View { //fixme commented out to test main
+public class MainFrame extends JFrame implements ActionListener, View {//implements java.View.java.View { //fixme commented out to test main
   // Navigation Panel & Buttons
   private JPanel navigationPanel;
   private JButton backButton = new JButton("⬅");
@@ -77,6 +79,23 @@ public class MainFrame extends JFrame implements ActionListener {//implements Vi
     this.settingsPanel.setBackground(Color.GREEN);
 
   }
+
+  ///////////////////////////////////////////////////////
+  // TODO - STUBS
+
+  @Override
+  public void makeVisible() {
+    System.out.println("A STUB method was called: makeVisible on: " + this);
+    // TODO - STUB
+  }
+
+  @Override
+  public void refresh() {
+    System.out.println("A STUB method was called: refresh on: " + this);
+    // TODO - STUB
+  }
+
+  /////////////////////////////////////////////////////////////
 
   /**
    * Initializes navigation panel and adds 4 buttons: back, browse, portfolio, settings. Adds
@@ -155,4 +174,5 @@ public class MainFrame extends JFrame implements ActionListener {//implements Vi
       this.backButton.setEnabled(false);
     }
   }
+
 }
