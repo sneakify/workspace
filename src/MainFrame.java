@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 /**
  * Overall frame that contains a navigation panel and displays the appropriate content panel.
@@ -39,8 +40,9 @@ public class MainFrame extends JFrame implements ActionListener {//implements Vi
 
     // frame
     this.setVisible(true);
-    this.setSize(500, 500); // TODO may want to abstract
+    this.setSize(600, 600); // TODO may want to abstract
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    this.setLayout(new BorderLayout());
 
     // navigation bar
     this.makeNavigationBar();
@@ -48,8 +50,9 @@ public class MainFrame extends JFrame implements ActionListener {//implements Vi
 
     // container for content panels
     this.mainPanel = new JPanel(new CardLayout());
-    this.mainPanel.setSize(400, 500);
-    this.add(this.mainPanel);
+    this.mainPanel.setSize(300, 400);
+    this.mainPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+    this.add(this.mainPanel, BorderLayout.CENTER);
 
     // content panels
     this.browsePanel = new BrowsePanel();
