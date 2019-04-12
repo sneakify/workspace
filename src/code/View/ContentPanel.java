@@ -1,5 +1,4 @@
 package code.View;
-
 import java.awt.*;
 
 import javax.swing.*;
