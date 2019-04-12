@@ -79,30 +79,30 @@ public class DatabaseMySQL implements DatabaseAPI {
 //     * Register a patient - no recovery of newly created patient_id
 //     * @param p The patient
 //     */
-//    public void registerPatientMethod1(Patient p)
-//    {
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        String sql = "INSERT INTO patient (lastname,firstname,sex,dob) VALUES" +
-//                "('"+p.getLastName()+"','"+p.getFirstName()+"','"+p.getSex()+"','"+sdf.format(p.getDob())+"')";
-//        int key = -1;
-//        try {
-//
-//            // get connection and initialize statement
-//            Connection con = dbu.getConnection();
-//            Statement stmt = con.createStatement();
-//            stmt.executeUpdate(sql);
-//
-//            // Cleanup
-//            stmt.close();
-//
-//        } catch (SQLException e) {
-//            System.err.println("ERROR: Could not insert record: "+sql);
-//            System.err.println(e.getMessage());
-//            e.printStackTrace();
-//        }
-//    }
-//
-//
+    public void registerPatientMethod1(Patient p)
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String sql = "INSERT INTO patient (lastname,firstname,sex,dob) VALUES" +
+                "('"+p.getLastName()+"','"+p.getFirstName()+"','"+p.getSex()+"','"+sdf.format(p.getDob())+"')";
+        int key = -1;
+        try {
+
+            // get connection and initialize statement
+            Connection con = dbu.getConnection();
+            Statement stmt = con.createStatement();
+            stmt.executeUpdate(sql);
+
+            // Cleanup
+            stmt.close();
+
+        } catch (SQLException e) {
+            System.err.println("ERROR: Could not insert record: "+sql);
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
 //    /**
 //     * Register a patient - fetch patient_id that was created
 //     * @param p The Patient
