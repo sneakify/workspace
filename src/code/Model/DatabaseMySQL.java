@@ -9,6 +9,21 @@ public class DatabaseMySQL implements DatabaseAPI {
     // and loads parameters dynamically.
     DBUtils dbu;
 
+
+    /**
+     * Find existing Songs on the given date
+     * @param date Required date.  Better would be to accept null as "latest"
+     * @return A list of Songs, those stored in the chart on the given date
+     */
+    public List<Song> existingSongs(Date date) {
+
+        List<Song> list = dbu.existingSongs();
+        // TODO stuff pls stub
+        System.out.println("Oops tried to do a dummy method, with dummy return");
+        List<Song> los = new ArrayList<Song>();
+        return los;
+    }
+
     public void getConnection() {
         // stub TODO stuff stub
 
@@ -20,18 +35,6 @@ public class DatabaseMySQL implements DatabaseAPI {
     public void insertTodaySongs(List<Song> loSongYo) {
         // TODO stuff pls stub
         System.out.println("Oops tried to do a dummy method");
-    }
-
-    /**
-     * Find existing Songs on the given date
-     * @param date Required date.  Better would be to accept null as "latest"
-     * @return A list of Songs, those stored in the chart on the given date
-     */
-    public List<Song> existingSongs(Date date) {
-        // TODO stuff pls stub
-        System.out.println("Oops tried to do a dummy method, with dummy return");
-        List<Song> los = new ArrayList<Song>();
-        return los;
     }
 
     /**

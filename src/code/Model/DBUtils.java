@@ -1,6 +1,8 @@
 package code.Model;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBUtils {
 
@@ -14,6 +16,49 @@ public class DBUtils {
         this.user = user;
         this.password = password;
     }
+
+    public List<Song> existingSongs() {
+
+        // TODO - for this to work, need to set up the mysql-connector dependency in Project Structure
+        // for Reference: https://stackoverflow.com/questions/30651830/use-jdbc-mysql-connector-in-intellij-idea
+
+        List<Song> mylist = new ArrayList<>();
+
+        try {
+            Connection conn = getConnection();
+            Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+
+            ResultSet rs = st.executeQuery("SELECT * FROM song");
+
+            while (rs.next()) {
+                String name = rs.getString("title");
+
+
+                Song newSong = new Song(
+                        "stuff",
+                        "things",
+                        "else",
+                        rs.getInt("song_value"),
+                        "what");
+                // add stuff
+//                mylist.add(name)
+
+                // print stuff
+                System.out.println("adding: " + name);
+            }
+            rs.close();
+            st.close();
+            conn.close();
+
+        } catch(SQLException e) {
+            System.err.println(e.getMessage());
+            System.exit(1);
+        }
+        // could maybe do finally to close connection? idk
+        return mylist;
+    }
+
 
     public Connection getConnection()
     {
