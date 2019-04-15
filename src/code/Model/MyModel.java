@@ -10,11 +10,18 @@ import java.util.List;
 public class MyModel implements ModelSQLInterface {
 
     // hashmap of song objects to integers (representing number of shares
-    private HashMap <Song, Integer> allTheSongs = new HashMap<>();
+    private HashMap <Song, Integer> allTheSongs;
     private DatabaseAPI db;
 
     public MyModel(DatabaseAPI db) {
         this.db = db;
+        this.allTheSongs = new HashMap<>();
+
+        List<Song> all = db.existingSongs(Date.valueOf("today"));
+
+        for (Song s: all) {
+            allTheSongs.putIfAbsent(s, s.getRank());
+        }
     }
 
     public Integer whatIsCurrentPrice(Song s) {
