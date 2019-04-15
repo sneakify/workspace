@@ -4,6 +4,7 @@ import code.Model.*;
 import code.View.MainFrame;
 
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -36,17 +37,25 @@ public class Main {
     api.authenticate("murach", "grendel");
     System.out.println("\n\nNo Error Yet? Congratulations, you connected to the database:");
 
-    List<Song> songList = api.existingSongs(Date.valueOf("latest"));
+    // one way to get the current date on the machine running the Java
+    long ms = System.currentTimeMillis();
+    Date date = new Date(ms);
+    List<Song> songList = api.existingSongs(Date.valueOf(date.toString()));
+
     for (Song s : songList) {
       System.out.println(s.toString());
     }
 
-
     // TODO instantiate java.Model and make it relate to view somehow, pass into view probably
     ModelSQLInterface mod = new MyModel(api);
 
+
+
+    // Bradley - I'M NOT GONNA MESS WITH VIEW FILES, but should pass in the 'mod' MODELSQLINTERFACE
+    //           object into the View, which really should be 'View mf = new MainFrame(mod)'
     // Start the java.View
     MainFrame mf = new MainFrame();
+    // TODO ==== View mf = new MainFrame(mod);
 
     // Close connection with the MySQL Database
     api.closeConnection();
