@@ -1,5 +1,6 @@
 package code.Model;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,10 @@ public class DatabaseMySQL implements DatabaseAPI {
     // and loads parameters dynamically.
     DBUtils dbu;
 
+    public void getConnection() {
+        // stub TODO stuff stub
+
+    }
     /**
      * Insert The Songs for This Day
      * @param loSongYo Song
@@ -22,7 +27,7 @@ public class DatabaseMySQL implements DatabaseAPI {
      * @param date Required date.  Better would be to accept null as "latest"
      * @return A list of Songs, those stored in the chart on the given date
      */
-    public List<Song> existingSongs(String date) {
+    public List<Song> existingSongs(Date date) {
         // TODO stuff pls stub
         System.out.println("Oops tried to do a dummy method, with dummy return");
         List<Song> los = new ArrayList<Song>();
@@ -36,7 +41,11 @@ public class DatabaseMySQL implements DatabaseAPI {
      */
     public int insertUser(User u) {
         // TODO stuff pls stub
-        return 1;
+        return dbu.getOrInsertTerm(
+                "user",
+                "user_id",
+                "purchasing_power",
+                String.valueOf(u.getPurchasing_power()));
     }
 
     /**
@@ -45,6 +54,10 @@ public class DatabaseMySQL implements DatabaseAPI {
      * @return The newly created chart ID or -1 if chart already exists at that date
      */
     public int registerNewDayOfCharts(String date) {
+
+        // TODO could do something like below line
+        // dbu.getOrInsertTerm("")
+
         // TODO stuff pls stub
         return 1;
 
@@ -61,6 +74,15 @@ public class DatabaseMySQL implements DatabaseAPI {
         return dbu.getOrInsertTerm("album", "album_id", "album_name", albumName);
     }
 
+    @Override
+    public int insertSong(Integer rank) {
+        return 0;
+    }
+
+    @Override
+    public void clearSongData() {
+
+    }
 
     ///////////////////////////////////////////////////////////////////////
 
@@ -68,7 +90,6 @@ public class DatabaseMySQL implements DatabaseAPI {
 
         dbu = new DBUtils("jdbc:mysql://localhost:3306/spootify?serverTimezone=EST5EDT", user, password);
     }
-
 
     /**
      * Close the connection when application finishes

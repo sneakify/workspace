@@ -1,6 +1,7 @@
 package code.Model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -17,6 +18,7 @@ public class MyModel implements ModelSQLInterface {
     }
 
     public Integer whatIsCurrentPrice(Song s) {
+
         db.getOrInsertAlbumID(s.getAlbumID());
 
         // TODO return integer value (actual) of song s
@@ -61,18 +63,26 @@ public class MyModel implements ModelSQLInterface {
 
 
         try {
+            // db.getConnection?
 
+            Date today = Date.valueOf("today\'s date"); // TODO get today's date in specified format
             // TODO change to authenticate stuff?
-            Connection con = dbu.getConnection();
+            db.existingSongs(today);
+            db.clearSongData();
+
+            DBUtils utl = new DBUtils("stuff", "morestuff", "pword");
+
+
+            Connection con = utl.getConnection();
             PreparedStatement pstmt = con.prepareStatement(sql);
 
-            for (Song s : listSongs) {
-                pstmt.setString(1, s.getLastName());
-                pstmt.setString(2, s.getFirstName());
-                pstmt.setBoolean(3, s.isAcceptingNewPatients());
-                pstmt.setInt(4, getOrInsertSpecialty(s.getSpecialty()));
-                pstmt.execute();
-            }
+//            for (Song s : listSongs) {
+//                pstmt.setString(1, s.getLastName());
+//                pstmt.setString(2, s.getFirstName());
+//                pstmt.setBoolean(3, s.isAcceptingNewPatients());
+//                pstmt.setInt(4, getOrInsertSpecialty(s.getSpecialty()));
+//                pstmt.execute();
+//            }
             pstmt.close();
         } catch (SQLException e) {
             e.printStackTrace();

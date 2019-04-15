@@ -1,5 +1,6 @@
 package code.Model;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface DatabaseAPI {
@@ -15,7 +16,7 @@ public interface DatabaseAPI {
      * @param date Required date.  Better would be to accept null as "latest"
      * @return A list of Songs, those stored in the chart on the given date
      */
-    public List<Song> existingSongs(String date);
+    public List<Song> existingSongs(Date date);
 
     /**
      * Register a new day of charts
@@ -32,6 +33,19 @@ public interface DatabaseAPI {
     public int getOrInsertAlbumID(String albumName);
 
     /**
+     * Inserts one song at the specified rank
+     * @param rank
+     * @return
+     */
+    public int insertSong(Integer rank);
+
+    /**
+     * Clears the current songdata (first should check that everything is stored in history, and if it
+     * isn't, inserts stuff)
+     */
+    public void clearSongData();
+
+    /**
      * Insert one user
      * @param u
      * @return
@@ -46,6 +60,8 @@ public interface DatabaseAPI {
      * @param password
      */
     public void authenticate(String user, String password);
+
+    public void getConnection();
 
     /**
      * Close the connection when application finishes

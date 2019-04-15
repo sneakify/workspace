@@ -1,9 +1,10 @@
 package code.Model;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 public class Song {
-
-
-
     private String spotifyID;
     private String title;
     private String artistID;
@@ -42,9 +43,33 @@ public class Song {
                 '}';
     }
 
-    public Integer currentPrice() {
-        dbu
-        return d
+    public Integer currentPrice(Song s, DatabaseAPI db) {
+        String sql = "SELECT song_value from song " +
+                "WHERE " + s.getSpotifyID() +
+                "= song.spotify_id";
+
+        String stuff = "DUMMY STUFF";
+
+        try {
+            DBUtils util = new DBUtils("me", "you", "yurmom");
+            // TODO change to authenticate stuff?
+            Connection con = util.getConnection();
+            PreparedStatement pstmt = con.prepareStatement(sql);
+//
+//            for (Song s : listSongs) {
+//                pstmt.setString(1, s.getLastName());
+//                pstmt.setString(2, s.getFirstName());
+//                pstmt.setBoolean(3, s.isAcceptingNewPatients());
+//                pstmt.setInt(4, getOrInsertSpecialty(s.getSpecialty()));
+//                pstmt.execute();
+//            }
+            pstmt.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return Integer.valueOf(stuff);
     }
 
     public String getSpotifyID() {

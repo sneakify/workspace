@@ -3,6 +3,7 @@ package code.Controller;
 import code.Model.*;
 import code.View.MainFrame;
 
+import java.sql.Date;
 import java.util.List;
 
 
@@ -35,7 +36,7 @@ public class Main {
     api.authenticate("murach", "grendel");
     System.out.println("\n\nNo Error Yet? Congratulations, you connected to the database:");
 
-    List<Song> songList = api.existingSongs("latest");
+    List<Song> songList = api.existingSongs(Date.valueOf("latest"));
     for (Song s : songList) {
       System.out.println(s.toString());
     }
