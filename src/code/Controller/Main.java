@@ -27,6 +27,7 @@ public class Main {
 
   private static DatabaseAPI api = new DatabaseMySQL();
 
+
   public static void main(String[] args) {
     System.out.println("The Program Started Running"); // (i.e. show the on button worked)
 
@@ -41,7 +42,7 @@ public class Main {
 
 
     // TODO instantiate java.Model and make it relate to view somehow, pass into view probably
-    ModelSQLInterface mod = new MyModel();
+    ModelSQLInterface mod = new MyModel(api);
 
     // Start the java.View
     MainFrame mf = new MainFrame();

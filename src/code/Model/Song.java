@@ -42,6 +42,11 @@ public class Song {
                 '}';
     }
 
+    public Integer currentPrice() {
+        dbu
+        return d
+    }
+
     public String getSpotifyID() {
         return spotifyID;
     }
