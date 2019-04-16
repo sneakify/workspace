@@ -1,7 +1,5 @@
 package code.View;
 
-import code.View.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -61,8 +59,8 @@ public class MainFrame extends JFrame implements ActionListener {//implements Vi
     // content panels
     this.browsePanel = new BrowsePanel();
     this.portfolioPanel = new PortfolioPanel();
-    this.buyPanel = new BuyPanel();
-    this.sellPanel = new SellPanel();
+//    this.buyPanel = new BuyPanel(); fixme
+//    this.sellPanel = new SellPanel(); fixme
     this.settingsPanel = new SettingsPanel();
 
     // add content panels to main panel
