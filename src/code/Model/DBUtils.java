@@ -32,21 +32,31 @@ public class DBUtils {
             ResultSet rs = st.executeQuery("SELECT * FROM song");
 
             while (rs.next()) {
-                String name = rs.getString("title");
+                // TODO - THIS IS WHAT TO LOOK AT, figure out how to retun this shit
+                String spotify_id = rs.getString("spotify_id");
+                String title = rs.getString("title");
+                String artist_id = rs.getString("artist_id");
+                String album_id = rs.getString("album_id");
+                String song_value = rs.getString("song_value");
 
+
+                // String spotifyID, String title, String artistID, int rank, String albumID)
 
                 Song newSong = new Song(
-                        "stuff",
-                        "things",
-                        "else",
-                        rs.getInt("song_value"),
-                        "what");
+                        rs.getString("spotify_id"),
+                        rs.getString("title"),
+                        rs.getString("artist_id"),
+                        rs.getInt("song_value"), // rank
+                        rs.getString("song_value"));
+
                 // add stuff
 //                mylist.add(name)
 
                 // print stuff
-                System.out.println("adding: " + name);
+                System.out.println("adding: " + newSong.toString());
+
             }
+
             rs.close();
             st.close();
             conn.close();
@@ -58,7 +68,6 @@ public class DBUtils {
         // could maybe do finally to close connection? idk
         return mylist;
     }
-
 
     public Connection getConnection()
     {
@@ -88,8 +97,7 @@ public class DBUtils {
         }
     }
 
-    public int insertOneRecord(String insertSQL)
-    {
+    public int insertOneRecord(String insertSQL) {
         System.out.println("INSERT STATEMENT: "+insertSQL);
         int key = -1;
         try {
@@ -116,7 +124,6 @@ public class DBUtils {
         return key;
     }
 
-
     /**
      * For a table of terms consisting of an id and string value pair, get the id of the term
      * adding a new term if it does not yet exist in the table
@@ -124,9 +131,7 @@ public class DBUtils {
      * @param term The term value
      * @return The id of the term
      */
-    public int getOrInsertTerm(String table, String keyColumn, String valueColumn, String term)
-    {
-
+    public int getOrInsertTerm(String table, String keyColumn, String valueColumn, String term) {
         int key = -1;
 
         try {

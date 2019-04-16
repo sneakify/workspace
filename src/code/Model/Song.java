@@ -40,7 +40,7 @@ public class Song {
                 ", title='" + title + '\'' +
                 ", artistID='" + artistID + '\'' +
                 ", rank=" + rank + '\'' +
-                '}';
+                ", albumID=" + albumID;
     }
 
     public Integer currentPrice(Song s, DatabaseAPI db) {
@@ -111,5 +111,4 @@ public class Song {
     public void setAlbumID(String albumID) {
         this.albumID = albumID;
     }
-
 }
