@@ -226,7 +226,7 @@ public class DBUtils {
       
       while (rs.next()) {
         String d = rs.getString("date");
-        int v = rs.getInt("song_value");
+        int v = rs.getInt("day_value");
         
         History h = new History(d, v);
         mylist.add(h);
@@ -255,7 +255,7 @@ public class DBUtils {
      
      while (rs.next()) {
        String d = rs.getString("date");
-       int v = rs.getInt("song_value");
+       int v = rs.getInt("portfolio_value");
        
        History h = new History(d, v);
        mylist.add(h);
