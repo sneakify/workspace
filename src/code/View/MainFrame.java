@@ -74,12 +74,6 @@ public class MainFrame extends JFrame implements ActionListener {//implements Vi
 
     // current panel upon construction should be Browse Panel
     this.curPanel = this.browsePanel;
-
-
-    // TODO remove. testing purposes only
-    this.portfolioPanel.setBackground(Color.CYAN);
-    this.settingsPanel.setBackground(Color.GREEN);
-
   }
 
   /**
