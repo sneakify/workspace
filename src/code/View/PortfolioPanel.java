@@ -20,7 +20,6 @@ public class PortfolioPanel extends ContentPanel {
 
 
     PortfolioPanel() {
-        // TODO
         this.setLayout(new BorderLayout());
         this.makeTotalsPanel();
 

@@ -12,7 +12,7 @@ import javax.swing.border.EmptyBorder;
 /**
  * Overall frame that contains a navigation panel and displays the appropriate content panel.
  */
-public class MainFrame extends JFrame implements ActionListener {//implements View { //fixme commented out to test main
+public class MainFrame extends JFrame implements ActionListener {//implements View { //fixme necessary?
   // Navigation Panel & Buttons
   private JPanel navigationPanel;
   private JButton backButton = new JButton("⬅");
