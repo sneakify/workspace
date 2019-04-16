@@ -152,7 +152,7 @@ public class DBUtils {
     }
 
     catch (SQLException e) {
-      System.err.println("ERROR: Coult not complete purchase:" + sql);
+      System.err.println("ERROR: Coult not complete sale:" + sql);
       System.err.println(e.getMessage());
       e.printStackTrace();
     }
