@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
  * Content Panel that allows user to browse through and filter U.S. Top 50 chart. Clicking any one
  * song launches Buy Panel.
  */
-public class BrowsePanel extends ContentPanel {
+class BrowsePanel extends ContentPanel {
   // chart to display as table
   private JTable chart;
 

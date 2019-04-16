@@ -1,9 +1,9 @@
 package code.View;
 
 /**
- *
+ * TODO
  */
-public class SettingsPanel extends ContentPanel {
+class SettingsPanel extends ContentPanel {
 
     SettingsPanel() {
 

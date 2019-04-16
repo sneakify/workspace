@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
  * Content Panel that allows user to view their available funds, total number of shares owned,
  * and each owned stock. Clicking any one song launches Sell Panel.
  */
-public class PortfolioPanel extends ContentPanel {
+class PortfolioPanel extends ContentPanel {
     // chart to display as table
     private JTable stocks;
     private double totalFunds = 0;
@@ -18,7 +18,9 @@ public class PortfolioPanel extends ContentPanel {
     private JLabel totalFundsLabel = new JLabel();
     private JLabel totalSharesLabel = new JLabel();
 
-
+    /**
+     * TODO
+     */
     PortfolioPanel() {
         this.setLayout(new BorderLayout());
         this.makeTotalsPanel();

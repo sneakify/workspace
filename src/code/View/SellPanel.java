@@ -5,11 +5,17 @@ import code.Model.Song;
 /**
  * TODO
  */
-public class SellPanel extends ContentPanel {
-    Song song;
+class SellPanel extends TransactionPanel {
+    int sharesOwned;
 
-    SellPanel(Song song) {
-        this.song = song;
+    /**
+     * TODO
+     * @param song
+     * @param sharesOwned
+     */
+    SellPanel(Song song, int sharesOwned) {
+        super(song);
+        this.sharesOwned = sharesOwned;
         // TODO
     }
 }
