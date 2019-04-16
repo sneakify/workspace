@@ -108,4 +108,162 @@ public class DBUtils {
 
         return key;
     }
+    
+    
+// inserts purchases from users into database
+  public void buy_shares(User u, Song s, int n) {
+    String sql = "INSERT INTO buy (user_id, spotify_id, price, n_shares, purchase_time) VALUES"
+        + "('" + u.getUserID() + "," + s.getSpotifyID() + ","
+        + "SELECT song_value FROM song WHERE song_id =" + s.getSpotifyID() + ","
+        + "CURRENT_TIMESTAMP)";
+    try {
+
+      // get connection and initialize statement
+      Connection con = getConnection();
+      PreparedStatement stmt = con.prepareStatement(sql);
+      stmt.executeUpdate(sql);
+
+      // cleanup
+      stmt.close();
+    }
+
+    catch (SQLException e) {
+      System.err.println("ERROR: Coult not complete purchase:" + sql);
+      System.err.println(e.getMessage());
+      e.printStackTrace();
+    }
+  }
+
+// inserts sales from users into database
+  public void sell_shares(User u, Song s, int n) {
+    String sql = "INSERT INTO sell (user_id, spotify_id, price, n_shares, sale_time) VALUES" + "('"
+        + u.getUserID() + "," + s.getSpotifyID() + ","
+        + ", SELECT song_value FROM song WHERE song_id =" + s.getSpotifyID() + ","
+        + "CURRENT_TIMESTAMP)";
+    try {
+
+      // get connection and initialize statement
+      Connection con = getConnection();
+      PreparedStatement stmt = con.prepareStatement(sql);
+      stmt.executeUpdate(sql);
+
+      // cleanup
+      stmt.close();
+    }
+
+    catch (SQLException e) {
+      System.err.println("ERROR: Coult not complete purchase:" + sql);
+      System.err.println(e.getMessage());
+      e.printStackTrace();
+    }
+  }
+
+// returns album name of given song 
+  public String song_album(Song s) {
+
+    String value = null;
+    
+    try {
+      Connection con = getConnection();
+      Statement stmt = con.createStatement();
+      String sqlGet = "SELECT album_name FROM song JOIN album Using(album_id) WHERE song_id ="
+          + s.getSpotifyID();
+      ResultSet rs = stmt.executeQuery(sqlGet);
+
+      rs.close();
+      stmt.close();
+      
+      while (rs.next()) {
+        value = rs.getString("album_name");
+     }
+
+    } catch (SQLException e) {
+      System.err.println(e.getMessage());
+      e.printStackTrace();
+
+    }
+    return value;
+  }
+
+//returns artist name of given song
+  public String song_artist(Song s) {
+
+    String value = null;
+    try {
+      Connection con = getConnection();
+      Statement stmt = con.createStatement();
+      String sqlGet = "SELECT artist_name FROM song JOIN artist Using(artist_id) WHERE song_id ="
+          + s.getSpotifyID();
+      ResultSet rs = stmt.executeQuery(sqlGet);
+
+      rs.close();
+      stmt.close();
+      
+      while (rs.next()) {
+        value = rs.getString("artist_name");
+      }
+
+    } catch (SQLException e) {
+      System.err.println(e.getMessage());
+      e.printStackTrace();
+    }
+    return value;
+  }
+  
+// returns the past 7 days of the given song's history 
+  public List<History> song7(Song s) {
+    
+    List<History> mylist = new ArrayList<History>();
+    try {
+      Connection con = getConnection();
+      Statement stmt = con.createStatement();
+      String sqlGet = "SELECT date, day_value FROM song_history WHERE song_id =" + s.getSpotifyID()+
+          "ORDER BY date DESC LIMIT 7";
+      ResultSet rs = stmt.executeQuery(sqlGet);
+
+      rs.close();
+      stmt.close();
+      
+      while (rs.next()) {
+        String d = rs.getString("date");
+        int v = rs.getInt("song_value");
+        
+        History h = new History(d, v);
+        mylist.add(h);
+        
+      }
+
+    } catch (SQLException e) {
+      System.err.println(e.getMessage());
+      e.printStackTrace();
+    }
+  }
+  
+//returns the past 7 days of the given user's portfolio (void for now not sure how to return this info)
+ public void user7(User u) {
+   
+   List<History> mylist = new ArrayList<History>();
+   try {
+     Connection con = getConnection();
+     Statement stmt = con.createStatement();
+     String sqlGet = "SELECT date, portfolio_value FROM user_history WHERE user_id =" + u.getUserID()+
+         "ORDER BY date DESC LIMIT 7";
+     ResultSet rs = stmt.executeQuery(sqlGet);
+
+     rs.close();
+     stmt.close();
+     
+     while (rs.next()) {
+       String d = rs.getString("date");
+       int v = rs.getInt("song_value");
+       
+       History h = new History(d, v);
+       mylist.add(h);
+
+     }
+   } catch (SQLException e) {
+     System.err.println(e.getMessage());
+     e.printStackTrace();
+   }
+ }
 }
