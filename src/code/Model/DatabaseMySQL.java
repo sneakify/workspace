@@ -99,6 +99,16 @@ public class DatabaseMySQL implements DatabaseAPI {
      */
     public void closeConnection() { dbu.closeConnection(); }
 
+    @Override
+    public String song_album(Song s) {
+        return null;
+    }
+
+    @Override
+    public String song_artist(Song s) {
+        return null;
+    }
+
 //    /**
 //     * Register a patient - no recovery of newly created patient_id
 //     * @param p The patient

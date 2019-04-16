@@ -33,6 +33,14 @@ public class Song {
         this.albumID = "DUMMY";
     }
 
+    public Song(String title) {
+        this.spotifyID = "DUMMY";
+        this.title = title;
+        this.artistID = "dummy_artist_id";
+        this.rank = 69;
+        this.albumID = "DUMMY";
+    }
+
     @Override
     public String toString() {
         return "Song{" +

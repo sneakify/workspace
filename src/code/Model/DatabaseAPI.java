@@ -67,6 +67,10 @@ public interface DatabaseAPI {
      * Close the connection when application finishes
      */
     public void closeConnection();
+
+    String song_album(Song s);
+
+    String song_artist(Song s);
 }
 
 //    /**

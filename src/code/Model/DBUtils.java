@@ -54,7 +54,6 @@ public class DBUtils {
 
                 // print stuff
                 System.out.println("adding: " + newSong.toString());
-
             }
 
             rs.close();
@@ -210,12 +209,14 @@ public class DBUtils {
 // returns album name of given song (how do i return the output of sql query? aka rs)
   public String song_album(Song s) {
 
+        String albumName = null;
     try {
       Connection con = getConnection();
       Statement stmt = con.createStatement();
-      String sqlGet = "SELECT album_name FROM song JOIN album Using(album_id) WHERE song_id ="
-          + s.getSpotifyID();
+      String sqlGet = "SELECT album_name FROM song JOIN album Using(album_id) WHERE song_id =" + s.getSpotifyID();
       ResultSet rs = stmt.executeQuery(sqlGet);
+
+      albumName = rs.getString("album_name");
 
       rs.close();
       stmt.close();
@@ -225,25 +226,30 @@ public class DBUtils {
       e.printStackTrace();
 
     }
+      return albumName;
   }
 
 //returns artist name of given song (how do i return the output of sql query? aka rs)
   public String song_artist(Song s) {
 
-    try {
-      Connection con = getConnection();
-      Statement stmt = con.createStatement();
-      String sqlGet = "SELECT artist_name FROM song JOIN artist Using(artist_id) WHERE song_id ="
-          + s.getSpotifyID();
-      ResultSet rs = stmt.executeQuery(sqlGet);
+      String artistName = null;
+      try {
+          Connection con = getConnection();
+          Statement stmt = con.createStatement();
+          String sqlGet = "SELECT artist_name FROM song JOIN artist Using(artist_id) WHERE song_id ="
+                  + s.getSpotifyID();
+          ResultSet rs = stmt.executeQuery(sqlGet);
 
-      rs.close();
-      stmt.close();
+          artistName = rs.getString("artist_name");
 
-    } catch (SQLException e) {
-      System.err.println(e.getMessage());
-      e.printStackTrace();
-    }
+          rs.close();
+          stmt.close();
+
+      } catch (SQLException e) {
+          System.err.println(e.getMessage());
+          e.printStackTrace();
+      }
+      return artistName;
   }
   
 // returns the past 7 days of the given song's history (void for now not sure how to return this info)

@@ -37,14 +37,25 @@ public class Main {
     api.authenticate("murach", "grendel");
     System.out.println("\n\nNo Error Yet? Congratulations, you connected to the database:");
 
+    // TODO - uncomment and then run
     // one way to get the current date on the machine running the Java
-    long ms = System.currentTimeMillis();
-    Date date = new Date(ms);
-    List<Song> songList = api.existingSongs(Date.valueOf(date.toString()));
+//    long ms = System.currentTimeMillis();
+//    Date date = new Date(ms);
+//    List<Song> songList = api.existingSongs(Date.valueOf(date.toString()));
+//
+//    for (Song s : songList) {
+//      System.out.println(s.toString());
+//    }
 
-    for (Song s : songList) {
-      System.out.println(s.toString());
-    }
+    //Song(1, "Old Town Road - Remix", 1, 1, 293),
+
+    //        new Song("")
+
+    Song mySong = new Song("Old Town Road - Remix");
+
+    System.out.println(api.song_album(mySong));
+    System.out.println(api.song_artist(mySong));
+
 
     // TODO instantiate java.Model and make it relate to view somehow, pass into view probably
     ModelSQLInterface mod = new MyModel(api);
