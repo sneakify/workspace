@@ -159,7 +159,7 @@ public class DBUtils {
         return key;
     }
     
-    // inserts purchases from users into database
+ // inserts purchases from users into database
   public void buy_shares(User u, Song s, int n) {
     String sql = "INSERT INTO buy (user_id, spotify_id, price, n_shares, purchase_time) VALUES"
         + "('" + u.getUserID() + "," + s.getSpotifyID() + ","
@@ -245,5 +245,40 @@ public class DBUtils {
       e.printStackTrace();
     }
   }
-}
+  
+// returns the past 7 days of the given song's history (void for now not sure how to return this info)
+  public void song7(Song s) {
+    try {
+      Connection con = getConnection();
+      Statement stmt = con.createStatement();
+      String sqlGet = "SELECT date, day_value FROM song_history WHERE song_id =" + s.getSpotifyID()+
+          "ORDER BY date DESC LIMIT 7";
+      ResultSet rs = stmt.executeQuery(sqlGet);
+
+      rs.close();
+      stmt.close();
+
+    } catch (SQLException e) {
+      System.err.println(e.getMessage());
+      e.printStackTrace();
+    }
+  }
+  
+//returns the past 7 days of the given user's portfolio (void for now not sure how to return this info)
+ public void user7(User u) {
+   try {
+     Connection con = getConnection();
+     Statement stmt = con.createStatement();
+     String sqlGet = "SELECT date, portfolio_value FROM user_history WHERE user_id =" + u.getUserID()+
+         "ORDER BY date DESC LIMIT 7";
+     ResultSet rs = stmt.executeQuery(sqlGet);
+
+     rs.close();
+     stmt.close();
+
+   } catch (SQLException e) {
+     System.err.println(e.getMessage());
+     e.printStackTrace();
+   }
+ }
 }
