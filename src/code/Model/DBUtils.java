@@ -158,4 +158,92 @@ public class DBUtils {
 
         return key;
     }
+    
+    // inserts purchases from users into database
+  public void buy_shares(User u, Song s, int n) {
+    String sql = "INSERT INTO buy (user_id, spotify_id, price, n_shares, purchase_time) VALUES"
+        + "('" + u.getUserID() + "," + s.getSpotifyID() + ","
+        + "SELECT song_value FROM song WHERE song_id =" + s.getSpotifyID() + ","
+        + "CURRENT_TIMESTAMP)";
+    try {
+
+      // get connection and initialize statement
+      Connection con = getConnection();
+      PreparedStatement stmt = con.prepareStatement(sql);
+      stmt.executeUpdate(sql);
+
+      // cleanup
+      stmt.close();
+    }
+
+    catch (SQLException e) {
+      System.err.println("ERROR: Coult not complete purchase:" + sql);
+      System.err.println(e.getMessage());
+      e.printStackTrace();
+    }
+  }
+
+// inserts sales from users into database
+  public void sell_shares(User u, Song s, int n) {
+    String sql = "INSERT INTO sell (user_id, spotify_id, price, n_shares, sale_time) VALUES" + "('"
+        + u.getUserID() + "," + s.getSpotifyID() + ","
+        + ", SELECT song_value FROM song WHERE song_id =" + s.getSpotifyID() + ","
+        + "CURRENT_TIMESTAMP)";
+    try {
+
+      // get connection and initialize statement
+      Connection con = getConnection();
+      PreparedStatement stmt = con.prepareStatement(sql);
+      stmt.executeUpdate(sql);
+
+      // cleanup
+      stmt.close();
+    }
+
+    catch (SQLException e) {
+      System.err.println("ERROR: Coult not complete purchase:" + sql);
+      System.err.println(e.getMessage());
+      e.printStackTrace();
+    }
+  }
+
+// returns album name of given song (how do i return the output of sql query? aka rs)
+  public String song_album(Song s) {
+
+    try {
+      Connection con = getConnection();
+      Statement stmt = con.createStatement();
+      String sqlGet = "SELECT album_name FROM song JOIN album Using(album_id) WHERE song_id ="
+          + s.getSpotifyID();
+      ResultSet rs = stmt.executeQuery(sqlGet);
+
+      rs.close();
+      stmt.close();
+
+    } catch (SQLException e) {
+      System.err.println(e.getMessage());
+      e.printStackTrace();
+
+    }
+  }
+
+//returns artist name of given song (how do i return the output of sql query? aka rs)
+  public String song_artist(Song s) {
+
+    try {
+      Connection con = getConnection();
+      Statement stmt = con.createStatement();
+      String sqlGet = "SELECT artist_name FROM song JOIN artist Using(artist_id) WHERE song_id ="
+          + s.getSpotifyID();
+      ResultSet rs = stmt.executeQuery(sqlGet);
+
+      rs.close();
+      stmt.close();
+
+    } catch (SQLException e) {
+      System.err.println(e.getMessage());
+      e.printStackTrace();
+    }
+  }
+}
 }
