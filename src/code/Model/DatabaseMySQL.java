@@ -1,6 +1,7 @@
 package code.Model;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,6 +79,80 @@ public class DatabaseMySQL implements DatabaseAPI {
     }
 
     @Override
+    public Song getOrInsertSong(Song s) {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String sql =  "INSERT INTO song (spotify_id,title,artist_id,album_id, song_value) VALUES" +
+                "('" + s.getSpotifyID() + "','" + s.getTitle() + "','" + s.getArtistID() +
+                "','" + s.getAlbumID() +"','" + s.getSongValue() +"','" + s.getArtistID() + "')";
+        int key = -1;
+        // put song in song thing
+
+
+
+        // make sure album stuff is there
+        // return dbu.getOrInsertTerm("");
+
+        return null;
+    }
+
+
+//
+//     /**
+//     //     * Register a patient - fetch patient_id that was created
+//     //     * @param p The Patient
+//     //     * @return patient_id
+//     //     */
+//    public int registerPatientMethod2(Patient p)
+//    {
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        String sql = "INSERT INTO patient (lastname,firstname,sex,dob) VALUES" +
+//                "('"+p.getLastName()+"','"+p.getFirstName()+"','"+p.getSex()+"','"+sdf.format(p.getDob())+"')";
+//        int key = -1;
+//        try {
+//
+//            // get connection and initialize statement
+//            Connection con = dbu.getConnection();
+//            Statement stmt = con.createStatement();
+//
+//            stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+//
+//            // extract auto-incremented ID
+//            ResultSet rs = stmt.getGeneratedKeys();
+//            if (rs.next()) key = rs.getInt(1);
+//
+//            // Cleanup
+//            rs.close();
+//            stmt.close();
+//
+//        } catch (SQLException e) {
+//            System.err.println("ERROR: Could not insert record: "+sql);
+//            System.err.println(e.getMessage());
+//            e.printStackTrace();
+//        }
+//        return key;
+//    }
+//
+//
+//    /**
+//     * Register a new patient
+//     * @param p The patient
+//     * @return The newly created patient ID or -1 if patient already exists
+//     */
+//    public int registerPatient(Patient p)
+//    {
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        String sql = "INSERT INTO patient (lastname,firstname,sex,dob) VALUES" +
+//                    "('"+p.getLastName()+"','"+p.getFirstName()+"','"+p.getSex()+"','"+sdf.format(p.getDob())+"')";
+//        return dbu.insertOneRecord(sql);
+//    }
+
+    @Override
+    public int getCurrentPrice(String spotifyID) {
+        return 0;
+    }
+
+    @Override
     public int insertSong(Integer rank) {
         return 0;
     }
@@ -137,54 +212,6 @@ public class DatabaseMySQL implements DatabaseAPI {
 //    }
 //
 
-//    /**
-//     * Register a patient - fetch patient_id that was created
-//     * @param p The Patient
-//     * @return patient_id
-//     */
-//    public int registerPatientMethod2(Patient p)
-//    {
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        String sql = "INSERT INTO patient (lastname,firstname,sex,dob) VALUES" +
-//                "('"+p.getLastName()+"','"+p.getFirstName()+"','"+p.getSex()+"','"+sdf.format(p.getDob())+"')";
-//        int key = -1;
-//        try {
-//
-//            // get connection and initialize statement
-//            Connection con = dbu.getConnection();
-//            Statement stmt = con.createStatement();
-//
-//            stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-//
-//            // extract auto-incremented ID
-//            ResultSet rs = stmt.getGeneratedKeys();
-//            if (rs.next()) key = rs.getInt(1);
-//
-//            // Cleanup
-//            rs.close();
-//            stmt.close();
-//
-//        } catch (SQLException e) {
-//            System.err.println("ERROR: Could not insert record: "+sql);
-//            System.err.println(e.getMessage());
-//            e.printStackTrace();
-//        }
-//        return key;
-//    }
-//
-//
-//    /**
-//     * Register a new patient
-//     * @param p The patient
-//     * @return The newly created patient ID or -1 if patient already exists
-//     */
-//    public int registerPatient(Patient p)
-//    {
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        String sql = "INSERT INTO patient (lastname,firstname,sex,dob) VALUES" +
-//                    "('"+p.getLastName()+"','"+p.getFirstName()+"','"+p.getSex()+"','"+sdf.format(p.getDob())+"')";
-//        return dbu.insertOneRecord(sql);
-//    }
 //
 //
 //    /**

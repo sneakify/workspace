@@ -1,9 +1,11 @@
 package code.Model;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,23 +15,35 @@ public class MyModel implements ModelSQLInterface {
     private HashMap <Song, Integer> allTheSongs;
     private DatabaseAPI db;
 
+    public java.sql.Date todayDateSQL() {
+        // get today's date in the correct format yo
+        java.util.Date utilDate = new Date();
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+        return sqlDate;
+    }
+
     public MyModel(DatabaseAPI db) {
         this.db = db;
         this.allTheSongs = new HashMap<>();
 
-        List<Song> all = db.existingSongs(Date.valueOf("today"));
+        // what's today's date?!?!?
+        java.sql.Date today = this.todayDateSQL();
 
+        // get all them songs
+        List<Song> all = db.existingSongs(today);
+
+        // put all them songs in a hashmap
         for (Song s: all) {
-            allTheSongs.putIfAbsent(s, s.getRank());
+            allTheSongs.putIfAbsent(s, s.getSongValue());
         }
     }
 
     public Integer whatIsCurrentPrice(Song s) {
 
-        db.getOrInsertAlbumID(s.getAlbumID());
+        Song newSong = db.getOrInsertSong(s);
 
-        // TODO return integer value (actual) of song s
-        return null;
+        return db.getCurrentPrice(s.getSpotifyID());
     }
 
     //    public void insertDoctors(List<Doctor> drlist)
@@ -59,7 +73,7 @@ public class MyModel implements ModelSQLInterface {
 //
 //    }
 
-    public void refreshSongs(List<Song> listSongs) {
+    public void refreshSongs(List<Song> listSongs, java.sql.Date today) {
         // not most efficient when inserting many records
         // for Doctor d: drlist)
         //      insertDoctor(d);
@@ -72,7 +86,6 @@ public class MyModel implements ModelSQLInterface {
         try {
             // db.getConnection?
 
-            Date today = Date.valueOf("today\'s date"); // TODO get today's date in specified format
             // TODO change to authenticate stuff?
             db.existingSongs(today);
             db.clearSongData();

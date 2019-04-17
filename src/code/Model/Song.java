@@ -8,28 +8,28 @@ public class Song {
     private String spotifyID;
     private String title;
     private String artistID;
-    private int rank;
+    private int songValue;
     private String albumID;
 
     /**
      Constructor
      */
-    public Song(String spotifyID, String title, String artistID, int rank, String albumID) {
+    public Song(String spotifyID, String title, String artistID, int songValue, String albumID) {
         this.spotifyID = spotifyID;
         this.title = title;
         this.artistID = artistID;
-        this.rank = rank;
+        this.songValue = songValue;
         this.albumID = albumID;
     }
 
     /**
      The Convenience Constructor
      */
-    public Song(String title, String artistID, int rank) {
+    public Song(String title, String artistID, int songValue) {
         this.spotifyID = "DUMMY";
         this.title = title;
         this.artistID = artistID;
-        this.rank = rank;
+        this.songValue = songValue;
         this.albumID = "DUMMY";
     }
 
@@ -37,7 +37,7 @@ public class Song {
         this.spotifyID = "DUMMY";
         this.title = title;
         this.artistID = "dummy_artist_id";
-        this.rank = 69;
+        this.songValue = 69;
         this.albumID = "DUMMY";
     }
 
@@ -47,7 +47,7 @@ public class Song {
                 "spotifyID=" + spotifyID +
                 ", title='" + title + '\'' +
                 ", artistID='" + artistID + '\'' +
-                ", rank=" + rank + '\'' +
+                ", songValue=" + songValue + '\'' +
                 ", albumID=" + albumID;
     }
 
@@ -104,12 +104,12 @@ public class Song {
         this.artistID = artistID;
     }
 
-    public int getRank() {
-        return rank;
+    public int getSongValue() {
+        return songValue;
     }
 
-    public void setRank(int rank) {
-        this.rank = rank;
+    public void setSongValue(int rank) {
+        this.songValue = songValue;
     }
 
     public String getAlbumID() {

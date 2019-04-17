@@ -32,6 +32,10 @@ public interface DatabaseAPI {
      */
     public int getOrInsertAlbumID(String albumName);
 
+    public Song getOrInsertSong(Song s);
+
+    public int getCurrentPrice(String spotifyID);
+
     /**
      * Inserts one song at the specified rank
      * @param rank
