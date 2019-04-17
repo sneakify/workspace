@@ -210,60 +210,91 @@ public class DBUtils {
     return value;
   }
   
+ 
 // returns the past 7 days of the given song's history 
-  public List<History> song7(Song s) {
-    
-    List<History> mylist = new ArrayList<History>();
+  public HashMap<String, Integer> song7(Song s) {
+
+    HashMap<String, Integer> h = new HashMap<String, Integer>();
     try {
       Connection con = getConnection();
       Statement stmt = con.createStatement();
-      String sqlGet = "SELECT date, day_value FROM song_history WHERE song_id =" + s.getSpotifyID()+
-          "ORDER BY date DESC LIMIT 7";
+      String sqlGet = "SELECT date, day_value FROM song_history WHERE song_id =" + s.getSpotifyID()
+          + "ORDER BY date DESC LIMIT 7";
       ResultSet rs = stmt.executeQuery(sqlGet);
 
       rs.close();
       stmt.close();
-      
+
       while (rs.next()) {
         String d = rs.getString("date");
         int v = rs.getInt("day_value");
-        
-        History h = new History(d, v);
-        mylist.add(h);
-        
+        h.put(d, v);
       }
 
     } catch (SQLException e) {
       System.err.println(e.getMessage());
       e.printStackTrace();
     }
+    return h;
   }
+
+//returns the past 7 days of the given user's portfolio 
+  public HashMap<String, Integer> user7(User u) {
+
+    HashMap<String, Integer> h = new HashMap<String, Integer>();
+    try {
+      Connection con = getConnection();
+      Statement stmt = con.createStatement();
+      String sqlGet = "SELECT date, portfolio_value FROM user_history WHERE user_id ="
+          + u.getUserID() + "ORDER BY date DESC LIMIT 7";
+      ResultSet rs = stmt.executeQuery(sqlGet);
+
+      rs.close();
+      stmt.close();
+
+      while (rs.next()) {
+        String d = rs.getString("date");
+        int v = rs.getInt("portfolio_value");
+        h.put(d, v);
   
-//returns the past 7 days of the given user's portfolio (void for now not sure how to return this info)
- public void user7(User u) {
-   
-   List<History> mylist = new ArrayList<History>();
-   try {
-     Connection con = getConnection();
-     Statement stmt = con.createStatement();
-     String sqlGet = "SELECT date, portfolio_value FROM user_history WHERE user_id =" + u.getUserID()+
-         "ORDER BY date DESC LIMIT 7";
-     ResultSet rs = stmt.executeQuery(sqlGet);
 
-     rs.close();
-     stmt.close();
-     
-     while (rs.next()) {
-       String d = rs.getString("date");
-       int v = rs.getInt("portfolio_value");
-       
-       History h = new History(d, v);
-       mylist.add(h);
+      }
+    } catch (SQLException e) {
+      System.err.println(e.getMessage());
+      e.printStackTrace();
+    }
+    return h;
+  }
 
-     }
-   } catch (SQLException e) {
-     System.err.println(e.getMessage());
-     e.printStackTrace();
-   }
- }
+  // returns given user's stock portfolio
+  public HashMap<Integer, Integer> user_port(User u) {
+
+    HashMap<Integer, Integer> h = new HashMap<Integer, Integer>();
+    try {
+      Connection con = getConnection();
+      Statement stmt = con.createStatement();
+      String sqlGet = "SELECT spotify_id, user_bought - COALESCE(user_sold,0) AS shares_owned"
+          + "FROM (SELECT user_id, spotify_id, SUM(n_shares) AS user_bought"
+          + "  FROM buy GROUP BY user_id, spotify_id) AS total_bought"
+          + "LEFT JOIN (SELECT user_id, spotify_id, SUM(n_shares) AS user_sold"
+          + "  FROM sell GROUP BY user_id, spotify_id) AS total_sold"
+          + "USING (user_id, spotify_id)WHERE user_id = " + u.getUserID();
+      ResultSet rs = stmt.executeQuery(sqlGet);
+
+      rs.close();
+      stmt.close();
+
+      while (rs.next()) {
+        int s = rs.getInt("spotify_id");
+        int n = rs.getInt("shares_owned");
+        h.put(s, n);
+
+      }
+    } catch (SQLException e) {
+      System.err.println(e.getMessage());
+      e.printStackTrace();
+    }
+    return h;
+  }
+}
 }
