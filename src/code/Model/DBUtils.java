@@ -109,6 +109,27 @@ public class DBUtils {
         return key;
     }
     
+//inserts new user into database
+  public void new_user(String name, String username, String email, String password) {
+    String sql = "INSERT INTO user Value ("+name+"," +username+"," +email+"," +password+", CURDATE(), 5000)";
+    try {
+
+      // get connection and initialize statement
+      Connection con = getConnection();
+      PreparedStatement stmt = con.prepareStatement(sql);
+      stmt.executeUpdate(sql);
+
+      // cleanup
+      stmt.close();
+    }
+
+    catch (SQLException e) {
+      System.err.println("ERROR: Coult not complete purchase:" + sql);
+      System.err.println(e.getMessage());
+      e.printStackTrace();
+    }
+  }
+    
     
 // inserts purchases from users into database
   public void buy_shares(User u, Song s, int n) {
