@@ -318,4 +318,46 @@ public class DBUtils {
     return h;
   }
 }
+
+//returns the value of the given user's portfolio
+ public int port_value(User u) {
+
+   Integer n =  null;
+   
+   try {
+     Connection con = getConnection();
+     Statement stmt = con.createStatement();
+     String sqlGet = "Select (sum(total_value) + purchasing_power) as portfolio_value" + 
+         "    From" + 
+         "    (Select user_id, spotify_id, shares_owned * song_value as total_value" + 
+         "    From" + 
+         "      (Select user_id, spotify_id, user_bought - coalesce(user_sold,0) as shares_owned" + 
+         "      From" + 
+         "        (Select user_id, spotify_id, sum(n_shares) as user_bought" + 
+         "        From buy" + 
+         "        Group by user_id, spotify_id) as total_bought" + 
+         "      Left Join " + 
+         "        (Select user_id, spotify_id, sum(n_shares) as user_sold" + 
+         "        From sell" + 
+         "        Group by user_id, spotify_id) as total_sold" + 
+         "        Using (user_id, spotify_id)) as user_total" + 
+         "    Join song Using (spotify_id)) as user_share_value" + 
+         "  Join user Using (user_id)" + 
+         "  Group by user_id) as daily_portfolio" + 
+         "Where user.user_id =" + u.getUserID();
+     ResultSet rs = stmt.executeQuery(sqlGet);
+
+     rs.close();
+     stmt.close();
+
+     while (rs.next()) {
+       n = rs.getInt("portfolio_value");
+
+     }
+   } catch (SQLException e) {
+     System.err.println(e.getMessage());
+     e.printStackTrace();
+   }
+   return n;
+ }
 }
