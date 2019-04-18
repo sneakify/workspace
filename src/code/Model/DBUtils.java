@@ -327,24 +327,23 @@ public class DBUtils {
    try {
      Connection con = getConnection();
      Statement stmt = con.createStatement();
-     String sqlGet = "Select (sum(total_value) + purchasing_power) as portfolio_value" + 
+     String sqlGet = "Select sum(song_total) + purchasing_power as portfolio_value" + 
+         "  From" + 
+         "    (Select user_id, title, shares_owned * song_value as song_total" + 
          "    From" + 
-         "    (Select user_id, spotify_id, shares_owned * song_value as total_value" + 
-         "    From" + 
-         "      (Select user_id, spotify_id, user_bought - coalesce(user_sold,0) as shares_owned" + 
+         "      (Select user_id, spotify_id, user_bought - coalesce(user_sold,0) as shares_owned\r\n" + 
          "      From" + 
-         "        (Select user_id, spotify_id, sum(n_shares) as user_bought" + 
+         "        (Select user_id, spotify_id, sum(n_shares) as user_bought\r\n" + 
          "        From buy" + 
          "        Group by user_id, spotify_id) as total_bought" + 
-         "      Left Join " + 
+         "      Left Join" + 
          "        (Select user_id, spotify_id, sum(n_shares) as user_sold" + 
          "        From sell" + 
          "        Group by user_id, spotify_id) as total_sold" + 
          "        Using (user_id, spotify_id)) as user_total" + 
-         "    Join song Using (spotify_id)) as user_share_value" + 
+         "    Join song Using (spotify_id)) as all_songs" + 
          "  Join user Using (user_id)" + 
-         "  Group by user_id) as daily_portfolio" + 
-         "Where user.user_id =" + u.getUserID();
+         "Where user_id =" + u.getUserID();
      ResultSet rs = stmt.executeQuery(sqlGet);
 
      rs.close();
