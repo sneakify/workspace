@@ -1,15 +1,63 @@
 package code.Model;
 
-import java.sql.Date;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class DatabaseMySQL implements DatabaseAPI {
+
+
+    public void authenticate(String user, String password) {
+
+        dbu = new DBUtils("jdbc:mysql://localhost:3306/spootify?serverTimezone=EST5EDT", user, password);
+    }
+
+
+    public java.sql.Date todayDateSQL() {
+        // get today's date in the correct format yo
+        java.util.Date utilDate = new java.util.Date();
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+        return sqlDate;
+    }
+
+    public DatabaseMySQL() {
+
+        this.allTheSongs = new HashMap<>();
+
+        // Authenticate your access to the server.
+        this.authenticate("murach", "grendel");
+
+        // what's today's date?!?!?
+        java.sql.Date today = this.todayDateSQL();
+
+        // get all them songs
+        List<Song> all = this.existingSongs(today);
+
+        // put all them songs in a hashmap
+        for (Song s: all) {
+            allTheSongs.putIfAbsent(s, s.getSongValue());
+        }
+    }
+
+    public Integer whatIsCurrentPrice(Song s) {
+
+        this.getOrInsertSong(s);
+
+        return this.getCurrentPrice(s.getSpotifyID());
+    }
+
+    /////////////////////////////////// ////////////////////////////////
+    /////////////////////////////////// ////////////////////////////////
+
     // For demonstration purposes. Better would be a constructor that takes a file path
     // and loads parameters dynamically.
     DBUtils dbu;
 
+    // hashmap of song objects to integers (representing number of shares
+    private HashMap<Song, Integer> allTheSongs;
 
     /**
      * Find existing Songs on the given date
@@ -18,11 +66,56 @@ public class DatabaseMySQL implements DatabaseAPI {
      */
     public List<Song> existingSongs(Date date) {
 
-        List<Song> list = dbu.existingSongs();
-        // TODO stuff pls stub
-        System.out.println("Oops tried to do a dummy method, with dummy return");
-        List<Song> los = new ArrayList<Song>();
-        return los;
+        // TODO - for this to work, need to set up the mysql-connector dependency in Project Structure
+        // for Reference: https://stackoverflow.com/questions/30651830/use-jdbc-mysql-connector-in-intellij-idea
+
+        List<Song> mylist = new ArrayList<>();
+
+        try {
+            Connection conn = dbu.getConnection();
+            Statement st = conn.createStatement();
+
+            ResultSet rs = st.executeQuery("SELECT * FROM song");
+
+            while (rs.next()) {
+                // TODO - THIS IS WHAT TO LOOK AT, figure out how to retun this shit
+                String spotify_id = rs.getString("spotify_id");
+                String title = rs.getString("title");
+                String artist_id = rs.getString("artist_id");
+                String album_id = rs.getString("album_id");
+                String song_value = rs.getString("song_value");
+
+                // String spotifyID, String title, String artistID,
+                //
+                //
+                //
+                //
+                // int rank, String albumID)
+
+                Song newSong = new Song(
+                        rs.getString("spotify_id"),
+                        rs.getString("title"),
+                        rs.getString("artist_id"),
+                        rs.getInt("song_value"), // rank
+                        rs.getString("song_value"));
+                System.out.println("hello");
+
+                // add stuff
+                mylist.add(newSong);
+
+                // print stuff
+                System.out.println("adding: " + newSong.toString());
+            }
+
+            rs.close();
+            st.close();
+
+        } catch(SQLException e) {
+            System.err.println(e.getMessage());
+            System.exit(1);
+        }
+        // could maybe do finally to close connection? idk
+        return mylist;
     }
 
     public void getConnection() {
@@ -78,22 +171,58 @@ public class DatabaseMySQL implements DatabaseAPI {
         return dbu.getOrInsertTerm("album", "album_id", "album_name", albumName);
     }
 
+
+    public void refreshSongs(List<Song> listSongs, java.sql.Date today) {
+        // not most efficient when inserting many records
+        // for Doctor d: drlist)
+        //      insertDoctor(d);
+
+        String sql = "Insert into song " +
+                "(spotify_id, title, artist_id, album_id, song_value)" +
+                "Values (?,?,?,?,?)";
+
+
+        try {
+            // db.getConnection?
+
+            // TODO change to authenticate stuff?
+            this.existingSongs(today);
+            this.clearSongData();
+
+            DBUtils utl = new DBUtils("stuff", "morestuff", "pword");
+
+
+            Connection con = utl.getConnection();
+            PreparedStatement pstmt = con.prepareStatement(sql);
+
+//            for (Song s : listSongs) {
+//                pstmt.setString(1, s.getLastName());
+//                pstmt.setString(2, s.getFirstName());
+//                pstmt.setBoolean(3, s.isAcceptingNewPatients());
+//                pstmt.setInt(4, getOrInsertSpecialty(s.getSpecialty()));
+//                pstmt.execute();
+//            }
+            pstmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public String toString() {
+        return allTheSongs.toString();
+    }
+
+
     @Override
-    public Song getOrInsertSong(Song s) {
+    public int getOrInsertSong(Song s) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String sql =  "INSERT INTO song (spotify_id,title,artist_id,album_id, song_value) VALUES" +
                 "('" + s.getSpotifyID() + "','" + s.getTitle() + "','" + s.getArtistID() +
-                "','" + s.getAlbumID() +"','" + s.getSongValue() +"','" + s.getArtistID() + "')";
-        int key = -1;
-        // put song in song thing
+                "','" + s.getAlbumID() +"','" + s.getSongValue() + "')";
 
-
-
-        // make sure album stuff is there
-        // return dbu.getOrInsertTerm("");
-
-        return null;
+        return dbu.insertOneRecord(sql);
     }
 
 
@@ -163,11 +292,6 @@ public class DatabaseMySQL implements DatabaseAPI {
     }
 
     ///////////////////////////////////////////////////////////////////////
-
-    public void authenticate(String user, String password) {
-
-        dbu = new DBUtils("jdbc:mysql://localhost:3306/spootify?serverTimezone=EST5EDT", user, password);
-    }
 
     /**
      * Close the connection when application finishes

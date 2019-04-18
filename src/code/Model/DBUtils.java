@@ -17,57 +17,6 @@ public class DBUtils {
         this.password = password;
     }
 
-    public List<Song> existingSongs() {
-
-        // TODO - for this to work, need to set up the mysql-connector dependency in Project Structure
-        // for Reference: https://stackoverflow.com/questions/30651830/use-jdbc-mysql-connector-in-intellij-idea
-
-        List<Song> mylist = new ArrayList<>();
-
-        try {
-            Connection conn = getConnection();
-            Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_UPDATABLE);
-
-            ResultSet rs = st.executeQuery("SELECT * FROM song");
-
-            while (rs.next()) {
-                // TODO - THIS IS WHAT TO LOOK AT, figure out how to retun this shit
-                String spotify_id = rs.getString("spotify_id");
-                String title = rs.getString("title");
-                String artist_id = rs.getString("artist_id");
-                String album_id = rs.getString("album_id");
-                String song_value = rs.getString("song_value");
-
-
-                // String spotifyID, String title, String artistID, int rank, String albumID)
-
-                Song newSong = new Song(
-                        rs.getString("spotify_id"),
-                        rs.getString("title"),
-                        rs.getString("artist_id"),
-                        rs.getInt("song_value"), // rank
-                        rs.getString("song_value"));
-
-                // add stuff
-//                mylist.add(name)
-
-                // print stuff
-                System.out.println("adding: " + newSong.toString());
-            }
-
-            rs.close();
-            st.close();
-            conn.close();
-
-        } catch(SQLException e) {
-            System.err.println(e.getMessage());
-            System.exit(1);
-        }
-        // could maybe do finally to close connection? idk
-        return mylist;
-    }
-
     public Connection getConnection()
     {
         if (con == null) {

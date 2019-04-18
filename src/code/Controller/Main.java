@@ -33,8 +33,6 @@ public class Main {
   public static void main(String[] args) {
     System.out.println("The Program Started Running"); // (i.e. show the on button worked)
 
-    // Authenticate your access to the server.
-    api.authenticate("murach", "grendel");
     System.out.println("\n\nNo Error Yet? Congratulations, you connected to the database:");
 
     // TODO - uncomment and then run
@@ -57,19 +55,17 @@ public class Main {
     System.out.println(api.song_artist(mySong));
 
 
+    // So actually we're just instantiating a DatabaseAPI and that IS our model
     // TODO instantiate java.Model and make it relate to view somehow, pass into view probably
-    ModelSQLInterface mod = new MyModel(api);
-
-
 
     // Bradley - I'M NOT GONNA MESS WITH VIEW FILES, but should pass in the 'mod' MODELSQLINTERFACE
     //           object into the View, which really should be 'View mf = new MainFrame(mod)'
     // Start the java.View
+
     MainFrame mf = new MainFrame();
     // TODO ==== View mf = new MainFrame(mod);
 
     // Close connection with the MySQL Database
-    api.closeConnection();
   }
 }
 

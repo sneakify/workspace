@@ -32,7 +32,7 @@ public interface DatabaseAPI {
      */
     public int getOrInsertAlbumID(String albumName);
 
-    public Song getOrInsertSong(Song s);
+    public int getOrInsertSong(Song s);
 
     public int getCurrentPrice(String spotifyID);
 
@@ -75,6 +75,20 @@ public interface DatabaseAPI {
     String song_album(Song s);
 
     String song_artist(Song s);
+
+    /**
+     * The Basic ToString method
+     * @return String
+     */
+    String toString();
+
+    // purchase
+
+    // sell
+
+    // update settings (password, email)
+
+    // fill data for today
 }
 
 //    /**

@@ -3,12 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="c821b5a8-9e86-4842-b176-547e131b5500" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/View/code/Controller/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/View/code/Controller/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/View/code/Model/DBUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/View/code/Model/DBUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/View/code/Model/DatabaseAPI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/View/code/Model/DatabaseAPI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/View/code/Model/DatabaseMySQL.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/View/code/Model/DatabaseMySQL.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/View/code/Model/ModelSQLInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/View/code/Model/MyModel.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/code/Controller/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/Controller/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/code/Model/DBUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/Model/DBUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/code/Model/DatabaseAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/Model/DatabaseAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/code/Model/DatabaseMySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/Model/DatabaseMySQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/code/Model/Song.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/Model/Song.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/code/Model/ModelSQLInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/code/Model/MyModel.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,33 +29,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/code/Model/ModelSQLInterface.java">
+        <entry file="jar://$PROJECT_DIR$/../jdk-11.0.2/lib/src.zip!/java.sql/java/sql/Date.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/code/Model/MyModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="45" column="40" selection-start-line="45" selection-start-column="40" selection-end-line="45" selection-end-column="40" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#3077#3078#0" expanded="true" />
-                <element signature="e#3122#3123#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/code/Model/User.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
+            <state relative-caret-position="1241">
+              <caret line="99" column="7" selection-start-line="99" selection-start-column="7" selection-end-line="99" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -57,8 +40,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/code/Model/Song.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="37" column="27" lean-forward="true" selection-start-line="37" selection-start-column="27" selection-end-line="37" selection-end-column="27" />
+            <state relative-caret-position="221">
+              <caret line="61" column="12" selection-start-line="61" selection-start-column="12" selection-end-line="61" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -81,8 +64,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/code/Controller/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="51" column="6" selection-start-line="51" selection-start-column="6" selection-end-line="51" selection-end-column="6" />
+            <state relative-caret-position="495">
+              <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -93,8 +76,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/code/Model/DBUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="226" lean-forward="true" selection-start-line="226" selection-end-line="226" />
+            <state relative-caret-position="179">
+              <caret line="37" column="20" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -105,16 +88,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/code/Model/DatabaseMySQL.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1751">
-              <caret line="103" column="8" selection-start-line="103" selection-start-column="8" selection-end-line="103" selection-end-column="20" />
+            <state relative-caret-position="179">
+              <caret line="298" column="40" selection-start-line="298" selection-start-column="40" selection-end-line="298" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2178#2179#0" expanded="true" />
-                <element signature="e#2202#2203#0" expanded="true" />
-                <element signature="e#2696#2697#0" expanded="true" />
-                <element signature="e#2723#2724#0" expanded="true" />
-                <element signature="e#2778#2779#0" expanded="true" />
-                <element signature="e#2805#2806#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -123,8 +100,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/code/Model/DatabaseAPI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="68" column="27" selection-start-line="68" selection-start-column="27" selection-end-line="68" selection-end-column="27" />
+            <state relative-caret-position="1275">
+              <caret line="76" column="31" selection-start-line="76" selection-start-column="31" selection-end-line="76" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -150,6 +127,16 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>date</find>
+      <find>url</find>
+      <find>existingSo</find>
+      <find>authenticate</find>
+      <find>existing</find>
+      <find>existingSongs</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -179,24 +166,25 @@
         <option value="$PROJECT_DIR$/src/java/Model/MainFrame.java" />
         <option value="$PROJECT_DIR$/src/java/Model/DatabaseMySQL.java" />
         <option value="$PROJECT_DIR$/src/java/Model/DatabaseAPI.java" />
-        <option value="$PROJECT_DIR$/src/code/Model/ModelSQLInterface.java" />
         <option value="$PROJECT_DIR$/src/code/Model/User.java" />
         <option value="$PROJECT_DIR$/src/code/View/MainFrame.java" />
         <option value="$PROJECT_DIR$/src/code/View/ContentPanel.java" />
         <option value="$PROJECT_DIR$/src/code/View/BrowsePanel.java" />
-        <option value="$PROJECT_DIR$/src/code/Model/MyModel.java" />
         <option value="$PROJECT_DIR$/src/code/Model/DBUtils.java" />
-        <option value="$PROJECT_DIR$/src/code/Model/DatabaseAPI.java" />
         <option value="$PROJECT_DIR$/src/code/Model/Song.java" />
+        <option value="$PROJECT_DIR$/src/code/Model/ModelSQLInterface.java" />
+        <option value="$PROJECT_DIR$/src/code/Model/DatabaseAPI.java" />
+        <option value="$PROJECT_DIR$/src/code/Model/MyModel.java" />
         <option value="$PROJECT_DIR$/src/code/Model/DatabaseMySQL.java" />
         <option value="$PROJECT_DIR$/src/code/Controller/Main.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="953" />
-    <option name="width" value="974" />
-    <option name="height" value="1047" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-523" />
+    <option name="y" value="-27" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -206,7 +194,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -243,7 +231,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -309,6 +297,10 @@
       <workItem from="1555357935318" duration="12866000" />
       <workItem from="1555385244414" duration="1636000" />
       <workItem from="1555388229289" duration="2193000" />
+      <workItem from="1555538756590" duration="1189000" />
+      <workItem from="1555540244045" duration="551000" />
+      <workItem from="1555540824245" duration="4169000" />
+      <workItem from="1555545314530" duration="1288000" />
     </task>
     <task id="LOCAL-00001" summary="added some boilerplate">
       <created>1555001331389</created>
@@ -352,17 +344,24 @@
       <option name="project" value="LOCAL" />
       <updated>1555371865159</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fixed date stuff">
+      <created>1555542855610</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1555542855610</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30577000" />
+    <option name="totallyTimeSpent" value="37774000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="953" y="0" width="974" height="1047" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19693655" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.102345414" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -372,7 +371,7 @@
       <window_info id="Learn" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.33260393" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33152762" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -380,7 +379,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Messages" order="10" visible="true" weight="0.32822758" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32394367" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
       <window_info anchor="bottom" id="Version Control" order="12" weight="0.32932165" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -404,7 +403,8 @@
     <MESSAGE value="hmm - ex" />
     <MESSAGE value="stuffs" />
     <MESSAGE value="basic interacting with db starting to take shape in existingsongs fns" />
-    <option name="LAST_COMMIT_MESSAGE" value="basic interacting with db starting to take shape in existingsongs fns" />
+    <MESSAGE value="fixed date stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed date stuff" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/java/Model/MainFrame.java" />
@@ -468,10 +468,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/code/Model/ModelSQLInterface.java">
+    <entry file="file://$PROJECT_DIR$/src/code/Model/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/code/Model/MyModel.java" />
+    <entry file="file://$PROJECT_DIR$/src/code/Model/ModelSQLInterface.java" />
+    <entry file="jar://$PROJECT_DIR$/../jdk-11.0.2/lib/src.zip!/java.sql/java/sql/Date.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1241">
+          <caret line="99" column="7" selection-start-line="99" selection-start-column="7" selection-end-line="99" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -485,6 +494,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/code/Model/DatabaseAPI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1275">
+          <caret line="76" column="31" selection-start-line="76" selection-start-column="31" selection-end-line="76" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/code/View/View.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -492,39 +511,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/code/Model/MyModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="45" column="40" selection-start-line="45" selection-start-column="40" selection-end-line="45" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3077#3078#0" expanded="true" />
-            <element signature="e#3122#3123#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/code/Model/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/code/Model/DatabaseAPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="68" column="27" selection-start-line="68" selection-start-column="27" selection-end-line="68" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/code/Model/Song.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="37" column="27" lean-forward="true" selection-start-line="37" selection-start-column="27" selection-end-line="37" selection-end-column="27" />
+        <state relative-caret-position="221">
+          <caret line="61" column="12" selection-start-line="61" selection-start-column="12" selection-end-line="61" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/code/Model/DBUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="37" column="20" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -533,24 +533,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/code/Model/DatabaseMySQL.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1751">
-          <caret line="103" column="8" selection-start-line="103" selection-start-column="8" selection-end-line="103" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2178#2179#0" expanded="true" />
-            <element signature="e#2202#2203#0" expanded="true" />
-            <element signature="e#2696#2697#0" expanded="true" />
-            <element signature="e#2723#2724#0" expanded="true" />
-            <element signature="e#2778#2779#0" expanded="true" />
-            <element signature="e#2805#2806#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/code/Model/DBUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="226" lean-forward="true" selection-start-line="226" selection-end-line="226" />
+        <state relative-caret-position="179">
+          <caret line="298" column="40" selection-start-line="298" selection-start-column="40" selection-end-line="298" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -559,8 +543,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/code/Controller/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="51" column="6" selection-start-line="51" selection-start-column="6" selection-end-line="51" selection-end-column="6" />
+        <state relative-caret-position="495">
+          <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
