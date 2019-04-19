@@ -17,12 +17,24 @@ private String url;
     this.password = password;
   }
 
+  /**
+   * Temp fn, want to know if connected
+   * @return
+   */
+  public String connectedHuh() {
+    if (this.user == null || this.password == null || this.url == null) {
+      return "Something's null, so not connected";
+    } else {
+      return "It's connected";
+    }
+  }
+
+
+
     // TODO - for this to work, need to set up the mysql-connector dependency in
     // Project Structure
     // for Reference:
     // https://stackoverflow.com/questions/30651830/use-jdbc-mysql-connector-in-intellij-idea
-
-
 
   public Connection getConnection() {
     if (con == null) {
@@ -35,6 +47,7 @@ private String url;
       }
     }
 
+    System.out.println("null?" + con.toString());
     return con;
   }
 
@@ -388,9 +401,6 @@ private String url;
      Statement stmt = con.createStatement();
      String sqlGet = "Select * From song";
      ResultSet rs = stmt.executeQuery(sqlGet);
-
-     rs.close();
-     stmt.close();
    
      while (rs.next()) {
        String spotify_id = rs.getString("spotify_id");
@@ -403,6 +413,10 @@ private String url;
        mylist.add(temp);
 
      }
+
+     rs.close();
+     stmt.close();
+
    } catch (SQLException e) {
      System.err.println(e.getMessage());
      e.printStackTrace();

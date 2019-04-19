@@ -9,14 +9,35 @@ import java.util.HashMap;
 import java.util.List;
 
 public class DatabaseMySQL implements DatabaseAPI {
-    // For demonstration purposes. Better would be a constructor that takes a file path
-    // and loads parameters dynamically.
     DBUtils dbu;
     private HashMap<Song, Integer> allTheSongs;
 
-    public void authenticate(String user, String password) {
+    public DatabaseMySQL() {
+        // Authenticate your access to the server.
+        this.authenticate(Login.usr, Login.pword);
 
+        this.allTheSongs = new HashMap<>();
+
+        // what's today's date?!?!?
+        java.sql.Date today = this.todayDateSQL();
+
+        // get all them songs
+        List<Song> all = this.existingSongs(today);
+
+        System.out.println("list o all songs" + all.toString()); // TODO - delete this
+
+        // put all them songs in a hashmap
+        for (Song s: all) {
+            allTheSongs.putIfAbsent(s, s.getSongValue());
+        }
+    }
+
+    ////////////////////
+
+    public void authenticate(String user, String password) {
+        System.out.println(user + "::" + password);
         dbu = new DBUtils("jdbc:mysql://localhost:3306/spootify?serverTimezone=EST5EDT", user, password);
+        System.out.println(dbu.connectedHuh());
     }
 
 
@@ -26,30 +47,6 @@ public class DatabaseMySQL implements DatabaseAPI {
         java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 
         return sqlDate;
-    }
-
-
-    public DatabaseMySQL() {
-        // Authenticate your access to the server.
-        this.authenticate(Login.usr, Login.pword);
-        System.out.println("\n\nNo Error Yet? Congratulations, you connected to the database:");
-        //
-
-        this.allTheSongs = new HashMap<>();
-
-        // Authenticate your access to the server.
-        this.authenticate(Login.usr, Login.pword);
-
-        // what's today's date?!?!?
-        java.sql.Date today = this.todayDateSQL();
-
-        // get all them songs
-        List<Song> all = this.existingSongs(today);
-
-        // put all them songs in a hashmap
-        for (Song s: all) {
-            allTheSongs.putIfAbsent(s, s.getSongValue());
-        }
     }
 
 
@@ -69,7 +66,6 @@ public class DatabaseMySQL implements DatabaseAPI {
      */
     public List<Song> existingSongs(java.sql.Date date) {
 
-
         // TODO - for this to work, need to set up the mysql-connector dependency in Project Structure
         // for Reference: https://stackoverflow.com/questions/30651830/use-jdbc-mysql-connector-in-intellij-idea
 
@@ -78,23 +74,16 @@ public class DatabaseMySQL implements DatabaseAPI {
         try {
             Connection conn = dbu.getConnection();
             Statement st = conn.createStatement();
+            String sqlGet = "SELECT * FROM song";
 
-            ResultSet rs = st.executeQuery("SELECT * FROM song");
+            ResultSet rs = st.executeQuery(sqlGet);
 
             while (rs.next()) {
-                // TODO - THIS IS WHAT TO LOOK AT, figure out how to retun this shit
                 String spotify_id = rs.getString("spotify_id");
                 String title = rs.getString("title");
                 String artist_id = rs.getString("artist_id");
                 String album_id = rs.getString("album_id");
                 String song_value = rs.getString("song_value");
-
-                // String spotifyID, String title, String artistID,
-                //
-                //
-                //
-                //
-                // int rank, String albumID)
 
                 Song newSong = new Song(
                         rs.getString("spotify_id"),
@@ -102,13 +91,9 @@ public class DatabaseMySQL implements DatabaseAPI {
                         rs.getString("artist_id"),
                         rs.getInt("song_value"), // rank
                         rs.getString("song_value"));
-                System.out.println("hello");
 
                 // add stuff
                 mylist.add(newSong);
-
-                // print stuff
-                System.out.println("adding: " + newSong.toString());
             }
 
             rs.close();
@@ -118,7 +103,6 @@ public class DatabaseMySQL implements DatabaseAPI {
             System.err.println(e.getMessage());
             System.exit(1);
         }
-        // could maybe do finally to close connection? idk
         return mylist;
     }
 

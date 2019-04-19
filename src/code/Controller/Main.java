@@ -25,18 +25,16 @@ public class Main {
 
   // this is our driver, our main, the one which runs
 
-
-    // instantiate DatabaseAPI object (sort of like a bootleg model),
-    // which in its constructor calls authenticate
-    private static DatabaseAPI api = new DatabaseMySQL();
-
   public static void main(String[] args) {
 
     // Let's the log-lookers know that "yes, we have liftoff"
     System.out.println("The Program Started Running");
 
 
-      Song mySong = new Song("Old Town Road - Remix");
+    // instantiate DatabaseAPI object (sort of like a bootleg model),
+    // which in its constructor calls authenticate
+    DatabaseAPI api = new DatabaseMySQL();
+    // TODO - NOTE, this calls the constructor of this class, which runs the "authenticate" function,
 
 
     // Start the java.View
