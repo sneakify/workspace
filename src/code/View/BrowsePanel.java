@@ -22,7 +22,7 @@ class BrowsePanel extends ContentPanel implements ActionListener {
   private HashMap<JButton, Song> songButtons;
 
   // list of songs
-  ArrayList<Song> songs = this.dbUtils.all_songs();
+  ArrayList<Song> songs;
 
   // filters by which to search through chart
   private JTextField songFilter;
@@ -38,6 +38,7 @@ class BrowsePanel extends ContentPanel implements ActionListener {
    */
   BrowsePanel(MainFrame mainFrame) {
     super(mainFrame);
+    this.songs = this.dbUtils.all_songs();
 
     this.setLayout(new BorderLayout());
     this.makeFilterPanel();
