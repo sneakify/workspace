@@ -38,8 +38,6 @@ public class Main {
 
       Song mySong = new Song("Old Town Road - Remix");
 
-      System.out.println(api.song_album(mySong));
-      System.out.println(api.song_artist(mySong));
 
     // Start the java.View
     MainFrame mf = new MainFrame();

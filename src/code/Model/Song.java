@@ -19,6 +19,14 @@ public class Song {
         this.albumID = albumID;
     }
 
+    public Song(String spotifyID) {
+        this.spotifyID = spotifyID;
+        this.title = "Default";
+        this.artistID = "111";
+        this.song_value = 111;
+        this.albumID = "22222";
+    }
+
 
     @Override
     public String toString() {
