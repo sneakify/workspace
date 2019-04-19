@@ -1,6 +1,7 @@
 package code.Model;
 
 import java.sql.*;
+import java.util.HashMap;
 
 public class DBUtils {
 
@@ -108,7 +109,7 @@ public class DBUtils {
 
         return key;
     }
-    
+
 //inserts new user into database
   public void new_user(String name, String username, String email, String password) {
     String sql = "INSERT INTO user Value ("+name+"," +username+"," +email+"," +password+", CURDATE(), 5000)";
@@ -129,8 +130,8 @@ public class DBUtils {
       e.printStackTrace();
     }
   }
-    
-    
+
+
 // inserts purchases from users into database
   public void buy_shares(User u, Song s, int n) {
     String sql = "INSERT INTO buy (user_id, spotify_id, price, n_shares, purchase_time) VALUES"
@@ -179,11 +180,11 @@ public class DBUtils {
     }
   }
 
-// returns album name of given song 
+// returns album name of given song
   public String song_album(Song s) {
 
     String value = null;
-    
+
     try {
       Connection con = getConnection();
       Statement stmt = con.createStatement();
@@ -193,7 +194,7 @@ public class DBUtils {
 
       rs.close();
       stmt.close();
-      
+
       while (rs.next()) {
         value = rs.getString("album_name");
      }
@@ -219,7 +220,7 @@ public class DBUtils {
 
       rs.close();
       stmt.close();
-      
+
       while (rs.next()) {
         value = rs.getString("artist_name");
       }
@@ -230,7 +231,7 @@ public class DBUtils {
     }
     return value;
   }
-  
+
  
 // returns the past 7 days of the given song's history 
   public HashMap<String, Integer> song7(Song s) {

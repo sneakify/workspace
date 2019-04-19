@@ -59,15 +59,14 @@ class PortfolioPanel extends ContentPanel {
         this.add(totalsPanelContainer, BorderLayout.NORTH);
 
         // labels
-        Font labelFont = new Font(this.font.getFontName(), this.font.getStyle(), this.font.getSize() - 2);
         // total funds
         JLabel fundsLabel = new JLabel("Total Funds: ");
-        fundsLabel.setFont(labelFont);
-        this.totalFundsLabel.setFont(labelFont);
+        fundsLabel.setFont(this.labelFont);
+        this.totalFundsLabel.setFont(this.labelFont);
         // total # shares
         JLabel sharesLabel = new JLabel("Total Shares: ");
-        sharesLabel.setFont(labelFont);
-        this.totalSharesLabel.setFont(labelFont);
+        sharesLabel.setFont(this.labelFont);
+        this.totalSharesLabel.setFont(this.labelFont);
 
         // add components to totals panel
         // total funds

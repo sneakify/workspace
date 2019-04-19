@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+
 /**
  * Overall frame that contains a navigation panel and displays the appropriate content panel.
  */
@@ -34,6 +35,7 @@ public class MainFrame extends JFrame implements ActionListener {//implements Vi
   private final static String BUY = "BUY";
   private final static String SELL = "SELL";
   private final static String SETTINGS = "SETTINGS";
+
 
   /**
    * Constructor. Instantiates navigation panel and content panels. Adds panels to this frame.
