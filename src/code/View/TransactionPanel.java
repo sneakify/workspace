@@ -5,18 +5,17 @@ import java.awt.*;
 import javax.swing.*;
 
 import code.Model.Song;
+import code.Model.User;
 
 /**
  * TODO
  */
 abstract class TransactionPanel extends ContentPanel {
+  User user;
   Song song;
 
-  /**
-   * TODO
-   * @param song
-   */
-  TransactionPanel(Song song) {
+  TransactionPanel(User user, Song song) {
+    this.user = user;
     this.song = song;
 
     this.makeInfoPanel();
@@ -37,19 +36,18 @@ abstract class TransactionPanel extends ContentPanel {
     this.add(infoPanelContainer, BorderLayout.NORTH);
 
     // labels
-    Font labelFont = new Font(this.font.getFontName(), this.font.getStyle(), this.font.getSize() - 2);
     // title
     JLabel titleLabel = new JLabel("Title: " + this.song.getTitle());
-    titleLabel.setFont(labelFont);
+    titleLabel.setFont(this.labelFont);
     // artist
     JLabel artistLabel = new JLabel("Artist: " + this.song.getAlbumID()); // fixme use appropriate method
-    artistLabel.setFont(labelFont);
+    artistLabel.setFont(this.labelFont);
     // album
     JLabel albumLabel = new JLabel("Album: " + this.song.getArtistID()); // fixme use appropriate method
-    albumLabel.setFont(labelFont);
+    albumLabel.setFont(this.labelFont);
     // current stock price
-    JLabel currentStockPriceLabel = new JLabel("Current Stock Price: $" + this.song.getSongValue()); // fixme use appropriate method
-    currentStockPriceLabel.setFont(labelFont);
+    JLabel currentStockPriceLabel = new JLabel("Current Stock Price: $" + this.song.getSpotifyID()); // fixme use appropriate method
+    currentStockPriceLabel.setFont(this.labelFont);
 
     // add labels to info panel
     constraints.gridx = 0;

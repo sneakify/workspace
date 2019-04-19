@@ -5,11 +5,15 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import code.Model.User;
+
 /**
  * Content Panel that allows user to view their available funds, total number of shares owned,
  * and each owned stock. Clicking any one song launches Sell Panel.
  */
 class PortfolioPanel extends ContentPanel {
+    User user;
+
     // chart to display as table
     private JTable stocks;
     private double totalFunds = 0;
@@ -21,7 +25,8 @@ class PortfolioPanel extends ContentPanel {
     /**
      * TODO
      */
-    PortfolioPanel() {
+    PortfolioPanel(User user) {
+        this.user = user;
         this.setLayout(new BorderLayout());
         this.makeTotalsPanel();
 
@@ -59,15 +64,14 @@ class PortfolioPanel extends ContentPanel {
         this.add(totalsPanelContainer, BorderLayout.NORTH);
 
         // labels
-        Font labelFont = new Font(this.font.getFontName(), this.font.getStyle(), this.font.getSize() - 2);
         // total funds
         JLabel fundsLabel = new JLabel("Total Funds: ");
-        fundsLabel.setFont(labelFont);
-        this.totalFundsLabel.setFont(labelFont);
+        fundsLabel.setFont(this.labelFont);
+        this.totalFundsLabel.setFont(this.labelFont);
         // total # shares
         JLabel sharesLabel = new JLabel("Total Shares: ");
-        sharesLabel.setFont(labelFont);
-        this.totalSharesLabel.setFont(labelFont);
+        sharesLabel.setFont(this.labelFont);
+        this.totalSharesLabel.setFont(this.labelFont);
 
         // add components to totals panel
         // total funds

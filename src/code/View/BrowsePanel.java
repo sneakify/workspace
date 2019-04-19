@@ -67,13 +67,12 @@ class BrowsePanel extends ContentPanel {
     filtersLabel.setFont(this.font);
 
     // filter labels
-    Font labelFont = new Font(this.font.getFontName(), this.font.getStyle(), this.font.getSize() - 2);
     JLabel songLabel = new JLabel("Song:");
-    songLabel.setFont(labelFont);
+    songLabel.setFont(this.labelFont);
     JLabel artistLabel = new JLabel("Artist:");
-    artistLabel.setFont(labelFont);
+    artistLabel.setFont(this.labelFont);
     JLabel genreLabel = new JLabel("Genre:");
-    genreLabel.setFont(labelFont);
+    genreLabel.setFont(this.labelFont);
 
     // filter input fields TODO set action listeners
     this.songFilter = new JTextField(10);
