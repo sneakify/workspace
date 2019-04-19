@@ -19,6 +19,9 @@ public class Song {
         this.albumID = albumID;
     }
 
+    /**
+     * Convenience Constructor
+     */
     public Song(String spotifyID) {
         this.spotifyID = spotifyID;
         this.title = "Default";
@@ -26,7 +29,6 @@ public class Song {
         this.song_value = 111;
         this.albumID = "22222";
     }
-
 
     @Override
     public String toString() {

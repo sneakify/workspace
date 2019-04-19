@@ -2,7 +2,6 @@ package code.Controller;
 
 import code.Model.*;
 import code.View.MainFrame;
-
 import java.util.List;
 
 
@@ -37,8 +36,13 @@ public class Main {
     // TODO - NOTE, this calls the constructor of this class, which runs the "authenticate" function,
 
 
+    // TODO - make the functions that pull the user from the database info and such?
+    User user = new User(33,"Bradley Fargo", "breadfergy","me@gmail.com", "totallyrad", "1997-01-02", 100);
+
+    api.insertUser(user);
+
     // Start the java.View
-    MainFrame mf = new MainFrame();
+    MainFrame mf = new MainFrame(user);
 
     // Close connection with the MySQL Database
     api.closeConnection();

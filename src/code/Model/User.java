@@ -3,8 +3,7 @@ package code.Model;
 public class User {
 
     private int userID;
-    private String firstName;
-    private String lastName;
+    private String fullName;
     private String userName;
     private String email;
     private String password;
@@ -13,15 +12,14 @@ public class User {
 
 
     public User(int userID,
-                String lastName, String firstName,
+                String fullName,
                 String userName,
                 String email,
                 String password,
                 String createdDate,
                 double purchasingPower) {
         this.userID = userID;
-        this.lastName = lastName;
-        this.firstName = firstName;
+        this.fullName = fullName;
         this.userName = userName;
         this.email = email;
         this.password = password;
@@ -37,20 +35,12 @@ public class User {
         this.userID = userID;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setFullName(String firstName) {
+        this.fullName = firstName;
     }
 
     public String getUserName() {

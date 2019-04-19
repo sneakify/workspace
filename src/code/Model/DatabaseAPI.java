@@ -39,8 +39,6 @@ public interface DatabaseAPI {
     public int insertUser(User u);
 
 
-
-
     /**
      * The Basic ToString method
      * @return String
