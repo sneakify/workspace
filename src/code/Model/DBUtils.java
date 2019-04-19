@@ -423,5 +423,33 @@ private String url;
    }
    return mylist;
  }
+  
+   //returns the genre of the given song
+ public String song_genre(Song s) {
+   
+   String value = null;
+   try {
+     Connection con = getConnection();
+     Statement stmt = con.createStatement();
+     String sqlGet = "Select genre_name" + 
+         "From song" + 
+         "Join artist Using(artist_id)" + 
+         "Join genre Using(genre_id)" + 
+         "Where spotify_id =" + s.getSpotifyID();
+     ResultSet rs = stmt.executeQuery(sqlGet);
+
+     rs.close();
+     stmt.close();
+     
+     while (rs.next()) {
+       value = rs.getString("genre_name");
+     }
+
+   } catch (SQLException e) {
+     System.err.println(e.getMessage());
+     e.printStackTrace();
+   }
+   return value;
+ }
    
  }
