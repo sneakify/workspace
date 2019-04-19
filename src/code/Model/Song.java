@@ -4,33 +4,23 @@ public class Song {
 
 
 
-    private String spotifyID;
+    private int spotifyID;
     private String title;
-    private String artistID;
-    private int rank;
-    private String albumID;
+    private int artistID;
+    private int song_value;
+    private int albumID;
 
     /**
      Constructor
      */
-    public Song(String spotifyID, String title, String artistID, int rank, String albumID) {
+    public Song(int spotifyID, String title, int artistID, int song_value, int albumID) {
         this.spotifyID = spotifyID;
         this.title = title;
         this.artistID = artistID;
-        this.rank = rank;
+        this.song_value = song_value;
         this.albumID = albumID;
     }
 
-    /**
-     The Convenience Constructor
-     */
-    public Song(String title, String artistID, int rank) {
-        this.spotifyID = "DUMMY";
-        this.title = title;
-        this.artistID = artistID;
-        this.rank = rank;
-        this.albumID = "DUMMY";
-    }
 
     @Override
     public String toString() {
@@ -38,15 +28,15 @@ public class Song {
                 "spotifyID=" + spotifyID +
                 ", title='" + title + '\'' +
                 ", artistID='" + artistID + '\'' +
-                ", rank=" + rank + '\'' +
+                ", song_value=" + song_value + '\'' +
                 '}';
     }
 
-    public String getSpotifyID() {
+    public int getSpotifyID() {
         return spotifyID;
     }
 
-    public void setSpotifyID(String spotifyID) {
+    public void setSpotifyID(int spotifyID) {
         this.spotifyID = spotifyID;
     }
 
@@ -58,28 +48,28 @@ public class Song {
         this.title = title;
     }
 
-    public String getArtistID() {
+    public int getArtistID() {
         return artistID;
     }
 
-    public void setArtistID(String artistID) {
+    public void setArtistID(int artistID) {
         this.artistID = artistID;
     }
 
-    public int getRank() {
-        return rank;
+    public int getSongValue() {
+        return this.song_value;
     }
 
-    public void setRank(int rank) {
-        this.rank = rank;
+    public void setRank(int song_value) {
+        this.song_value = song_value;
     }
 
-    public String getAlbumID() {
+    public int getAlbumID() {
         return albumID;
     }
 
-    public void setAlbumID(String albumID) {
+    public void setAlbumID(int albumID) {
         this.albumID = albumID;
     }
-
+    
 }
