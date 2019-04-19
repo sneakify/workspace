@@ -154,7 +154,7 @@ class BrowsePanel extends ContentPanel implements ActionListener {
     ArrayList<String> genres = new ArrayList<String>();
 
     for (Song song: this.songs) {
-      String genre = ""; // fixme get song genre
+      String genre = dbUtils.song_genre(song);
       if (!genres.contains(genre)) {
         genres.add(genre);
         this.genreFilter.addItem(genre);
@@ -187,7 +187,7 @@ class BrowsePanel extends ContentPanel implements ActionListener {
     for (Song song : this.songs) {
       if (song.getTitle().contains(s)
               && dbUtils.song_artist(song).contains(a)
-              && song.getTitle().equals(g)) { // fixme change to song genre
+              && dbUtils.song_genre(song).equals(g)) {
         filtered.add(song);
       }
     }
