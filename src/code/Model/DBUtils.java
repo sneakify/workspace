@@ -29,8 +29,6 @@ private String url;
     }
   }
 
-
-
     // TODO - for this to work, need to set up the mysql-connector dependency in
     // Project Structure
     // for Reference:

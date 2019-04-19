@@ -107,9 +107,9 @@ public class DatabaseMySQL implements DatabaseAPI {
     }
 
     /**
-     * Insert one user
-     * @param u
-     * @return
+     * Insert one user into the database
+     * @param u the user to be inserted
+     * @return an int representing status of the insert
      */
     public int insertUser(User u) {
 
@@ -137,7 +137,7 @@ public class DatabaseMySQL implements DatabaseAPI {
             System.exit(1);
             status = 1;
         }
-        return status; // should figure out a way to return status
+        return status;
     }
 
     /**
