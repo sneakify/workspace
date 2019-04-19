@@ -317,7 +317,6 @@ public class DBUtils {
     }
     return h;
   }
-}
 
 //returns the value of the given user's portfolio
  public int port_value(User u) {
