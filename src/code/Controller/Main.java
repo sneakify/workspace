@@ -25,23 +25,20 @@ public class Main {
 
   // this is our driver, our main, the one which runs
 
-  private static DatabaseAPI api = new DatabaseMySQL();
-
   public static void main(String[] args) {
-    System.out.println("The Program Started Running"); // (i.e. show the on button worked)
 
-    // Authenticate your access to the server.
-    api.authenticate("murach", "grendel");
-    System.out.println("\n\nNo Error Yet? Congratulations, you connected to the database:");
+    // Let's the log-lookers know that "yes, we have liftoff"
+    System.out.println("The Program Started Running");
 
+    // instantiate DatabaseAPI object (sort of like a bootleg model),
+    // which in its constructor calls authenticate
+    DatabaseAPI api = new DatabaseMySQL();
+    
     List<Song> songList = api.existingSongs("latest");
+
     for (Song s : songList) {
       System.out.println(s.toString());
     }
-
-
-    // TODO instantiate java.Model and make it relate to view somehow, pass into view probably
-    ModelSQLInterface mod = new MyModel();
 
     // Start the java.View
     MainFrame mf = new MainFrame();

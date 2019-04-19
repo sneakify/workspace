@@ -51,6 +51,22 @@ public interface DatabaseAPI {
      * Close the connection when application finishes
      */
     public void closeConnection();
+
+
+    /**
+     * The Basic ToString method
+     * @return String
+     */
+    String toString();
+
+    // purchase
+
+    // sell
+
+    // update settings (password, email)
+
+    // fill data for today
+
 }
 
 //    /**

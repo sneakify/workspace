@@ -48,7 +48,7 @@ abstract class TransactionPanel extends ContentPanel {
     JLabel albumLabel = new JLabel("Album: " + this.song.getArtistID()); // fixme use appropriate method
     albumLabel.setFont(labelFont);
     // current stock price
-    JLabel currentStockPriceLabel = new JLabel("Current Stock Price: $" + this.song.getRank()); // fixme use appropriate method
+    JLabel currentStockPriceLabel = new JLabel("Current Stock Price: $" + this.song.getSongValue()); // fixme use appropriate method
     currentStockPriceLabel.setFont(labelFont);
 
     // add labels to info panel

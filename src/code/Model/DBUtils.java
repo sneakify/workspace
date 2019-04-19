@@ -1,6 +1,8 @@
 package code.Model;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DBUtils {
 
@@ -335,6 +337,7 @@ private String url;
     }
     return h;
   }
+
 //returns the value of the given user's portfolio
  public int port_value(User u) {
 
