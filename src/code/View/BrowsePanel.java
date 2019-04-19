@@ -39,7 +39,6 @@ class BrowsePanel extends ContentPanel implements ActionListener {
   BrowsePanel(MainFrame mainFrame) {
     super(mainFrame);
     this.songs = this.dbUtils.all_songs();
-
     this.setLayout(new BorderLayout());
     this.makeFilterPanel();
 
