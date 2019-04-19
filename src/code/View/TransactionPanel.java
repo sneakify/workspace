@@ -5,18 +5,17 @@ import java.awt.*;
 import javax.swing.*;
 
 import code.Model.Song;
+import code.Model.User;
 
 /**
  * TODO
  */
 abstract class TransactionPanel extends ContentPanel {
+  User user;
   Song song;
 
-  /**
-   * TODO
-   * @param song
-   */
-  TransactionPanel(Song song) {
+  TransactionPanel(User user, Song song) {
+    this.user = user;
     this.song = song;
 
     this.makeInfoPanel();
@@ -47,7 +46,7 @@ abstract class TransactionPanel extends ContentPanel {
     JLabel albumLabel = new JLabel("Album: " + this.song.getArtistID()); // fixme use appropriate method
     albumLabel.setFont(this.labelFont);
     // current stock price
-    JLabel currentStockPriceLabel = new JLabel("Current Stock Price: $" + this.song.getRank()); // fixme use appropriate method
+    JLabel currentStockPriceLabel = new JLabel("Current Stock Price: $" + this.song.getSpotifyID()); // fixme use appropriate method
     currentStockPriceLabel.setFont(this.labelFont);
 
     // add labels to info panel

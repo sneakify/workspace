@@ -7,11 +7,15 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import code.Model.User;
+
 
 /**
  * Overall frame that contains a navigation panel and displays the appropriate content panel.
  */
-public class MainFrame extends JFrame implements ActionListener {//implements View { //fixme necessary?
+public class MainFrame extends JFrame implements ActionListener {
+  User user; // TODO initialize
+
   // Navigation Panel & Buttons
   private JPanel navigationPanel;
   private JButton backButton = new JButton("⬅");
@@ -40,17 +44,17 @@ public class MainFrame extends JFrame implements ActionListener {//implements Vi
   /**
    * Constructor. Instantiates navigation panel and content panels. Adds panels to this frame.
    */
-  public MainFrame() {
+  public MainFrame() { // TODO have this take in a User
 
     // frame
     this.setVisible(true);
-    this.setSize(600, 600); // TODO may want to abstract
+    this.setSize(600, 600);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setLayout(new BorderLayout());
 
     // navigation bar
     this.makeNavigationBar();
-    this.add(this.navigationPanel, BorderLayout.NORTH); // TODO may need to fix alignment
+    this.add(this.navigationPanel, BorderLayout.NORTH);
 
     // container for content panels
     this.mainPanel = new JPanel(new CardLayout());
@@ -60,9 +64,7 @@ public class MainFrame extends JFrame implements ActionListener {//implements Vi
 
     // content panels
     this.browsePanel = new BrowsePanel();
-    this.portfolioPanel = new PortfolioPanel();
-//    this.buyPanel = new BuyPanel(); fixme
-//    this.sellPanel = new SellPanel(); fixme
+    this.portfolioPanel = new PortfolioPanel(this.user);
     this.settingsPanel = new SettingsPanel();
 
     // add content panels to main panel
@@ -96,7 +98,7 @@ public class MainFrame extends JFrame implements ActionListener {//implements Vi
     this.portfolioButton.addActionListener(this);
     this.settingsButton.addActionListener(this);
 
-    this.backButton.setEnabled(false); // TODO may abstract
+    this.backButton.setEnabled(false);
   }
 
   /**

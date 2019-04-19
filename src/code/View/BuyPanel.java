@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import code.Model.Song;
+import code.Model.User;
 
 /**
  * TODO
@@ -15,12 +16,8 @@ class BuyPanel extends TransactionPanel implements ActionListener {
     JTextField sharesToBuy = new JTextField();
     JButton buyButton = new JButton("Buy");
 
-    /**
-     * TODO
-     * @param song
-     */
-    BuyPanel(Song song) {
-        super(song);
+    BuyPanel(User user, Song song) {
+        super(user, song);
 
         this.makeBuySubPanel();
     }
@@ -42,7 +39,7 @@ class BuyPanel extends TransactionPanel implements ActionListener {
 
         int sharesToBuyInt = this.parseTextField();
 
-        double cost = (double) sharesToBuyInt * this.song.getRank(); // fixme replace getRank with current stock price
+        double cost = (double) sharesToBuyInt * this.song.getSpotifyID(); // fixme replace getRank with current stock price
         JLabel costLabel = new JLabel("Total Cost: $" + cost);
         costLabel.setFont(this.labelFont);
 

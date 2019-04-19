@@ -5,11 +5,15 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import code.Model.User;
+
 /**
  * Content Panel that allows user to view their available funds, total number of shares owned,
  * and each owned stock. Clicking any one song launches Sell Panel.
  */
 class PortfolioPanel extends ContentPanel {
+    User user;
+
     // chart to display as table
     private JTable stocks;
     private double totalFunds = 0;
@@ -21,7 +25,8 @@ class PortfolioPanel extends ContentPanel {
     /**
      * TODO
      */
-    PortfolioPanel() {
+    PortfolioPanel(User user) {
+        this.user = user;
         this.setLayout(new BorderLayout());
         this.makeTotalsPanel();
 

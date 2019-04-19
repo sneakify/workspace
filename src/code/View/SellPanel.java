@@ -7,27 +7,21 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import code.Model.Song;
+import code.Model.User;
 
 /**
  * TODO
  */
 class SellPanel extends TransactionPanel implements ActionListener {
-    int sharesOwned;
-
     JTextField sharesToSell = new JTextField();
     JButton sellButton = new JButton("Sell");
 
-    /**
-     * TODO
-     * @param song
-     * @param sharesOwned
-     */
-    SellPanel(Song song, int sharesOwned) {
-        super(song);
-        this.sharesOwned = sharesOwned;
+    SellPanel(User user, Song song) {
+        super(user, song);
 
         JPanel shareInfoPanel = new JPanel(new BorderLayout());
-        JLabel numShares = new JLabel("# Shares: " + this.sharesOwned + " shares");
+        int sharesOwned = 0; // fixme get info from this.user
+        JLabel numShares = new JLabel("# Shares: " + sharesOwned + " shares");
         numShares.setFont(this.labelFont);
         shareInfoPanel.add(numShares, BorderLayout.WEST);
         this.add(shareInfoPanel);
@@ -52,7 +46,7 @@ class SellPanel extends TransactionPanel implements ActionListener {
 
         int sharesToSellInt = this.parseTextField();
 
-        double earnings = (double) sharesToSellInt * this.song.getRank(); // fixme replace getRank with current stock price
+        double earnings = (double) sharesToSellInt * this.song.getSpotifyID(); // fixme replace getRank with current stock price
         JLabel earningsLabel = new JLabel("Total Earnings: $" + earnings);
         earningsLabel.setFont(this.labelFont);
 
