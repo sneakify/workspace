@@ -5,11 +5,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/code/View/BrowsePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/View/BrowsePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/code/View/BuyPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/View/BuyPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/code/View/ContentPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/View/ContentPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/code/View/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/View/MainFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/code/View/PortfolioPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/View/PortfolioPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/code/View/SellPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/View/SellPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/code/View/SettingsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/View/SettingsPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/code/View/TransactionPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/View/TransactionPanel.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -26,35 +24,60 @@
     <session id="-594039542">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="224" />
-          <entry key="txt" value="25" />
+          <entry key="java" value="1152" />
+          <entry key="txt" value="36" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="224" />
-          <entry key="PLAIN_TEXT" value="25" />
+          <entry key="JAVA" value="1152" />
+          <entry key="PLAIN_TEXT" value="36" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="6" />
+          <entry key="java" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="6" />
+          <entry key="JAVA" value="20" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/code/Model/DBUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="25" selection-start-line="25" selection-end-line="25" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#getConnection#0;class#DBUtils#0" />
+                <element signature="method#closeConnection#0;class#DBUtils#0" />
+                <element signature="method#insertOneRecord#0;class#DBUtils#0" />
+                <element signature="method#getOrInsertTerm#0;class#DBUtils#0" />
+                <element signature="method#new_user#0;class#DBUtils#0" />
+                <element signature="method#buy_shares#0;class#DBUtils#0" />
+                <element signature="method#sell_shares#0;class#DBUtils#0" />
+                <element signature="method#song_album#0;class#DBUtils#0" />
+                <element signature="method#song_artist#0;class#DBUtils#0" />
+                <element signature="method#song7#0;class#DBUtils#0" />
+                <element signature="method#user7#0;class#DBUtils#0" />
+                <element signature="method#user_port#0;class#DBUtils#0" />
+                <element signature="method#all_songs#0;class#DBUtils#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/code/View/MainFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="62" column="50" lean-forward="true" selection-start-line="62" selection-start-column="50" selection-end-line="62" selection-end-column="50" />
+            <state relative-caret-position="34">
+              <caret line="48" column="21" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -63,10 +86,25 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/code/View/SettingsPanel.java">
+        <entry file="file://$PROJECT_DIR$/src/code/View/BrowsePanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+            <state relative-caret-position="373">
+              <caret line="181" column="5" lean-forward="true" selection-start-line="181" selection-start-column="5" selection-end-line="181" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/code/View/PortfolioPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="462">
+              <caret line="146" lean-forward="true" selection-start-line="146" selection-end-line="146" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -129,13 +167,13 @@
         <option value="$PROJECT_DIR$/src/code/Model/Song.java" />
         <option value="$PROJECT_DIR$/src/code/Model/DBUtils.java" />
         <option value="$PROJECT_DIR$/src/code/View/ContentPanel.java" />
+        <option value="$PROJECT_DIR$/src/code/View/SettingsPanel.java" />
         <option value="$PROJECT_DIR$/src/code/View/BrowsePanel.java" />
-        <option value="$PROJECT_DIR$/src/code/View/PortfolioPanel.java" />
         <option value="$PROJECT_DIR$/src/code/View/TransactionPanel.java" />
         <option value="$PROJECT_DIR$/src/code/View/BuyPanel.java" />
         <option value="$PROJECT_DIR$/src/code/View/SellPanel.java" />
-        <option value="$PROJECT_DIR$/src/code/View/SettingsPanel.java" />
         <option value="$PROJECT_DIR$/src/code/View/MainFrame.java" />
+        <option value="$PROJECT_DIR$/src/code/View/PortfolioPanel.java" />
       </list>
     </option>
   </component>
@@ -208,7 +246,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555707121754" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555709723088" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -356,11 +394,18 @@
       <option name="project" value="LOCAL" />
       <updated>1555706645124</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="view stuff">
+      <created>1555707146070</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1555707146070</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24749000" />
+    <option name="totallyTimeSpent" value="27310000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -385,7 +430,7 @@
       <window_info id="Learn" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49954587" weight="0.32858709" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49500453" weight="0.3274918" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49500453" visible="true" weight="0.15115005" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -423,7 +468,8 @@
     <MESSAGE value="in progress" />
     <MESSAGE value="Merge branch 'master' of https://github.com/sneakify/workspace&#10;&#10;# Conflicts:&#10;#&#9;out/production/View/code/View/BrowsePanel.class&#10;#&#9;out/production/View/code/View/BuyPanel.class&#10;#&#9;out/production/View/code/View/ContentPanel.class&#10;#&#9;out/production/View/code/View/MainFrame.class&#10;#&#9;out/production/View/code/View/PortfolioPanel.class&#10;#&#9;out/production/View/code/View/SellPanel.class" />
     <MESSAGE value="let's try this again" />
-    <option name="LAST_COMMIT_MESSAGE" value="let's try this again" />
+    <MESSAGE value="view stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="view stuff" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="antWorkspaceConfiguration">
@@ -514,9 +560,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/code/Model/Login.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/code/Model/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="28" column="47" selection-start-line="28" selection-start-column="47" selection-end-line="28" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/code/View/SettingsPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/code/View/TransactionPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/code/View/ContentPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="22" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/code/Model/DBUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-356">
+        <state relative-caret-position="17">
           <caret line="25" selection-start-line="25" selection-end-line="25" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -537,24 +621,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/code/Model/Login.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/code/Model/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="28" column="47" selection-start-line="28" selection-start-column="47" selection-end-line="28" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/code/View/BuyPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="25" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
+        <state relative-caret-position="-378">
+          <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -563,68 +633,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/code/View/SellPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="25" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
+        <state relative-caret-position="438">
+          <caret line="70" column="24" lean-forward="true" selection-start-line="70" selection-start-column="24" selection-end-line="70" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/code/View/TransactionPanel.java">
+    <entry file="file://$PROJECT_DIR$/src/code/View/MainFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="17" column="21" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/code/View/PortfolioPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="25" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="25" />
+        <state relative-caret-position="34">
+          <caret line="48" column="21" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1277#1278#0" expanded="true" />
-            <element signature="e#1321#1322#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/code/View/BrowsePanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="39" column="21" selection-start-line="39" selection-start-column="21" selection-end-line="39" selection-end-column="21" />
+        <state relative-caret-position="373">
+          <caret line="181" column="5" lean-forward="true" selection-start-line="181" selection-start-column="5" selection-end-line="181" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5088#5096#0" expanded="true" />
-            <element signature="e#5970#5976#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/code/View/ContentPanel.java">
+    <entry file="file://$PROJECT_DIR$/src/code/View/PortfolioPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="22" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#507#508#0" expanded="true" />
-            <element signature="e#525#526#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/code/View/SettingsPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/code/View/MainFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="62" column="50" lean-forward="true" selection-start-line="62" selection-start-column="50" selection-end-line="62" selection-end-column="50" />
+        <state relative-caret-position="462">
+          <caret line="146" lean-forward="true" selection-start-line="146" selection-end-line="146" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

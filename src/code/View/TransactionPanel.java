@@ -14,9 +14,9 @@ abstract class TransactionPanel extends ContentPanel {
   User user;
   Song song;
 
-  TransactionPanel(MainFrame mainFrame, User user, Song song) {
+  TransactionPanel(MainFrame mainFrame, Song song) {
     super(mainFrame);
-    this.user = user;
+    this.user = this.mainFrame.user;
     this.song = song;
 
     this.makeInfoPanel();

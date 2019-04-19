@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import code.Model.Song;
 import code.Model.User;
 
 
@@ -14,7 +15,7 @@ import code.Model.User;
  * Overall frame that contains a navigation panel and displays the appropriate content panel.
  */
 public class MainFrame extends JFrame implements ActionListener {
-  User user; // TODO initialize
+  User user;
 
   // Navigation Panel & Buttons
   private JPanel navigationPanel;
@@ -44,7 +45,8 @@ public class MainFrame extends JFrame implements ActionListener {
   /**
    * Constructor. Instantiates navigation panel and content panels. Adds panels to this frame.
    */
-  public MainFrame() { // TODO have this take in a User
+  public MainFrame(User user) {
+    this.user = user;
 
     // frame
     this.setVisible(true);
@@ -64,7 +66,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
     // content panels
     this.browsePanel = new BrowsePanel(this);
-    this.portfolioPanel = new PortfolioPanel(this, this.user);
+    this.portfolioPanel = new PortfolioPanel(this);
     this.settingsPanel = new SettingsPanel(this);
 
     // add content panels to main panel
@@ -154,5 +156,19 @@ public class MainFrame extends JFrame implements ActionListener {
     } else {
       this.backButton.setEnabled(false);
     }
+  }
+
+  protected void launchBuyPanel(Song song) {
+    CardLayout cl = (CardLayout) this.mainPanel.getLayout();
+    this.buyPanel = new BuyPanel(this, song);
+    cl.show(this.mainPanel, this.BUY);
+    this.curPanel = this.buyPanel;
+  }
+
+  protected void launchSellPanel(Song song) {
+    CardLayout cl = (CardLayout) this.mainPanel.getLayout();
+    this.sellPanel = new SellPanel(this, song);
+    cl.show(this.mainPanel, this.SELL);
+    this.curPanel = this.sellPanel;
   }
 }

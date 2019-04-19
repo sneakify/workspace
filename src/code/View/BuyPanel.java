@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import code.Model.Song;
-import code.Model.User;
 
 /**
  * TODO
@@ -16,8 +15,8 @@ class BuyPanel extends TransactionPanel implements ActionListener {
     JTextField sharesToBuy = new JTextField();
     JButton buyButton = new JButton("Buy");
 
-    BuyPanel(MainFrame mainFrame, User user, Song song) {
-        super(mainFrame, user, song);
+    BuyPanel(MainFrame mainFrame, Song song) {
+        super(mainFrame, song);
 
         this.makeBuySubPanel();
     }
@@ -39,7 +38,7 @@ class BuyPanel extends TransactionPanel implements ActionListener {
 
         int sharesToBuyInt = this.parseTextField();
 
-        double cost = (double) sharesToBuyInt * this.song.getSongValue(); // fixme replace  with current stock price
+        double cost = (double) sharesToBuyInt * this.song.getSongValue();
         JLabel costLabel = new JLabel("Total Cost: $" + cost);
         costLabel.setFont(this.labelFont);
 
@@ -60,7 +59,7 @@ class BuyPanel extends TransactionPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.buyButton) {
             try {
-                // TODO use DB utils to buy specified number of shares (use parseTextField)
+                this.dbUtils.buy_shares(this.user, this.song, this.parseTextField());
             } catch (Exception ex) {
                 this.showErrorPopup(ex.getMessage(), "ERROR: Could Not Buy Shares");
             }

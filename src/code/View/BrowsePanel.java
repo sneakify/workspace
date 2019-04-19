@@ -167,16 +167,18 @@ class BrowsePanel extends ContentPanel implements ActionListener {
     if (e.getSource() == this.songFilter
             || e.getSource() == this.artistFilter
             || e.getSource() == this.genreFilter) {
+      // filter
       String s = this.songFilter.getText();
       String a = this.artistFilter.getText();
       String g = this.genreFilter.getSelectedItem().toString(); // fixme possible bug caused by toString
       this.populateChart(this.filter(s, a, g));
     } else if (e.getSource() == this.clearFilters) {
+      // clear filters
       this.songFilter.setText("");
       this.artistFilter.setText("");
       this.genreFilter.setSelectedIndex(0);
     } else if (this.songButtons.containsKey(e.getSource())) {
-      // TODO
+      this.mainFrame.launchBuyPanel(this.songButtons.get(e.getSource()));
     }
   }
 

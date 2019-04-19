@@ -1,23 +1,32 @@
 package code.View;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import code.Model.User;
+import code.Model.Song;
 
 /**
  * Content Panel that allows user to view their available funds, total number of shares owned,
  * and each owned stock. Clicking any one song launches Sell Panel.
  */
-class PortfolioPanel extends ContentPanel {
-    User user;
-
+class PortfolioPanel extends ContentPanel implements ActionListener {
     // chart to display as table
     private JTable stocks;
-    private double totalFunds = 0;
-    private int totalShares = 0;
+    // buttons for each song
+    private HashMap<JButton, Song> songButtons;
+
+    // user's portfolio
+    HashMap<Song, Integer> portfolio;
+
+    private double totalFunds;
+    private int totalShares;
 
     private JLabel totalFundsLabel = new JLabel();
     private JLabel totalSharesLabel = new JLabel();
@@ -25,14 +34,16 @@ class PortfolioPanel extends ContentPanel {
     /**
      * TODO
      */
-    PortfolioPanel(MainFrame mainFrame, User user) {
+    PortfolioPanel(MainFrame mainFrame) {
         super(mainFrame);
 
-        this.user = user;
+        this.portfolio = dbUtils.user_port(this.mainFrame.user);
         this.setLayout(new BorderLayout());
         this.makeTotalsPanel();
 
-        // table TODO fill & set action listeners for Song column; selection mode?
+        this.updateTotals();
+
+        // table
         JLabel tableTitle = new JLabel("Your Stocks");
         tableTitle.setFont(this.font);
         this.add(tableTitle, BorderLayout.CENTER);
@@ -50,6 +61,7 @@ class PortfolioPanel extends ContentPanel {
         this.add(new JScrollPane(this.stocks), BorderLayout.SOUTH);
 
         this.updateTotalLabels();
+        this.populateTable(this.portfolio);
     }
 
     /**
@@ -90,11 +102,53 @@ class PortfolioPanel extends ContentPanel {
         totalsPanel.add(this.totalSharesLabel, constraints);
     }
 
+    private void updateTotals() {
+        this.totalFunds = this.mainFrame.user.getPurchasing_power();
+        this.totalShares = this.calculateTotalShares();
+    }
+
     /**
      * Updates label displaying user's total funds available and total number of shares owned.
      */
     private void updateTotalLabels() {
         this.totalFundsLabel.setText("$" + this.totalFunds);
         this.totalSharesLabel.setText(this.totalShares + " shares");
+    }
+
+    private int calculateTotalShares() {
+        int shares = 0;
+        for (int num : this.portfolio.values()) {
+            shares += num;
+        }
+        return shares;
+    }
+
+    private void populateTable(HashMap<Song, Integer> hm) {
+        this.stocks.removeAll();
+        ArrayList<Song> songs = new ArrayList<>(hm.keySet());
+        for (int row = 0; row < songs.size(); row++) {
+            Song song = songs.get(row);
+            for (int col = 0; col <= 4; col++) {
+                if (col == 0) { // clickable song title
+                    JButton button = new JButton(song.getTitle());
+                    button.addActionListener(this);
+                    this.stocks.setValueAt(button, row, col);
+                    this.songButtons.put(button, song);
+                } else if (col == 1) { // # shares
+                    this.stocks.setValueAt(hm.get(song), row, col);
+                } else if (col == 2) { // daily plays
+                    this.stocks.setValueAt(song.getSongValue() * 10000, row, col);
+                } else if (col == 3) { // stock price
+                    this.stocks.setValueAt(song.getSongValue(), row, col);
+                } else if (col == 4) { } // % change // TODO if we have time
+            }
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (this.songButtons.containsKey(e.getSource())) {
+            this.mainFrame.launchSellPanel(this.songButtons.get(e.getSource()));
+        }
     }
 }

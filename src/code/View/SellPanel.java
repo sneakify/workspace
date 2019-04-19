@@ -3,6 +3,7 @@ package code.View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 import javax.swing.*;
 
@@ -16,11 +17,13 @@ class SellPanel extends TransactionPanel implements ActionListener {
     JTextField sharesToSell = new JTextField();
     JButton sellButton = new JButton("Sell");
 
-    SellPanel(MainFrame mainFrame, User user, Song song) {
-        super(mainFrame, user, song);
+    SellPanel(MainFrame mainFrame, Song song) {
+        super(mainFrame, song);
 
         JPanel shareInfoPanel = new JPanel(new BorderLayout());
-        int sharesOwned = 0; // fixme get info from this.user
+
+        HashMap<Song, Integer> portfolio = dbUtils.user_port(this.user);
+        int sharesOwned = portfolio.get(this.song);
         JLabel numShares = new JLabel("# Shares: " + sharesOwned + " shares");
         numShares.setFont(this.labelFont);
         shareInfoPanel.add(numShares, BorderLayout.WEST);
@@ -46,7 +49,7 @@ class SellPanel extends TransactionPanel implements ActionListener {
 
         int sharesToSellInt = this.parseTextField();
 
-        double earnings = (double) sharesToSellInt * this.song.getSongValue(); // fixme replace getRank with current stock price
+        double earnings = (double) sharesToSellInt * this.song.getSongValue();
         JLabel earningsLabel = new JLabel("Total Earnings: $" + earnings);
         earningsLabel.setFont(this.labelFont);
 
@@ -67,7 +70,7 @@ class SellPanel extends TransactionPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.sellButton) {
             try {
-                // TODO use DB utils to sell specified number of shares (use parseTextField)
+                dbUtils.sell_shares(this.user, this.song, this.parseTextField());
             } catch (Exception ex) {
                 this.showErrorPopup(ex.getMessage(), "ERROR: Could Not Sell Shares");
             }
