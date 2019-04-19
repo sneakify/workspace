@@ -1,12 +1,32 @@
 package code.Model;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class DatabaseMySQL implements DatabaseAPI {
     // For demonstration purposes. Better would be a constructor that takes a file path
     // and loads parameters dynamically.
     DBUtils dbu;
+    private HashMap<Song, Integer> allTheSongs;
+
+    public void authenticate(String user, String password) {
+
+        dbu = new DBUtils("jdbc:mysql://localhost:3306/spootify?serverTimezone=EST5EDT", user, password);
+    }
+
+
+    public java.sql.Date todayDateSQL() {
+        // get today's date in the correct format yo
+        java.util.Date utilDate = new java.util.Date();
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+        return sqlDate;
+    }
 
 
     public DatabaseMySQL() {
@@ -14,6 +34,22 @@ public class DatabaseMySQL implements DatabaseAPI {
         this.authenticate(Login.usr, Login.pword);
         System.out.println("\n\nNo Error Yet? Congratulations, you connected to the database:");
         //
+
+        this.allTheSongs = new HashMap<>();
+
+        // Authenticate your access to the server.
+        this.authenticate(Login.usr, Login.pword);
+
+        // what's today's date?!?!?
+        java.sql.Date today = this.todayDateSQL();
+
+        // get all them songs
+        List<Song> all = this.existingSongs(today);
+
+        // put all them songs in a hashmap
+        for (Song s: all) {
+            allTheSongs.putIfAbsent(s, s.getSongValue());
+        }
     }
 
 
@@ -31,11 +67,59 @@ public class DatabaseMySQL implements DatabaseAPI {
      * @param date Required date.  Better would be to accept null as "latest"
      * @return A list of Songs, those stored in the chart on the given date
      */
-    public List<Song> existingSongs(String date) {
-        // TODO stuff pls stub
-        System.out.println("Oops tried to do a dummy method, with dummy return");
-        List<Song> los = new ArrayList<Song>();
-        return los;
+    public List<Song> existingSongs(java.sql.Date date) {
+
+
+        // TODO - for this to work, need to set up the mysql-connector dependency in Project Structure
+        // for Reference: https://stackoverflow.com/questions/30651830/use-jdbc-mysql-connector-in-intellij-idea
+
+        List<Song> mylist = new ArrayList<>();
+
+        try {
+            Connection conn = dbu.getConnection();
+            Statement st = conn.createStatement();
+
+            ResultSet rs = st.executeQuery("SELECT * FROM song");
+
+            while (rs.next()) {
+                // TODO - THIS IS WHAT TO LOOK AT, figure out how to retun this shit
+                String spotify_id = rs.getString("spotify_id");
+                String title = rs.getString("title");
+                String artist_id = rs.getString("artist_id");
+                String album_id = rs.getString("album_id");
+                String song_value = rs.getString("song_value");
+
+                // String spotifyID, String title, String artistID,
+                //
+                //
+                //
+                //
+                // int rank, String albumID)
+
+                Song newSong = new Song(
+                        rs.getInt("spotify_id"),
+                        rs.getString("title"),
+                        rs.getInt("artist_id"),
+                        rs.getInt("song_value"), // rank
+                        rs.getInt("song_value"));
+                System.out.println("hello");
+
+                // add stuff
+                mylist.add(newSong);
+
+                // print stuff
+                System.out.println("adding: " + newSong.toString());
+            }
+
+            rs.close();
+            st.close();
+
+        } catch(SQLException e) {
+            System.err.println(e.getMessage());
+            System.exit(1);
+        }
+        // could maybe do finally to close connection? idk
+        return mylist;
     }
 
     /**
@@ -72,11 +156,6 @@ public class DatabaseMySQL implements DatabaseAPI {
 
 
     ///////////////////////////////////////////////////////////////////////
-
-    public void authenticate(String user, String password) {
-
-        dbu = new DBUtils("jdbc:mysql://localhost:3306/spootify?serverTimezone=EST5EDT", user, password);
-    }
 
 
     /**

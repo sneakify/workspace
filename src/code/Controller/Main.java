@@ -25,20 +25,21 @@ public class Main {
 
   // this is our driver, our main, the one which runs
 
+
+    // instantiate DatabaseAPI object (sort of like a bootleg model),
+    // which in its constructor calls authenticate
+    private static DatabaseAPI api = new DatabaseMySQL();
+
   public static void main(String[] args) {
 
     // Let's the log-lookers know that "yes, we have liftoff"
     System.out.println("The Program Started Running");
 
-    // instantiate DatabaseAPI object (sort of like a bootleg model),
-    // which in its constructor calls authenticate
-    DatabaseAPI api = new DatabaseMySQL();
-    
-    List<Song> songList = api.existingSongs("latest");
 
-    for (Song s : songList) {
-      System.out.println(s.toString());
-    }
+      Song mySong = new Song("Old Town Road - Remix");
+
+      System.out.println(api.song_album(mySong));
+      System.out.println(api.song_artist(mySong));
 
     // Start the java.View
     MainFrame mf = new MainFrame();
