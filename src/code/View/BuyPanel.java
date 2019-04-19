@@ -16,8 +16,8 @@ class BuyPanel extends TransactionPanel implements ActionListener {
     JTextField sharesToBuy = new JTextField();
     JButton buyButton = new JButton("Buy");
 
-    BuyPanel(User user, Song song) {
-        super(user, song);
+    BuyPanel(MainFrame mainFrame, User user, Song song) {
+        super(mainFrame, user, song);
 
         this.makeBuySubPanel();
     }

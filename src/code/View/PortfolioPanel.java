@@ -25,7 +25,9 @@ class PortfolioPanel extends ContentPanel {
     /**
      * TODO
      */
-    PortfolioPanel(User user) {
+    PortfolioPanel(MainFrame mainFrame, User user) {
+        super(mainFrame);
+
         this.user = user;
         this.setLayout(new BorderLayout());
         this.makeTotalsPanel();

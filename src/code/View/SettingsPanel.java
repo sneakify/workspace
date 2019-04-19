@@ -5,8 +5,8 @@ package code.View;
  */
 class SettingsPanel extends ContentPanel {
 
-    SettingsPanel() {
-
+    SettingsPanel(MainFrame mainFrame) {
+        super(mainFrame);
         // TODO -
     }
 }

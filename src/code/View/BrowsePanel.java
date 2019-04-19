@@ -36,7 +36,8 @@ class BrowsePanel extends ContentPanel implements ActionListener {
    * Constructor. Places filtering options above U.S. Top 50 chart and updates list of selectable
    * genres based on current top 50.
    */
-  BrowsePanel() {
+  BrowsePanel(MainFrame mainFrame) {
+    super(mainFrame);
 
     this.setLayout(new BorderLayout());
     this.makeFilterPanel();

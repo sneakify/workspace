@@ -14,6 +14,13 @@ public abstract class ContentPanel extends JPanel {
   Font labelFont = new Font(this.font.getFontName(), this.font.getStyle(), this.font.getSize() - 2);
 
   DBUtils dbUtils = new DBUtils(Login.url, Login.usr, Login.pword); // TODO input correct url
+
+  MainFrame mainFrame;
+
+  ContentPanel(MainFrame mainFrame) {
+    this.mainFrame = mainFrame;
+  }
+
   /**
    * Displays popup window with given error message and window title.
    *

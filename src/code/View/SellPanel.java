@@ -16,8 +16,8 @@ class SellPanel extends TransactionPanel implements ActionListener {
     JTextField sharesToSell = new JTextField();
     JButton sellButton = new JButton("Sell");
 
-    SellPanel(User user, Song song) {
-        super(user, song);
+    SellPanel(MainFrame mainFrame, User user, Song song) {
+        super(mainFrame, user, song);
 
         JPanel shareInfoPanel = new JPanel(new BorderLayout());
         int sharesOwned = 0; // fixme get info from this.user
