@@ -13,7 +13,7 @@ public abstract class ContentPanel extends JPanel {
   protected Font font = new Font("Calisto MT", Font.BOLD, 18); // TODO subject to change
   Font labelFont = new Font(this.font.getFontName(), this.font.getStyle(), this.font.getSize() - 2);
 
-  DBUtils dbUtils = new DBUtils("", Login.usr, Login.pword);
+  DBUtils dbUtils = new DBUtils(Login.url, Login.usr, Login.pword); // TODO input correct url
   /**
    * Displays popup window with given error message and window title.
    *

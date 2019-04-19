@@ -1,6 +1,8 @@
 package code.View;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,18 +15,21 @@ import code.Model.Song;
  * Content Panel that allows user to browse through and filter U.S. Top 50 chart. Clicking any one
  * song launches Buy Panel.
  */
-class BrowsePanel extends ContentPanel {
+class BrowsePanel extends ContentPanel implements ActionListener {
   // chart to display as table
   private JTable chart;
   // buttons for each song
   private HashMap<JButton, Song> songButtons;
+
+  // list of songs
+  ArrayList<Song> songs = this.dbUtils.all_songs();
 
   // filters by which to search through chart
   private JTextField songFilter;
   private JTextField artistFilter;
   private JComboBox<String> genreFilter;
 
-  // button to clear all existing filters TODO add action listener
+  // button to clear all existing filters
   private JButton clearFilters = new JButton("Clear Filters");
 
   /**
@@ -36,7 +41,7 @@ class BrowsePanel extends ContentPanel {
     this.setLayout(new BorderLayout());
     this.makeFilterPanel();
 
-    // table TODO fill & set action listeners for Song column; selection mode?
+    // table
     JLabel chartTitle = new JLabel("U.S. Top 50");
     chartTitle.setFont(this.font);
     this.add(chartTitle, BorderLayout.CENTER);
@@ -52,9 +57,9 @@ class BrowsePanel extends ContentPanel {
 
     this.chart = new JTable(tableModel);
     this.add(new JScrollPane(this.chart), BorderLayout.SOUTH);
-    this.populateChart();
 
-    // this.updateGenres(); TODO make this method
+    this.populateChart(this.songs);
+    this.updateGenres();
 
   }
 
@@ -81,10 +86,16 @@ class BrowsePanel extends ContentPanel {
     JLabel genreLabel = new JLabel("Genre:");
     genreLabel.setFont(this.labelFont);
 
-    // filter input fields TODO set action listeners
+    // filter input fields
     this.songFilter = new JTextField(10);
     this.artistFilter = new JTextField(10);
     this.genreFilter = new JComboBox<String>();
+
+    // set action listeners
+    this.songFilter.addActionListener(this);
+    this.artistFilter.addActionListener(this);
+    this.genreFilter.addActionListener(this);
+    this.clearFilters.addActionListener(this);
 
     // add components to filter panel
     // add Filters label
@@ -115,13 +126,14 @@ class BrowsePanel extends ContentPanel {
     filterPanel.add(this.genreFilter, constraints);
   }
 
-  private void populateChart() {
-    ArrayList<Song> songs = dbUtils.all_songs();
-    for (int row = 0; row < songs.size(); row++) {
-      Song song = songs.get(row);
+  private void populateChart(ArrayList<Song> list) {
+    this.chart.removeAll();
+    for (int row = 0; row < list.size(); row++) {
+      Song song = list.get(row);
       for (int col = 0; col <= 4; col++) {
         if (col == 0) { // clickable song title
           JButton button = new JButton(song.getTitle());
+          button.addActionListener(this);
           this.chart.setValueAt(button, row, col);
           this.songButtons.put(button, song);
         } else if (col == 1) { // artist
@@ -133,5 +145,49 @@ class BrowsePanel extends ContentPanel {
         } else if (col == 4) { } // % change // TODO if we have time
       }
     }
+  }
+
+  private void updateGenres() {
+    this.genreFilter.removeAllItems();
+    this.genreFilter.addItem("Any Genre");
+    ArrayList<String> genres = new ArrayList<String>();
+
+    for (Song song: this.songs) {
+      String genre = ""; // fixme get song genre
+      if (!genres.contains(genre)) {
+        genres.add(genre);
+        this.genreFilter.addItem(genre);
+      }
+    }
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    if (e.getSource() == this.songFilter
+            || e.getSource() == this.artistFilter
+            || e.getSource() == this.genreFilter) {
+      String s = this.songFilter.getText();
+      String a = this.artistFilter.getText();
+      String g = this.genreFilter.getSelectedItem().toString(); // fixme possible bug caused by toString
+      this.populateChart(this.filter(s, a, g));
+    } else if (e.getSource() == this.clearFilters) {
+      this.songFilter.setText("");
+      this.artistFilter.setText("");
+      this.genreFilter.setSelectedIndex(0);
+    } else if (this.songButtons.containsKey(e.getSource())) {
+      // TODO
+    }
+  }
+
+  private ArrayList<Song> filter(String s, String a, String g) {
+    ArrayList<Song> filtered = new ArrayList<Song>();
+    for (Song song : this.songs) {
+      if (song.getTitle().contains(s)
+              && dbUtils.song_artist(song).contains(a)
+              && song.getTitle().equals(g)) { // fixme change to song genre
+        filtered.add(song);
+      }
+    }
+    return filtered;
   }
 }
