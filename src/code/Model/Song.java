@@ -2,23 +2,29 @@ package code.Model;
 
 public class Song {
 
-
-
-    private int spotifyID;
+    private String spotifyID;
     private String title;
-    private int artistID;
+    private String artistID;
     private int song_value;
-    private int albumID;
+    private String albumID;
 
     /**
      Constructor
      */
-    public Song(int spotifyID, String title, int artistID, int song_value, int albumID) {
+    public Song(String spotifyID, String title, String artistID, int song_value, String albumID) {
         this.spotifyID = spotifyID;
         this.title = title;
         this.artistID = artistID;
         this.song_value = song_value;
         this.albumID = albumID;
+    }
+
+    public Song(String spotifyID) {
+        this.spotifyID = spotifyID;
+        this.title = "Default";
+        this.artistID = "111";
+        this.song_value = 111;
+        this.albumID = "22222";
     }
 
 
@@ -32,11 +38,11 @@ public class Song {
                 '}';
     }
 
-    public int getSpotifyID() {
+    public String getSpotifyID() {
         return spotifyID;
     }
 
-    public void setSpotifyID(int spotifyID) {
+    public void setSpotifyID(String spotifyID) {
         this.spotifyID = spotifyID;
     }
 
@@ -48,11 +54,11 @@ public class Song {
         this.title = title;
     }
 
-    public int getArtistID() {
+    public String getArtistID() {
         return artistID;
     }
 
-    public void setArtistID(int artistID) {
+    public void setArtistID(String artistID) {
         this.artistID = artistID;
     }
 
@@ -64,11 +70,11 @@ public class Song {
         this.song_value = song_value;
     }
 
-    public int getAlbumID() {
+    public String getAlbumID() {
         return albumID;
     }
 
-    public void setAlbumID(int albumID) {
+    public void setAlbumID(String albumID) {
         this.albumID = albumID;
     }
     

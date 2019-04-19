@@ -15,7 +15,7 @@ public interface DatabaseAPI {
      * @param date Required date.  Better would be to accept null as "latest"
      * @return A list of Songs, those stored in the chart on the given date
      */
-    public List<Song> existingSongs(String date);
+    public List<Song> existingSongs(java.sql.Date date);
 
     /**
      * Register a new day of charts

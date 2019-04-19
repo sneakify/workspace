@@ -320,10 +320,10 @@ private String url;
       stmt.close();
 
       while (rs.next()) {
-        int spotify_id = rs.getInt("spotify_id");
+        String spotify_id = rs.getString("spotify_id");
         String title = rs.getString("title");
-        int artist_id = rs.getInt("artist_id");
-        int album_id = rs.getInt("album_id");
+        String artist_id = rs.getString("artist_id");
+        String album_id = rs.getString("album_id");
         int song_value = rs.getInt("song_value");
         int owned = rs.getInt("shares_owned");
         Song temp = new Song(spotify_id, title, artist_id, song_value, album_id);
@@ -393,10 +393,10 @@ private String url;
      stmt.close();
    
      while (rs.next()) {
-       int spotify_id = rs.getInt("spotify_id");
+       String spotify_id = rs.getString("spotify_id");
        String title = rs.getString("title");
-       int artist_id = rs.getInt("artist_id");
-       int album_id = rs.getInt("album_id");
+       String artist_id = rs.getString("artist_id");
+       String album_id = rs.getString("album_id");
        int song_value = rs.getInt("song_value");
        Song temp = new Song(spotify_id, title, artist_id, song_value, album_id);
        
