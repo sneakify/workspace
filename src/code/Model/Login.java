@@ -1,6 +1,6 @@
 package code.Model;
 
-class Login {
-    static String usr = "murach";
-    static String pword = "grendel";
+public class Login {
+    public static final String usr = "murach";
+    public static final String pword = "grendel";
 }

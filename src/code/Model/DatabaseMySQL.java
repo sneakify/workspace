@@ -97,11 +97,11 @@ public class DatabaseMySQL implements DatabaseAPI {
                 // int rank, String albumID)
 
                 Song newSong = new Song(
-                        rs.getInt("spotify_id"),
+                        rs.getString("spotify_id"),
                         rs.getString("title"),
-                        rs.getInt("artist_id"),
+                        rs.getString("artist_id"),
                         rs.getInt("song_value"), // rank
-                        rs.getInt("song_value"));
+                        rs.getString("song_value"));
                 System.out.println("hello");
 
                 // add stuff

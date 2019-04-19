@@ -320,7 +320,7 @@ private String url;
       stmt.close();
 
       while (rs.next()) {
-        int spotify_id = rs.getInt("spotify_id");
+        String spotify_id = rs.getString("spotify_id");
         String title = rs.getString("title");
         int artist_id = rs.getInt("artist_id");
         int album_id = rs.getInt("album_id");

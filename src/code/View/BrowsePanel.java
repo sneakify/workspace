@@ -1,9 +1,13 @@
 package code.View;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import code.Model.Song;
 
 /**
  * Content Panel that allows user to browse through and filter U.S. Top 50 chart. Clicking any one
@@ -12,6 +16,8 @@ import javax.swing.table.DefaultTableModel;
 class BrowsePanel extends ContentPanel {
   // chart to display as table
   private JTable chart;
+  // buttons for each song
+  private HashMap<JButton, Song> songButtons;
 
   // filters by which to search through chart
   private JTextField songFilter;
@@ -34,7 +40,7 @@ class BrowsePanel extends ContentPanel {
     JLabel chartTitle = new JLabel("U.S. Top 50");
     chartTitle.setFont(this.font);
     this.add(chartTitle, BorderLayout.CENTER);
-    String[] columnNames = {"Song", "Artist", "Daily Plays", "Stock Price", "% Change"};
+    String[] columnNames = {"Song", "Artist", "Daily Plays", "Stock Price", "% Change"}; // TODO remove % change
 
     // custom table model
     DefaultTableModel tableModel = new DefaultTableModel(new Object[50][5], columnNames) {
@@ -46,6 +52,7 @@ class BrowsePanel extends ContentPanel {
 
     this.chart = new JTable(tableModel);
     this.add(new JScrollPane(this.chart), BorderLayout.SOUTH);
+    this.populateChart();
 
     // this.updateGenres(); TODO make this method
 
@@ -106,5 +113,25 @@ class BrowsePanel extends ContentPanel {
     filterPanel.add(genreLabel, constraints);
     constraints.gridx++;
     filterPanel.add(this.genreFilter, constraints);
+  }
+
+  private void populateChart() {
+    ArrayList<Song> songs = dbUtils.all_songs();
+    for (int row = 0; row < songs.size(); row++) {
+      Song song = songs.get(row);
+      for (int col = 0; col <= 4; col++) {
+        if (col == 0) { // clickable song title
+          JButton button = new JButton(song.getTitle());
+          this.chart.setValueAt(button, row, col);
+          this.songButtons.put(button, song);
+        } else if (col == 1) { // artist
+          this.chart.setValueAt(dbUtils.song_artist(song), row, col);
+        } else if (col == 2) { // daily plays
+          this.chart.setValueAt(song.getSongValue() * 10000, row, col);
+        } else if (col == 3) { // stock price
+          this.chart.setValueAt(song.getSongValue(), row, col);
+        } else if (col == 4) { } // % change // TODO if we have time
+      }
+    }
   }
 }

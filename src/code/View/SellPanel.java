@@ -46,7 +46,7 @@ class SellPanel extends TransactionPanel implements ActionListener {
 
         int sharesToSellInt = this.parseTextField();
 
-        double earnings = (double) sharesToSellInt * this.song.getSpotifyID(); // fixme replace getRank with current stock price
+        double earnings = (double) sharesToSellInt * this.song.getSongValue(); // fixme replace getRank with current stock price
         JLabel earningsLabel = new JLabel("Total Earnings: $" + earnings);
         earningsLabel.setFont(this.labelFont);
 

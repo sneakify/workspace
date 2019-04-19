@@ -39,7 +39,7 @@ class BuyPanel extends TransactionPanel implements ActionListener {
 
         int sharesToBuyInt = this.parseTextField();
 
-        double cost = (double) sharesToBuyInt * this.song.getSpotifyID(); // fixme replace getRank with current stock price
+        double cost = (double) sharesToBuyInt * this.song.getSongValue(); // fixme replace  with current stock price
         JLabel costLabel = new JLabel("Total Cost: $" + cost);
         costLabel.setFont(this.labelFont);
 
