@@ -382,11 +382,11 @@ public class Model implements DatabaseAPI {
                 String d = rs.getString("date");
                 int v = rs.getInt("portfolio_value");
                 h.put(d, v);
-
-                rs.close();
-                stmt.close();
-
             }
+
+            rs.close();
+            stmt.close();
+
         } catch (SQLException e) {
             System.err.println(e.getMessage());
             e.printStackTrace();
@@ -427,9 +427,9 @@ public class Model implements DatabaseAPI {
 
                 h.put(temp, owned);
 
-                rs.close();
-                stmt.close();
             }
+            rs.close();
+            stmt.close();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
             e.printStackTrace();
@@ -467,9 +467,10 @@ public class Model implements DatabaseAPI {
             while (rs.next()) {
                 n = rs.getInt("portfolio_value");
 
-                rs.close();
-                stmt.close();
             }
+
+            rs.close();
+            stmt.close();
         } catch (SQLException e) {
             System.err.println("Port-Value Error" + e.getMessage());
             e.printStackTrace();

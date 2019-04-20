@@ -11,7 +11,7 @@ import code.Model.Song;
 /**
  * Panel that allows user to purchase some number of shares of  song. Launched from Browse Panel.
  */
-class BuyPanel extends TransactionPanel implements ActionListener {
+public class BuyPanel extends TransactionPanel implements ActionListener {
     JTextField sharesToBuy = new JTextField();
     JButton buyButton = new JButton("Buy");
 
@@ -21,7 +21,7 @@ class BuyPanel extends TransactionPanel implements ActionListener {
      * @param mainFrame reference to MainFrame
      * @param song song to be purchased
      */
-    BuyPanel(MainFrame mainFrame, Song song) {
+    public BuyPanel(MainFrame mainFrame, Song song) {
         super(mainFrame, song);
 
         this.makeBuySubPanel();
@@ -71,7 +71,7 @@ class BuyPanel extends TransactionPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.buyButton) {
             try {
-                this.dbUtils.buy_shares(this.user, this.song, this.parseTextField());
+                this.mainFrame.model.buy_shares(this.user, this.song, this.parseTextField());
             } catch (Exception ex) {
                 this.showErrorPopup(ex.getMessage(), "ERROR: Could Not Buy Shares");
             }

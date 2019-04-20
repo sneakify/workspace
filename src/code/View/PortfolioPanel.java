@@ -143,7 +143,7 @@ class PortfolioPanel extends ContentPanel implements MouseListener {
             Song song = songs.get(row);
             for (int col = 0; col <= 4; col++) {
                 if (col == 0) { // clickable song title
-                   this.stocks.setValueAt(song.getTitle(), row, col);
+                   this.stocks.setValueAt(song.getTitle(), row, col); //TODO - FIXME arrayoutofboundsexception
                    this.rowToSong.put(row, song);
                 } else if (col == 1) { // # shares
                     this.stocks.setValueAt(hm.get(song), row, col);
