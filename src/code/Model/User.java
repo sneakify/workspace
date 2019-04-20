@@ -8,7 +8,7 @@ public class User {
     private String email;
     private String password;
     private String createdDate;
-    private double purchasingPower;
+    private int purchasingPower;
 
 
     public User(int userID,
@@ -17,7 +17,7 @@ public class User {
                 String email,
                 String password,
                 String createdDate,
-                double purchasingPower) {
+                int purchasingPower) {
         this.userID = userID;
         this.fullName = fullName;
         this.userName = userName;
@@ -25,6 +25,18 @@ public class User {
         this.password = password;
         this.createdDate = createdDate;
         this.purchasingPower = purchasingPower;
+    }
+
+    public String toString() {
+        return "User{" +
+                "user_id=" + userID +
+                ", full_name='" + fullName + '\'' +
+                ", user_name='" + userName + '\'' +
+                ", email=" + email + '\'' +
+                ", password=" + password + '\'' +
+                ", created=" + createdDate + '\'' +
+                ", purchasing_power=" + purchasingPower + '\'' +
+                '}';
     }
 
     public int getUserID() {
@@ -75,11 +87,11 @@ public class User {
         this.createdDate = createdDate;
     }
 
-    public double getPurchasing_power() {
+    public int getPurchasing_power() {
         return purchasingPower;
     }
 
-    public void setPurchasing_power(double purchasing_power) {
+    public void setPurchasing_power(int purchasing_power) {
         this.purchasingPower = purchasing_power;
     }
 }

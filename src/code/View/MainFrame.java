@@ -18,7 +18,7 @@ import code.Model.User;
  */
 public class MainFrame extends JFrame implements ActionListener {
   User user;
-  DBUtils dbUtils;
+  Model model;
 
   // Navigation Panel & Buttons
   private JPanel navigationPanel;
@@ -52,7 +52,7 @@ public class MainFrame extends JFrame implements ActionListener {
    */
   public MainFrame(Model model) {
     this.user = model.myUser;
-    this.dbUtils = model.dbu;
+    this.model = model;
 
     // frame
     this.setVisible(true);

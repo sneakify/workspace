@@ -27,7 +27,7 @@ class SellPanel extends TransactionPanel implements ActionListener {
 
         JPanel shareInfoPanel = new JPanel(new BorderLayout());
 
-        HashMap<Song, Integer> portfolio = dbUtils.user_port(this.user);
+        HashMap<Song, Integer> portfolio = this.mainFrame.model.user_port(this.user);
         int sharesOwned = portfolio.get(this.song);
         JLabel numShares = new JLabel("# Shares: " + sharesOwned + " shares");
         numShares.setFont(this.labelFont);
@@ -82,7 +82,7 @@ class SellPanel extends TransactionPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.sellButton) {
             try {
-                dbUtils.sell_shares(this.user, this.song, this.parseTextField());
+                this.mainFrame.model.sell_shares(this.user, this.song, this.parseTextField());
             } catch (Exception ex) {
                 this.showErrorPopup(ex.getMessage(), "ERROR: Could Not Sell Shares");
             }

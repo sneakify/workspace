@@ -47,10 +47,10 @@ abstract class TransactionPanel extends ContentPanel {
     JLabel titleLabel = new JLabel("Title: " + this.song.getTitle());
     titleLabel.setFont(this.labelFont);
     // artist
-    JLabel artistLabel = new JLabel("Artist: " + this.dbUtils.song_artist(this.song));
+    JLabel artistLabel = new JLabel("Artist: " + this.mainFrame.model.song_artist(this.song));
     artistLabel.setFont(this.labelFont);
     // album
-    JLabel albumLabel = new JLabel("Album: " + this.dbUtils.song_album(this.song));
+    JLabel albumLabel = new JLabel("Album: " + this.mainFrame.model.song_album(this.song));
     albumLabel.setFont(this.labelFont);
     // current stock price
     JLabel currentStockPriceLabel = new JLabel("Current Stock Price: $" + this.song.getSongValue());

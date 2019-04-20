@@ -4,11 +4,11 @@ import java.util.List;
 
 public interface DatabaseAPI {
 
-    /**
-     * Insert The Songs for This Day
-     * @param loSongYo Song
-     */
-    public void insertTodaySongs(List<Song> loSongYo);
+//    /**
+//     * Insert The Songs for This Day
+//     * @param loSongYo Song
+//     */
+//    public void insertTodaySongs(List<Song> loSongYo);
 
     /**
      * Find existing Songs on the given date
@@ -17,12 +17,12 @@ public interface DatabaseAPI {
      */
     public List<Song> existingSongs(java.sql.Date date);
 
-    /**
-     * Register a new day of charts
-     * @param date The date of the chart to be input
-     * @return The newly created chart ID or -1 if chart already exists at that date
-     */
-    public int registerNewDayOfCharts(String date);
+//    /**
+//     * Register a new day of charts
+//     * @param date The date of the chart to be input
+//     * @return The newly created chart ID or -1 if chart already exists at that date
+//     */
+//    public int registerNewDayOfCharts(String date);
 
     /**
      * Get or insert on album

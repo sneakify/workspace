@@ -10,15 +10,13 @@ public class Model implements DatabaseAPI {
     public User myUser;
     private HashMap<Song, Integer> allTheSongs;
 
-    public Model(User u) {
-
-        this.myUser = u;
-        this.allTheSongs = new HashMap<>();
-        this.dbu = new DBUtils(Login.url, Login.usr, Login.pword);
-
-
+    public Model(int userID) {
         // Authenticate your access to the server.
         this.authenticate(Login.usr, Login.pword);
+
+        this.myUser = this.getUser(userID);
+        this.allTheSongs = new HashMap<>();
+        this.dbu = new DBUtils(Login.url, Login.usr, Login.pword);
 
         // what's today's date?!?!?
         java.sql.Date today = this.todayDateSQL();
@@ -32,6 +30,35 @@ public class Model implements DatabaseAPI {
         for (Song s: all) {
             allTheSongs.putIfAbsent(s, s.getSongValue());
         }
+    }
+
+    private User getUser(int userID) {
+        User u = null;
+        try {
+            Connection conn = dbu.getConnection();
+            Statement st = conn.createStatement();
+            String sqlGet = "Select * from user where user_id =" + userID + ";";
+
+            ResultSet rs = st.executeQuery(sqlGet);
+
+            while (rs.next()) {
+
+                u = new User(rs.getInt("user_id"),
+                        rs.getString("full_name"),
+                        rs.getString("user_name"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("created"),
+                        rs.getInt("purchasing_power"));
+            }
+
+            rs.close();
+            st.close();
+        } catch(SQLException e) {
+            System.err.println("GetUser:" + e.getMessage());
+            System.exit(1);
+        }
+        return u;
     }
 
     ////////////////////
@@ -142,16 +169,16 @@ public class Model implements DatabaseAPI {
         return status;
     }
 
-    /**
-     * Register a new day of charts
-     * @param date The date of the chart to be input
-     * @return The newly created chart ID or -1 if chart already exists at that date
-     */
-    public int registerNewDayOfCharts(String date) {
-        // TODO stuff pls stub
-        return 1;
-
-    }
+//    /**
+//     * Register a new day of charts
+//     * @param date The date of the chart to be input
+//     * @return The newly created chart ID or -1 if chart already exists at that date
+//     */
+//    public int registerNewDayOfCharts(String date) {
+//        // TODO stuff pls stub
+//        return 1;
+//
+//    }
 
 
     /**
@@ -207,6 +234,7 @@ public class Model implements DatabaseAPI {
             e.printStackTrace();
         }
     }
+
 
     // inserts purchases from users into database
     @SuppressWarnings("Duplicates")
@@ -506,6 +534,30 @@ public class Model implements DatabaseAPI {
             e.printStackTrace();
         }
         return value;
+    }
+
+
+    // updates the email and password of given user
+    public void update_user(User u, String email, String password) {
+        String sql = "Update user " +
+                "Set email = "+ email+", password = "+password +
+                " Where user_id = "+ u.getUserID()+";";
+        try {
+
+            // get connection and initialize statement
+            Connection con = dbu.getConnection();
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.executeUpdate(sql);
+
+            // cleanup
+            stmt.close();
+        }
+
+        catch (SQLException e) {
+            System.err.println("ERROR: Coult not complete purchase:" + sql);
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        }
     }
 
 }

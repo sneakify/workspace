@@ -43,7 +43,7 @@ class BrowsePanel extends ContentPanel implements ActionListener, MouseListener 
    */
   BrowsePanel(MainFrame mainFrame) {
     super(mainFrame);
-    this.songs = this.dbUtils.all_songs();
+    this.songs = this.mainFrame.model.all_songs();
     this.setLayout(new BorderLayout());
     this.makeFilterPanel();
 
@@ -148,7 +148,7 @@ class BrowsePanel extends ContentPanel implements ActionListener, MouseListener 
           this.chart.setValueAt(song.getTitle(), row, col);
           this.rowToSong.put(row, song);
         } else if (col == 1) { // artist
-          this.chart.setValueAt(dbUtils.song_artist(song), row, col);
+          this.chart.setValueAt(this.mainFrame.model.song_artist(song), row, col);
         } else if (col == 2) { // daily plays
           this.chart.setValueAt(song.getSongValue() * 10000, row, col);
         } else if (col == 3) { // stock price
@@ -170,7 +170,7 @@ class BrowsePanel extends ContentPanel implements ActionListener, MouseListener 
     ArrayList<String> genres = new ArrayList<String>();
 
     for (Song song: this.songs) {
-      String genre = dbUtils.song_genre(song);
+      String genre = this.mainFrame.model.song_genre(song);
       if (!genres.contains(genre)) {
         genres.add(genre);
         this.genreFilter.addItem(genre);
@@ -213,8 +213,8 @@ class BrowsePanel extends ContentPanel implements ActionListener, MouseListener 
     ArrayList<Song> filtered = new ArrayList<Song>();
     for (Song song : this.songs) {
       if (song.getTitle().contains(s)
-              && dbUtils.song_artist(song).contains(a)
-              && dbUtils.song_genre(song).equals(g)) {
+              && this.mainFrame.model.song_artist(song).contains(a)
+              && this.mainFrame.model.song_genre(song).equals(g)) {
         filtered.add(song);
       }
     }

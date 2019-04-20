@@ -38,7 +38,7 @@ class PortfolioPanel extends ContentPanel implements MouseListener {
     PortfolioPanel(MainFrame mainFrame) {
         super(mainFrame);
 
-        this.portfolio = dbUtils.user_port(this.mainFrame.user);
+        this.portfolio = this.mainFrame.model.user_port(this.mainFrame.user);
         this.setLayout(new BorderLayout());
         this.makeTotalsPanel();
 

@@ -13,9 +13,6 @@ public abstract class ContentPanel extends JPanel {
   protected Font font = new Font("Calisto MT", Font.BOLD, 18);
   Font labelFont = new Font(this.font.getFontName(), this.font.getStyle(), this.font.getSize() - 2);
 
-  // database utilities
-  DBUtils dbUtils;
-
   // reference to main frame used to launch buy/sell panels as needed
   MainFrame mainFrame;
 
@@ -26,7 +23,6 @@ public abstract class ContentPanel extends JPanel {
    */
   ContentPanel(MainFrame mainFrame) {
     this.mainFrame = mainFrame;
-    this.dbUtils = this.mainFrame.dbUtils;
   }
 
 

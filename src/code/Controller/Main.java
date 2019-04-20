@@ -1,6 +1,7 @@
 package code.Controller;
 
 import code.Model.*;
+import code.View.BuyPanel;
 import code.View.MainFrame;
 import java.util.List;
 
@@ -31,17 +32,21 @@ public class Main {
 
 
     // TODO - make the functions that pull the user from the database info and such?
-    User user = new User(33,"Bradley Fargo", "breadfergy","me@gmail.com", "totallyrad", "1997-01-02", 100);
+    //User user = new User(33,"Bradley Fargo", "breadfergy","me@gmail.com", "totallyrad", "1997-01-02", 100);
+
+
 
     // instantiate DatabaseAPI object (sort of like a bootleg model),
     // which in its constructor calls authenticate
-    Model api = new Model(user);
+    Model api = new Model(1);
     // TODO - NOTE, this calls the constructor of this class, which runs the "authenticate" function,
 
-    //api.insertUser(user);
+    // this exists in our database
+    Song s = new Song("1", "Old Town Road - Remix", "1", 293, "1");
 
     // Start the java.View
     MainFrame mf = new MainFrame(api);
+    BuyPanel bp = new BuyPanel(mf, s);
 
     // Close connection with the MySQL Database
     //api.closeConnection();
