@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -32,7 +31,9 @@ class PortfolioPanel extends ContentPanel implements ActionListener {
     private JLabel totalSharesLabel = new JLabel();
 
     /**
-     * TODO
+     * Constructor. Places available funds and total shares info above table of stocks.
+     *
+     * @param mainFrame referene to MainFrame used to launch Sell Panel when a song is clicked
      */
     PortfolioPanel(MainFrame mainFrame) {
         super(mainFrame);
@@ -47,7 +48,7 @@ class PortfolioPanel extends ContentPanel implements ActionListener {
         JLabel tableTitle = new JLabel("Your Stocks");
         tableTitle.setFont(this.font);
         this.add(tableTitle, BorderLayout.CENTER);
-        String[] columnNames = {"Song", "# Shares", "Daily Plays", "Stock Price", "% Change"};
+        String[] columnNames = {"Song", "# Shares", "Daily Plays", "Stock Price", "% Change"}; // TODO % change if time permits (unable to figure it out)
 
         // custom table model to make cells uneditable to user
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0) {
@@ -102,6 +103,9 @@ class PortfolioPanel extends ContentPanel implements ActionListener {
         totalsPanel.add(this.totalSharesLabel, constraints);
     }
 
+    /**
+     *
+     */
     private void updateTotals() {
         this.totalFunds = this.mainFrame.user.getPurchasing_power();
         this.totalShares = this.calculateTotalShares();
@@ -111,6 +115,7 @@ class PortfolioPanel extends ContentPanel implements ActionListener {
      * Updates label displaying user's total funds available and total number of shares owned.
      */
     private void updateTotalLabels() {
+        this.updateTotals();
         this.totalFundsLabel.setText("$" + this.totalFunds);
         this.totalSharesLabel.setText(this.totalShares + " shares");
     }
@@ -141,7 +146,7 @@ class PortfolioPanel extends ContentPanel implements ActionListener {
                     this.stocks.setValueAt(song.getSongValue() * 10000, row, col);
                 } else if (col == 3) { // stock price
                     this.stocks.setValueAt(song.getSongValue(), row, col);
-                } else if (col == 4) { } // % change // TODO if we have time
+                } else if (col == 4) { } // % change // TODO % change if time permits (unable to figure it out)
             }
         }
     }
@@ -151,5 +156,6 @@ class PortfolioPanel extends ContentPanel implements ActionListener {
         if (this.songButtons.containsKey(e.getSource())) {
             this.mainFrame.launchSellPanel(this.songButtons.get(e.getSource()));
         }
+        this.updateTotals();
     }
 }

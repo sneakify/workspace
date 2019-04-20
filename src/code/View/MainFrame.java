@@ -70,6 +70,8 @@ public class MainFrame extends JFrame implements ActionListener {
     this.browsePanel = new BrowsePanel(this);
     this.portfolioPanel = new PortfolioPanel(this);
     this.settingsPanel = new SettingsPanel(this);
+    this.buyPanel = new BuyPanel(this, null);
+    this.sellPanel = new SellPanel(this, null);
 
     // add content panels to main panel
     this.mainPanel.add(this.browsePanel, BROWSE);

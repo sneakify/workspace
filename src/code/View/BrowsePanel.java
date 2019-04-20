@@ -8,6 +8,8 @@ import java.util.HashMap;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
 
 import code.Model.Song;
 
@@ -59,6 +61,7 @@ class BrowsePanel extends ContentPanel implements ActionListener {
     };
 
     this.chart = new JTable(tableModel);
+    this.chart.getColumnModel().getColumn(0).setCellRenderer(new ButtonRenderer());
     this.add(new JScrollPane(this.chart), BorderLayout.SOUTH);
 
     this.populateChart(this.songs);
@@ -129,6 +132,12 @@ class BrowsePanel extends ContentPanel implements ActionListener {
     filterPanel.add(this.genreFilter, constraints);
   }
 
+  /**
+   * Fills this panel's table with the given list of Songs. Song information includes clickable
+   * song title (launches Buy Pael), artist name, number of daily plays, stock price, and % change.
+   *
+   * @param list list of songs to display
+   */
   private void populateChart(ArrayList<Song> list) {
     this.songButtons = new HashMap<JButton, Song>();
     this.chart.removeAll();
@@ -138,7 +147,7 @@ class BrowsePanel extends ContentPanel implements ActionListener {
         if (col == 0) { // clickable song title
           JButton button = new JButton(song.getTitle());
           button.addActionListener(this);
-          this.chart.setValueAt(button, row, col);
+          this.chart.setValueAt(button, row, col); // fixme THIS LINE
           this.songButtons.put(button, song);
         } else if (col == 1) { // artist
           this.chart.setValueAt(dbUtils.song_artist(song), row, col);
@@ -146,11 +155,15 @@ class BrowsePanel extends ContentPanel implements ActionListener {
           this.chart.setValueAt(song.getSongValue() * 10000, row, col);
         } else if (col == 3) { // stock price
           this.chart.setValueAt(song.getSongValue(), row, col);
-        } else if (col == 4) { } // % change // TODO if we have time
+        } else if (col == 4) { } // % change // TODO % change if time permits (unable to figure it out)
       }
     }
   }
 
+  /**
+   * Clears and refills genre options in list for dropdown genre filter. Traverses U.S. Top 50 to
+   * accumulate distinct genres to display.
+   */
   private void updateGenres() {
     this.genreFilter.removeAllItems();
     this.genreFilter.addItem("Any Genre");
@@ -165,26 +178,40 @@ class BrowsePanel extends ContentPanel implements ActionListener {
     }
   }
 
+  /**
+   * Filters list of any of three filter fields is updated. Clears all filters if "Clear Filters"
+   * button is clicked. Launches Buy Panel through reference to MainFrame if a song is clicked.
+   */
   @Override
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == this.songFilter
             || e.getSource() == this.artistFilter
             || e.getSource() == this.genreFilter) {
-      // filter
+      // filter by song, artist, and/or genre
       String s = this.songFilter.getText();
       String a = this.artistFilter.getText();
-      String g = this.genreFilter.getSelectedItem().toString(); // fixme possible bug caused by toString
+      String g = (String) this.genreFilter.getSelectedItem(); // fixme possible bug caused by casting
       this.populateChart(this.filter(s, a, g));
     } else if (e.getSource() == this.clearFilters) {
-      // clear filters
+      // clear all filters
       this.songFilter.setText("");
       this.artistFilter.setText("");
       this.genreFilter.setSelectedIndex(0);
     } else if (this.songButtons.containsKey(e.getSource())) {
+      // clicked a song -> launch a Buy Panel for this song
       this.mainFrame.launchBuyPanel(this.songButtons.get(e.getSource()));
     }
   }
 
+  /**
+   * Given filters for song title, artist name, amd genre, traverses current U.S. Top 50 char to
+   * find subset of songs that satisfy all parameters.
+   *
+   * @param s substring to find in song title
+   * @param a substring to find in artist name
+   * @param g genre to match
+   * @return list of songs filtered by given paramaters
+   */
   private ArrayList<Song> filter(String s, String a, String g) {
     ArrayList<Song> filtered = new ArrayList<Song>();
     for (Song song : this.songs) {
@@ -195,5 +222,23 @@ class BrowsePanel extends ContentPanel implements ActionListener {
       }
     }
     return filtered;
+  }
+
+  private class ButtonRenderer extends JButton implements TableCellRenderer {
+
+    public ButtonRenderer() {
+      this.setOpaque(true);
+    }
+
+    @Override
+    public Component getTableCellRendererComponent(JTable table, Object obj, boolean selected, boolean focued, int rowm, int col) {
+      if (obj == null) {
+        setText("");
+      } else {
+        setText(obj.toString());
+      }
+      return this;
+    }
+
   }
 }

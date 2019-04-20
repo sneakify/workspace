@@ -69,24 +69,8 @@ public class SettingsPanel extends ContentPanel implements ActionListener {
         // add the panel to this frame
         add(newPanel);
          
-        pack();
-        setLocationRelativeTo(null);
-    }
-     
-    public void main(String[] args) {
-        // set look and feel to the system look and feel
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-         
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new SettingsPanel().setVisible(true);
-            }
-        });
+//        pack();
+//        setLocationRelativeTo(null);
     }
 
     @Override
@@ -94,6 +78,5 @@ public class SettingsPanel extends ContentPanel implements ActionListener {
         if (e.getSource() == this.buttonSaveChanges) {
             // TODO
         }
-        // TODO
     }
 }
