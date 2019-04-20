@@ -13,7 +13,7 @@ import code.Model.Song;
 
 /**
  * Content Panel that allows user to browse through and filter U.S. Top 50 chart. Clicking any one
- * song launches Buy Panel.
+ * song launches a Buy Panel.
  */
 class BrowsePanel extends ContentPanel implements ActionListener {
   // chart to display as table
@@ -21,7 +21,7 @@ class BrowsePanel extends ContentPanel implements ActionListener {
   // buttons for each song
   private HashMap<JButton, Song> songButtons;
 
-  // list of songs
+  // list of all songs currently in U.S. Top 50
   ArrayList<Song> songs;
 
   // filters by which to search through chart
@@ -35,6 +35,8 @@ class BrowsePanel extends ContentPanel implements ActionListener {
   /**
    * Constructor. Places filtering options above U.S. Top 50 chart and updates list of selectable
    * genres based on current top 50.
+   *
+   * @param mainFrame referene to MainFrame used to launch Buy Panel when a song is clicked
    */
   BrowsePanel(MainFrame mainFrame) {
     super(mainFrame);
@@ -46,9 +48,9 @@ class BrowsePanel extends ContentPanel implements ActionListener {
     JLabel chartTitle = new JLabel("U.S. Top 50");
     chartTitle.setFont(this.font);
     this.add(chartTitle, BorderLayout.CENTER);
-    String[] columnNames = {"Song", "Artist", "Daily Plays", "Stock Price", "% Change"}; // TODO remove % change
+    String[] columnNames = {"Song", "Artist", "Daily Plays", "Stock Price", "% Change"}; // TODO % change if time permits (unable to figure it out)
 
-    // custom table model
+    // custom table model to make cells uneditable to user
     DefaultTableModel tableModel = new DefaultTableModel(new Object[50][5], columnNames) {
       @Override
       public boolean isCellEditable(int row, int column) {
@@ -128,6 +130,7 @@ class BrowsePanel extends ContentPanel implements ActionListener {
   }
 
   private void populateChart(ArrayList<Song> list) {
+    this.songButtons = new HashMap<JButton, Song>();
     this.chart.removeAll();
     for (int row = 0; row < list.size(); row++) {
       Song song = list.get(row);

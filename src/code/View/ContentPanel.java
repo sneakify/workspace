@@ -7,16 +7,24 @@ import code.Model.DBUtils;
 import code.Model.Login;
 
 /**
- * TODO
+ * Represents a panel that will be placed below the navigation bar.
  */
 public abstract class ContentPanel extends JPanel {
-  protected Font font = new Font("Calisto MT", Font.BOLD, 18); // TODO subject to change
+  // fonts
+  protected Font font = new Font("Calisto MT", Font.BOLD, 18);
   Font labelFont = new Font(this.font.getFontName(), this.font.getStyle(), this.font.getSize() - 2);
 
-  DBUtils dbUtils = new DBUtils(Login.url, Login.usr, Login.pword); // TODO input correct url
+  // database utilities
+  DBUtils dbUtils = new DBUtils(Login.url, Login.usr, Login.pword);
 
+  // reference to main frame used to launch buy/sell panels as needed
   MainFrame mainFrame;
 
+  /**
+   * Constructor. Initializes this.mainFrame with given MainFrame.
+   *
+   * @param mainFrame
+   */
   ContentPanel(MainFrame mainFrame) {
     this.mainFrame = mainFrame;
   }
