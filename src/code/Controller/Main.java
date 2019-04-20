@@ -32,7 +32,7 @@ public class Main {
 
     // instantiate DatabaseAPI object (sort of like a bootleg model),
     // which in its constructor calls authenticate
-    DatabaseAPI api = new DatabaseMySQL();
+    DatabaseAPI api = new Model();
     // TODO - NOTE, this calls the constructor of this class, which runs the "authenticate" function,
 
 
@@ -40,6 +40,8 @@ public class Main {
     User user = new User(33,"Bradley Fargo", "breadfergy","me@gmail.com", "totallyrad", "1997-01-02", 100);
 
     //api.insertUser(user);
+
+    DatabaseAPI myModel = new Model();
 
     // Start the java.View
     MainFrame mf = new MainFrame(user);
