@@ -134,7 +134,7 @@ class BrowsePanel extends ContentPanel implements ActionListener, MouseListener 
 
   /**
    * Fills this panel's table with the given list of Songs. Song information includes clickable
-   * song title (launches Buy Pael), artist name, number of daily plays, stock price, and % change.
+   * song title (launches Buy Panel), artist name, number of daily plays, stock price, and % change.
    *
    * @param list list of songs to display
    */

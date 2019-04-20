@@ -18,8 +18,8 @@ import code.Model.Song;
 class PortfolioPanel extends ContentPanel implements MouseListener {
     // chart to display as table
     private JTable stocks;
-  // coordinate of each song title in table
-  private HashMap<Point, Song> pointToSong;
+  // row of each song title in table
+  private HashMap<Integer, Song> rowToSong;
 
     // user's portfolio
     HashMap<Song, Integer> portfolio;
@@ -104,7 +104,7 @@ class PortfolioPanel extends ContentPanel implements MouseListener {
     }
 
     /**
-     * TODO
+     * Retrieves updated purchasing power and total number of shares for this user from database.
      */
     private void updateTotals() {
         this.totalFunds = this.mainFrame.user.getPurchasing_power();
@@ -128,8 +128,14 @@ class PortfolioPanel extends ContentPanel implements MouseListener {
         return shares;
     }
 
+  /**
+   * Fills this panel's table with the given list of Songs. Song information includes clickable
+   * song title (launches Sell Panel), artist name, number of daily plays, stock price, and % change.
+   *
+   * @param hm map of songs to number of shares owned by this user of each song
+   */
     private void populateTable(HashMap<Song, Integer> hm) {
-        this.pointToSong = new HashMap<Point, Song>();
+        this.rowToSong = new HashMap<Integer, Song>();
         this.stocks.removeAll();
         ArrayList<Song> songs = new ArrayList<>(hm.keySet());
         for (int row = 0; row < songs.size(); row++) {
@@ -137,7 +143,7 @@ class PortfolioPanel extends ContentPanel implements MouseListener {
             for (int col = 0; col <= 4; col++) {
                 if (col == 0) { // clickable song title
                    this.stocks.setValueAt(song.getTitle(), row, col);
-                   this.pointToSong.put(new Point(row, col), song);
+                   this.rowToSong.put(row, song);
                 } else if (col == 1) { // # shares
                     this.stocks.setValueAt(hm.get(song), row, col);
                 } else if (col == 2) { // daily plays
@@ -158,7 +164,7 @@ class PortfolioPanel extends ContentPanel implements MouseListener {
     int col = source.getSelectedColumn();
     if (col == 0) {
       // clicked a song -> launch a Buy Panel for this song
-      this.mainFrame.launchBuyPanel(this.pointToSong.get(new Point(row, col)));
+      this.mainFrame.launchSellPanel(this.rowToSong.get(row));
     }
   }
 
