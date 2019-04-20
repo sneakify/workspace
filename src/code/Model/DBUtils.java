@@ -458,7 +458,7 @@ private String url;
  public void update_user(User u, String email, String password) {
    String sql = "Update user " + 
        "Set email = "+ email+", password = "+password + 
-       "Where user_id = "+ u.getUserID()+";";
+       " Where user_id = "+ u.getUserID()+";";
    try {
 
      // get connection and initialize statement
