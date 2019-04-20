@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import code.Model.DBUtils;
+import code.Model.Model;
 import code.Model.Song;
 import code.Model.User;
 
@@ -16,6 +18,7 @@ import code.Model.User;
  */
 public class MainFrame extends JFrame implements ActionListener {
   User user;
+  DBUtils dbUtils;
 
   // Navigation Panel & Buttons
   private JPanel navigationPanel;
@@ -45,10 +48,12 @@ public class MainFrame extends JFrame implements ActionListener {
   /**
    * Constructor. Instantiates navigation panel and content panels. Adds panels to this frame.
    *
-   * @param user User of the application
+   * @param model model for this application
    */
-  public MainFrame(User user) {
-    this.user = user;
+  public MainFrame(Model model) {
+    this.user = model.myUser;
+    this.dbUtils = model.dbu;
+
 
     // frame
     this.setVisible(true);

@@ -76,7 +76,7 @@ public class SettingsPanel extends ContentPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.buttonSaveChanges) {
-            // TODO
+            this.dbUtils.update_user(this.mainFrame.user, this.textEmail.getText(), this.fieldPassword.getText());
         }
     }
 }

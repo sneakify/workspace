@@ -3,12 +3,13 @@ package code.View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
 import code.Model.Song;
@@ -17,11 +18,12 @@ import code.Model.Song;
  * Content Panel that allows user to browse through and filter U.S. Top 50 chart. Clicking any one
  * song launches a Buy Panel.
  */
-class BrowsePanel extends ContentPanel implements ActionListener {
+class BrowsePanel extends ContentPanel implements ActionListener, MouseListener {
   // chart to display as table
   private JTable chart;
   // buttons for each song
   private HashMap<JButton, Song> songButtons;
+  private HashMap<Point, Song> pointToSong;
 
   // list of all songs currently in U.S. Top 50
   ArrayList<Song> songs;
@@ -61,7 +63,6 @@ class BrowsePanel extends ContentPanel implements ActionListener {
     };
 
     this.chart = new JTable(tableModel);
-    this.chart.getColumnModel().getColumn(0).setCellRenderer(new ButtonRenderer());
     this.add(new JScrollPane(this.chart), BorderLayout.SOUTH);
 
     this.populateChart(this.songs);
@@ -139,16 +140,19 @@ class BrowsePanel extends ContentPanel implements ActionListener {
    * @param list list of songs to display
    */
   private void populateChart(ArrayList<Song> list) {
-    this.songButtons = new HashMap<JButton, Song>();
+//    this.songButtons = new HashMap<JButton, Song>();
+    this.pointToSong = new HashMap<Point, Song>();
     this.chart.removeAll();
     for (int row = 0; row < list.size(); row++) {
       Song song = list.get(row);
       for (int col = 0; col <= 4; col++) {
         if (col == 0) { // clickable song title
-          JButton button = new JButton(song.getTitle());
-          button.addActionListener(this);
-          this.chart.setValueAt(button, row, col); // fixme THIS LINE
-          this.songButtons.put(button, song);
+//          JButton button = new JButton(song.getTitle());
+//          button.addActionListener(this);
+//          this.chart.setValueAt(button, row, col); // fixme THIS LINE
+//          this.songButtons.put(button, song);
+          this.chart.setValueAt(song.getTitle(), row, col);
+          this.pointToSong.put(new Point(row, col), song);
         } else if (col == 1) { // artist
           this.chart.setValueAt(dbUtils.song_artist(song), row, col);
         } else if (col == 2) { // daily plays
@@ -158,6 +162,8 @@ class BrowsePanel extends ContentPanel implements ActionListener {
         } else if (col == 4) { } // % change // TODO % change if time permits (unable to figure it out)
       }
     }
+    this.chart.getColumnModel().getColumn(0).setCellRenderer(new ButtonRenderer());
+    this.chart.addMouseListener(this);
   }
 
   /**
@@ -197,10 +203,11 @@ class BrowsePanel extends ContentPanel implements ActionListener {
       this.songFilter.setText("");
       this.artistFilter.setText("");
       this.genreFilter.setSelectedIndex(0);
-    } else if (this.songButtons.containsKey(e.getSource())) {
-      // clicked a song -> launch a Buy Panel for this song
-      this.mainFrame.launchBuyPanel(this.songButtons.get(e.getSource()));
     }
+//    else if (this.songButtons.containsKey(e.getSource())) {
+//      // clicked a song -> launch a Buy Panel for this song
+//      this.mainFrame.launchBuyPanel(this.songButtons.get(e.getSource()));
+//    }
   }
 
   /**
@@ -223,6 +230,29 @@ class BrowsePanel extends ContentPanel implements ActionListener {
     }
     return filtered;
   }
+
+  @Override
+  public void mouseClicked(MouseEvent e) {
+    JTable source = (JTable) e.getSource();
+    int row = source.getSelectedRow();
+    int col = source.getSelectedColumn();
+    if (col == 0) {
+      // clicked a song -> launch a Buy Panel for this song
+      this.mainFrame.launchBuyPanel(this.songButtons.get(e.getSource()));
+    }
+  }
+
+  @Override
+  public void mousePressed(MouseEvent e) { }
+
+  @Override
+  public void mouseReleased(MouseEvent e) { }
+
+  @Override
+  public void mouseEntered(MouseEvent e) { }
+
+  @Override
+  public void mouseExited(MouseEvent e) { }
 
   private class ButtonRenderer extends JButton implements TableCellRenderer {
 

@@ -15,7 +15,7 @@ public abstract class ContentPanel extends JPanel {
   Font labelFont = new Font(this.font.getFontName(), this.font.getStyle(), this.font.getSize() - 2);
 
   // database utilities
-  DBUtils dbUtils = new DBUtils(Login.url, Login.usr, Login.pword);
+  DBUtils dbUtils;
 
   // reference to main frame used to launch buy/sell panels as needed
   MainFrame mainFrame;
@@ -23,10 +23,11 @@ public abstract class ContentPanel extends JPanel {
   /**
    * Constructor. Initializes this.mainFrame with given MainFrame.
    *
-   * @param mainFrame
+   * @param mainFrame reference to MainFrame used to launch buy/sell panels
    */
   ContentPanel(MainFrame mainFrame) {
     this.mainFrame = mainFrame;
+    this.dbUtils = this.mainFrame.dbUtils;
   }
 
 
