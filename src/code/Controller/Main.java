@@ -30,75 +30,20 @@ public class Main {
     System.out.println("The Program Started Running");
 
 
-    // instantiate DatabaseAPI object (sort of like a bootleg model),
-    // which in its constructor calls authenticate
-    DatabaseAPI api = new Model();
-    // TODO - NOTE, this calls the constructor of this class, which runs the "authenticate" function,
-
-
     // TODO - make the functions that pull the user from the database info and such?
     User user = new User(33,"Bradley Fargo", "breadfergy","me@gmail.com", "totallyrad", "1997-01-02", 100);
 
+    // instantiate DatabaseAPI object (sort of like a bootleg model),
+    // which in its constructor calls authenticate
+    Model api = new Model(user);
+    // TODO - NOTE, this calls the constructor of this class, which runs the "authenticate" function,
+
     //api.insertUser(user);
 
-    DatabaseAPI myModel = new Model();
-
     // Start the java.View
-    MainFrame mf = new MainFrame(user);
+    MainFrame mf = new MainFrame(api);
 
     // Close connection with the MySQL Database
-    api.closeConnection();
+    //api.closeConnection();
   }
 }
-
-///// EXAMPLES FROM DOCTORPATIENT
-/*
-		System.out.println("\n\nAvailable oncologists");
-		List<Doctor> doctors = api.acceptingNewPatients("oncology");
-		for (Doctor d : doctors)
-			System.out.println(d.toString());
-
-		*/
-
-// Insert a test patient
-// Exception thrown if patient already exists
-
-//SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
-//System.out.println("\n\nRegistering a patient");
-//Patient p = new Patient("Gates", "Bill", 'M', sdf.parse("10-28-1955"));
-//api.registerPatientMethod1(p);
-//int pid = api.registerPatientMethod2(p);
-//int pid = api.registerPatient(p);
-
-//System.out.println("Patient registered.");
-//System.out.println("Newly inserted patient: "+pid);
-
-
-
-
-// Test adding specialities
-// Note the repeats!
-//System.out.println("Adding specialties");
-//int sid1 = api.getOrInsertSpecialty("oncology");
-//int sid2 = api.getOrInsertSpecialty("cardiology");
-//int sid3 = api.getOrInsertSpecialty("pediatrics");
-//int sid4 = api.getOrInsertSpecialty("ent");
-//int sid5 = api.getOrInsertSpecialty("cardiology");
-//System.out.println("Specialty IDs: "+sid1+" "+sid2+" "+sid3+" "+sid4+" "+sid5);
-
-// add some doctors to a list collection and then add them all to the database
-/*
-		List<Doctor> drlist = new ArrayList<Doctor>();
-		drlist.add(new Doctor("House", "Gregory", true, "diagnostics"));
-		drlist.add(new Doctor("McCoy", "Leonard", true, "surgeon"));
-		drlist.add(new Doctor("Crusher", "Beverly", false, "oncology"));
-		drlist.add(new Doctor("Smith", "Joe", true, "oncology"));
-		drlist.add(new Doctor("Johnson", "Liz", true, "oncology"));
-
-		api.insertDoctors(drlist);
-
-		System.out.println("\n\nAvailable oncologists");
-		List<Doctor> doctors = api.acceptingNewPatients("oncology");
-		for (Doctor d : doctors)
-			System.out.println(d.toString());
-*/

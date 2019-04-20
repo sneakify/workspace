@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Model implements DatabaseAPI {
-    DBUtils dbu;
-    User myUser;
+    public DBUtils dbu;
+    public User myUser;
     private HashMap<Song, Integer> allTheSongs;
 
     public Model(User u) {

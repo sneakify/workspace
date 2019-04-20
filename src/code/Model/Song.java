@@ -49,6 +49,7 @@ public class Song {
     }
 
     public String getTitle() {
+        System.out.println(this.title);
         return title;
     }
 
