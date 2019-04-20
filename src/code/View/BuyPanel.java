@@ -67,6 +67,10 @@ class BuyPanel extends TransactionPanel implements ActionListener {
     }
 
     private int parseTextField() {
-        return Integer.parseInt(this.sharesToBuy.getText());
+        int i = 0;
+        try {
+            i = Integer.parseInt(this.sharesToBuy.getText());
+        } catch (NumberFormatException e) { }
+        return 0;
     }
 }

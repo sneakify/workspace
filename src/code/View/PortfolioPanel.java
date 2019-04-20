@@ -130,7 +130,8 @@ class PortfolioPanel extends ContentPanel implements MouseListener {
 
   /**
    * Fills this panel's table with the given list of Songs. Song information includes clickable
-   * song title (launches Sell Panel), artist name, number of daily plays, stock price, and % change.
+   * song title (launches Sell Panel), number of shares of this song owned by this user, number of
+   * daily plays, stock price, and % change.
    *
    * @param hm map of songs to number of shares owned by this user of each song
    */

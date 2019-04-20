@@ -78,6 +78,10 @@ class SellPanel extends TransactionPanel implements ActionListener {
     }
 
     private int parseTextField() {
-        return Integer.parseInt(this.sharesToSell.getText());
+        int i = 0;
+        try {
+            i = Integer.parseInt(this.sharesToSell.getText());
+        } catch (NumberFormatException e) { }
+        return 0;
     }
 }
