@@ -39,7 +39,7 @@ public class Main {
     // TODO - make the functions that pull the user from the database info and such?
     User user = new User(33,"Bradley Fargo", "breadfergy","me@gmail.com", "totallyrad", "1997-01-02", 100);
 
-    api.insertUser(user);
+    //api.insertUser(user);
 
     // Start the java.View
     MainFrame mf = new MainFrame(user);

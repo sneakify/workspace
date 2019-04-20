@@ -40,12 +40,12 @@ private String url;
         con = DriverManager.getConnection(url, user, password);
         return con;
       } catch (SQLException e) {
-        System.err.println(e.getMessage());
+        System.err.println("getConnection:" + e.getMessage());
         System.exit(1);
       }
     }
 
-    System.out.println("null?" + con.toString());
+    System.out.println("GetConnectionGettingGot::" + con.toString());
     return con;
   }
 
@@ -55,7 +55,7 @@ private String url;
         con.close();
       }
     } catch (SQLException e) {
-      System.err.println(e.getMessage());
+      System.err.println("closeConnection" + e.getMessage());
       e.printStackTrace();
     } finally {
       System.out.println("Closed that connedtion yo. Or it Was Null already");
@@ -122,7 +122,7 @@ private String url;
       stmt.close();
 
     } catch (SQLException e) {
-      System.err.println(e.getMessage());
+      System.err.println("GetOrInsertTerm: " + e.getMessage());
       e.printStackTrace();
     }
 
@@ -145,16 +145,20 @@ private String url;
 
     catch (SQLException e) {
       System.err.println("ERROR: Coult not complete purchase:" + sql);
-      System.err.println(e.getMessage());
+      System.err.println("New User: " + e.getMessage());
       e.printStackTrace();
     }
   }
 
 // inserts purchases from users into database
+  @SuppressWarnings("Duplicates")
   public void buy_shares(User u, Song s, int n) {
+    System.out.println("This is the thing" + u.toString() + s.toString() + String.valueOf(n));
+
+
     String sql = "INSERT INTO buy (user_id, spotify_id, price, n_shares, purchase_time) VALUES"
         + "('" + u.getUserID() + "," + s.getSpotifyID() + ","
-        + "SELECT song_value FROM song WHERE song_id =" + s.getSpotifyID() + ","
+        + "SELECT song_value FROM song WHERE spotify_id =" + s.getSpotifyID() + ","
         + "CURRENT_TIMESTAMP)";
     try {
 
@@ -176,10 +180,13 @@ private String url;
 
 // inserts sales from users into database
   public void sell_shares(User u, Song s, int n) {
+    System.out.println("This is the thing" + u.toString() + s.toString() + String.valueOf(n));
+
     String sql = "INSERT INTO sell (user_id, spotify_id, price, n_shares, sale_time) VALUES" + "('"
         + u.getUserID() + "," + s.getSpotifyID() + ","
-        + ", SELECT song_value FROM song WHERE song_id =" + s.getSpotifyID() + ","
+        + ", SELECT song_value FROM song WHERE spotify_id =" + s.getSpotifyID() + ","
         + "CURRENT_TIMESTAMP)";
+
     try {
 
       // get connection and initialize statement
@@ -206,16 +213,17 @@ private String url;
     try {
       Connection con = getConnection();
       Statement stmt = con.createStatement();
-      String sqlGet = "SELECT album_name FROM song JOIN album Using(album_id) WHERE song_id ="
+      String sqlGet = "SELECT album_name FROM song JOIN album Using(album_id) WHERE spotify_id ="
           + s.getSpotifyID();
       ResultSet rs = stmt.executeQuery(sqlGet);
-
-      rs.close();
-      stmt.close();
 
       while (rs.next()) {
         value = rs.getString("album_name");
       }
+
+      rs.close();
+      stmt.close();
+
 
     } catch (SQLException e) {
       System.err.println(e.getMessage());
@@ -232,16 +240,16 @@ private String url;
     try {
       Connection con = getConnection();
       Statement stmt = con.createStatement();
-      String sqlGet = "SELECT artist_name FROM song JOIN artist Using(artist_id) WHERE song_id ="
+      String sqlGet = "SELECT artist_name FROM song JOIN artist Using(artist_id) WHERE spotify_id ="
           + s.getSpotifyID();
       ResultSet rs = stmt.executeQuery(sqlGet);
-
-      rs.close();
-      stmt.close();
 
       while (rs.next()) {
         value = rs.getString("artist_name");
       }
+
+      rs.close();
+      stmt.close();
 
     } catch (SQLException e) {
       System.err.println(e.getMessage());
@@ -257,18 +265,18 @@ private String url;
     try {
       Connection con = getConnection();
       Statement stmt = con.createStatement();
-      String sqlGet = "SELECT date, day_value FROM song_history WHERE song_id =" + s.getSpotifyID()
+      String sqlGet = "SELECT date, day_value FROM song_history WHERE spotify_id =" + s.getSpotifyID()
           + "ORDER BY date DESC LIMIT 7";
       ResultSet rs = stmt.executeQuery(sqlGet);
-
-      rs.close();
-      stmt.close();
 
       while (rs.next()) {
         String d = rs.getString("date");
         int v = rs.getInt("day_value");
         h.put(d, v);
       }
+
+      rs.close();
+      stmt.close();
 
     } catch (SQLException e) {
       System.err.println(e.getMessage());
@@ -288,14 +296,13 @@ private String url;
           + u.getUserID() + "ORDER BY date DESC LIMIT 7";
       ResultSet rs = stmt.executeQuery(sqlGet);
 
-      rs.close();
-      stmt.close();
-
       while (rs.next()) {
         String d = rs.getString("date");
         int v = rs.getInt("portfolio_value");
         h.put(d, v);
-  
+
+        rs.close();
+        stmt.close();
 
       }
     } catch (SQLException e) {
@@ -327,9 +334,6 @@ private String url;
           "Where user_id = " + u.getUserID();
       ResultSet rs = stmt.executeQuery(sqlGet);
 
-      rs.close();
-      stmt.close();
-
       while (rs.next()) {
         String spotify_id = rs.getString("spotify_id");
         String title = rs.getString("title");
@@ -341,6 +345,8 @@ private String url;
         
         h.put(temp, owned);
 
+        rs.close();
+        stmt.close();
       }
     } catch (SQLException e) {
       System.err.println(e.getMessage());
@@ -376,15 +382,14 @@ private String url;
          "Where user_id =" + u.getUserID();
      ResultSet rs = stmt.executeQuery(sqlGet);
 
-     rs.close();
-     stmt.close();
-
      while (rs.next()) {
        n = rs.getInt("portfolio_value");
 
+       rs.close();
+       stmt.close();
      }
    } catch (SQLException e) {
-     System.err.println(e.getMessage());
+     System.err.println("Port-Value Error" + e.getMessage());
      e.printStackTrace();
    }
    return n;
@@ -416,7 +421,7 @@ private String url;
      stmt.close();
 
    } catch (SQLException e) {
-     System.err.println(e.getMessage());
+     System.err.println("All songs" + e.getMessage());
      e.printStackTrace();
    }
    return mylist;
@@ -429,22 +434,21 @@ private String url;
    try {
      Connection con = getConnection();
      Statement stmt = con.createStatement();
-     String sqlGet = "Select genre_name" + 
-         "From song" + 
-         "Join artist Using(artist_id)" + 
-         "Join genre Using(genre_id)" + 
-         "Where spotify_id =" + s.getSpotifyID();
+     String sqlGet = "Select genre_name " +
+         "From song " +
+         "Join artist USing(artist_id) " +
+         "Join genre Using(genre_id) " +
+         "Where spotify_id = " + s.getSpotifyID() + ";";
      ResultSet rs = stmt.executeQuery(sqlGet);
-
-     rs.close();
-     stmt.close();
      
      while (rs.next()) {
        value = rs.getString("genre_name");
      }
 
+     rs.close();
+     stmt.close();
    } catch (SQLException e) {
-     System.err.println(e.getMessage());
+     System.err.println("song_genre" + e.getMessage());
      e.printStackTrace();
    }
    return value;
