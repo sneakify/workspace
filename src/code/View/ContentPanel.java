@@ -29,6 +29,7 @@ public abstract class ContentPanel extends JPanel {
     this.mainFrame = mainFrame;
   }
 
+
   /**
    * Displays popup window with given error message and window title.
    *

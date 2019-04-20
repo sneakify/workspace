@@ -1,11 +1,13 @@
-package net.codejava.swing.jpanel;
-package code.Model;
-package code.Controller;
- 
+package code.View;
+
+import code.Model.DBUtils;
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
- 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,19 +19,20 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
  
 // allows a user to update their email or password
-public class SettingsPanel extends JFrame {
+public class SettingsPanel extends ContentPanel implements ActionListener {
   
-    private JLabel fullName = new JLabel(this.getFirstName() + this.getLastName());
-    private JLabel userName = new JLabel(this.getUserName());
-    private JLabel currEmail = new JLabel(this.getEmail());
+    private JLabel fullName = new JLabel(this.mainFrame.user.getFullName());
+    private JLabel userName = new JLabel(this.mainFrame.user.getUserName());
+    private JLabel currEmail = new JLabel(this.mainFrame.user.getEmail());
     private JLabel updateEmail = new JLabel("Change email: ");
     private JLabel updatePassword = new JLabel("Change password: ");
     private JTextField textEmail = new JTextField(20);
     private JPasswordField fieldPassword = new JPasswordField(20);
     private JButton buttonSaveChanges = new JButton("Save Changes");
      
-    public SettingsPanel() {
-        super("Settings");
+    public SettingsPanel(MainFrame mf) {
+        super(mf);
+        //super("Settings");
          
         // create a new panel with GridBagLayout manager
         JPanel newPanel = new JPanel(new GridBagLayout());
@@ -69,15 +72,8 @@ public class SettingsPanel extends JFrame {
         pack();
         setLocationRelativeTo(null);
     }
-    
-    
-    public void actionPerformed(event e) {
-      if (e.getSource() == this.buttonSaveChanges) {
-        // TODO
-      }
-    }
      
-    public static void main(String[] args) {
+    public void main(String[] args) {
         // set look and feel to the system look and feel
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -91,5 +87,13 @@ public class SettingsPanel extends JFrame {
                 new SettingsPanel().setVisible(true);
             }
         });
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == this.buttonSaveChanges) {
+            // TODO
+        }
+        // TODO
     }
 }
