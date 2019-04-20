@@ -453,5 +453,28 @@ private String url;
    }
    return value;
  }
+  
+  // updates the email and password of given user
+ public void update_user(User u, String email, String password) {
+   String sql = "Update user " + 
+       "Set email = "+ email+", password = "+password + 
+       " Where user_id = "+ u.getUserID()+";";
+   try {
+
+     // get connection and initialize statement
+     Connection con = getConnection();
+     PreparedStatement stmt = con.prepareStatement(sql);
+     stmt.executeUpdate(sql);
+
+     // cleanup
+     stmt.close();
+   }
+
+   catch (SQLException e) {
+     System.err.println("ERROR: Coult not complete purchase:" + sql);
+     System.err.println(e.getMessage());
+     e.printStackTrace();
+   }
+ }
    
  }
