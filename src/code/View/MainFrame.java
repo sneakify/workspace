@@ -40,9 +40,9 @@ public class MainFrame extends JFrame implements ActionListener {
 
   private final static String BROWSE = "BROWSE";
   private final static String PORTFOLIO = "PORTFOLIO";
+  private final static String SETTINGS = "SETTINGS";
   private final static String BUY = "BUY";
   private final static String SELL = "SELL";
-  private final static String SETTINGS = "SETTINGS";
 
 
   /**
@@ -75,14 +75,10 @@ public class MainFrame extends JFrame implements ActionListener {
     this.browsePanel = new BrowsePanel(this);
     this.portfolioPanel = new PortfolioPanel(this);
     this.settingsPanel = new SettingsPanel(this);
-    this.buyPanel = new BuyPanel(this, null);
-    this.sellPanel = new SellPanel(this, null);
 
     // add content panels to main panel
     this.mainPanel.add(this.browsePanel, BROWSE);
     this.mainPanel.add(this.portfolioPanel, PORTFOLIO);
-    this.mainPanel.add(this.buyPanel, BUY);
-    this.mainPanel.add(this.sellPanel, SELL);
     this.mainPanel.add(this.settingsPanel, SETTINGS);
 
     // current panel upon construction should be Browse Panel
@@ -176,6 +172,7 @@ public class MainFrame extends JFrame implements ActionListener {
   protected void launchBuyPanel(Song song) {
     CardLayout cl = (CardLayout) this.mainPanel.getLayout();
     this.buyPanel = new BuyPanel(this, song);
+    this.mainPanel.add(this.buyPanel, BUY);
     cl.show(this.mainPanel, this.BUY);
     this.curPanel = this.buyPanel;
   }
@@ -188,6 +185,7 @@ public class MainFrame extends JFrame implements ActionListener {
   protected void launchSellPanel(Song song) {
     CardLayout cl = (CardLayout) this.mainPanel.getLayout();
     this.sellPanel = new SellPanel(this, song);
+    this.mainPanel.add(this.sellPanel, SELL);
     cl.show(this.mainPanel, this.SELL);
     this.curPanel = this.sellPanel;
   }
