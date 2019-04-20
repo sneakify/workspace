@@ -54,7 +54,6 @@ public class MainFrame extends JFrame implements ActionListener {
     this.user = model.myUser;
     this.dbUtils = model.dbu;
 
-
     // frame
     this.setVisible(true);
     this.setSize(600, 600);

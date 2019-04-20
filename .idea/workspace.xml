@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c821b5a8-9e86-4842-b176-547e131b5500" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/code/View/ButtonRenderer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/code/View/BrowsePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/View/BrowsePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/code/View/PortfolioPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/View/PortfolioPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/code/View/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/View/MainFrame.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,13 +29,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="954" />
+          <entry key="java" value="956" />
           <entry key="txt" value="67" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="954" />
+          <entry key="JAVA" value="956" />
           <entry key="PLAIN_TEXT" value="67" />
         </counts>
       </usages-collector>
@@ -63,8 +61,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/code/View/MainFrame.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="153">
-                  <caret line="44" column="44" lean-forward="true" selection-start-line="44" selection-start-column="44" selection-end-line="44" selection-end-column="44" />
+                <state relative-caret-position="340">
+                  <caret line="55" column="4" selection-start-line="55" selection-start-column="4" selection-end-line="55" selection-end-column="4" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -202,10 +200,10 @@
         <option value="$PROJECT_DIR$/src/code/Model/DBUtils.java" />
         <option value="$PROJECT_DIR$/src/code/View/ContentPanel.java" />
         <option value="$PROJECT_DIR$/src/code/View/SettingsPanel.java" />
-        <option value="$PROJECT_DIR$/src/code/View/MainFrame.java" />
         <option value="$PROJECT_DIR$/src/code/View/BrowsePanel.java" />
         <option value="$PROJECT_DIR$/src/code/View/ButtonRenderer.java" />
         <option value="$PROJECT_DIR$/src/code/View/PortfolioPanel.java" />
+        <option value="$PROJECT_DIR$/src/code/View/MainFrame.java" />
       </list>
     </option>
   </component>
@@ -278,7 +276,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555709723088" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555783809208" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/mysql-connector-java-8.0.15.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -582,11 +580,18 @@
       <option name="project" value="LOCAL" />
       <updated>1555782977434</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="buy/sell null pointer">
+      <created>1555783820050</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1555783820050</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33930000" />
+    <option name="totallyTimeSpent" value="34230000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -838,8 +843,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/code/View/MainFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="44" column="44" lean-forward="true" selection-start-line="44" selection-start-column="44" selection-end-line="44" selection-end-column="44" />
+        <state relative-caret-position="340">
+          <caret line="55" column="4" selection-start-line="55" selection-start-column="4" selection-end-line="55" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
