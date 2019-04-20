@@ -44,6 +44,8 @@ public class MainFrame extends JFrame implements ActionListener {
 
   /**
    * Constructor. Instantiates navigation panel and content panels. Adds panels to this frame.
+   *
+   * @param user User of the application
    */
   public MainFrame(User user) {
     this.user = user;
@@ -104,7 +106,8 @@ public class MainFrame extends JFrame implements ActionListener {
   }
 
   /**
-   * TODO
+   * Performs appropriate action based on which button in navigation bar is pressed. Updates
+   * current content panel shown. Calls setBackButton() to update its enablement.
    */
   @Override
   public void actionPerformed(ActionEvent e) {
@@ -115,7 +118,7 @@ public class MainFrame extends JFrame implements ActionListener {
       /*
       - if in BUY, go to BROWSE
       - if in SELL, go to PORTFOLIO
-      - if in SETTINGS, BROWSE TODO change to something other than BROWSE?
+      - if in SETTINGS, BROWSE
        */
       if (this.curPanel == this.buyPanel || this.curPanel == this.settingsPanel) {
         cl.show(this.mainPanel, this.BROWSE);
@@ -158,6 +161,11 @@ public class MainFrame extends JFrame implements ActionListener {
     }
   }
 
+  /**
+   * Launches new BuyPanel for given song.
+   *
+   * @param song song to be purchased
+   */
   protected void launchBuyPanel(Song song) {
     CardLayout cl = (CardLayout) this.mainPanel.getLayout();
     this.buyPanel = new BuyPanel(this, song);
@@ -165,6 +173,11 @@ public class MainFrame extends JFrame implements ActionListener {
     this.curPanel = this.buyPanel;
   }
 
+  /**
+   * Laucnhes new SellPanel for given song.
+   *
+   * @param song song to be sold
+   */
   protected void launchSellPanel(Song song) {
     CardLayout cl = (CardLayout) this.mainPanel.getLayout();
     this.sellPanel = new SellPanel(this, song);

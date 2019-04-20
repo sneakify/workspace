@@ -49,7 +49,7 @@ class PortfolioPanel extends ContentPanel implements ActionListener {
         this.add(tableTitle, BorderLayout.CENTER);
         String[] columnNames = {"Song", "# Shares", "Daily Plays", "Stock Price", "% Change"};
 
-        // custom table model
+        // custom table model to make cells uneditable to user
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -124,6 +124,7 @@ class PortfolioPanel extends ContentPanel implements ActionListener {
     }
 
     private void populateTable(HashMap<Song, Integer> hm) {
+        this.songButtons = new HashMap<JButton, Song>();
         this.stocks.removeAll();
         ArrayList<Song> songs = new ArrayList<>(hm.keySet());
         for (int row = 0; row < songs.size(); row++) {
