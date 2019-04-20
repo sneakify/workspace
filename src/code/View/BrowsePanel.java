@@ -21,8 +21,8 @@ import code.Model.Song;
 class BrowsePanel extends ContentPanel implements ActionListener, MouseListener {
   // chart to display as table
   private JTable chart;
-  // coordinate of each song title in table
-  private HashMap<Point, Song> pointToSong;
+  // row of each song title in table
+  private HashMap<Integer, Song> rowToSong;
 
   // list of all songs currently in U.S. Top 50
   ArrayList<Song> songs;
@@ -139,14 +139,14 @@ class BrowsePanel extends ContentPanel implements ActionListener, MouseListener 
    * @param list list of songs to display
    */
   private void populateChart(ArrayList<Song> list) {
-    this.pointToSong = new HashMap<Point, Song>();
+    this.rowToSong = new HashMap<Integer, Song>();
     this.chart.removeAll();
     for (int row = 0; row < list.size(); row++) {
       Song song = list.get(row);
       for (int col = 0; col <= 4; col++) {
         if (col == 0) { // clickable song title
           this.chart.setValueAt(song.getTitle(), row, col);
-          this.pointToSong.put(new Point(row, col), song);
+          this.rowToSong.put(row, song);
         } else if (col == 1) { // artist
           this.chart.setValueAt(dbUtils.song_artist(song), row, col);
         } else if (col == 2) { // daily plays
@@ -228,7 +228,7 @@ class BrowsePanel extends ContentPanel implements ActionListener, MouseListener 
     int col = source.getSelectedColumn();
     if (col == 0) {
       // clicked a song -> launch a Buy Panel for this song
-      this.mainFrame.launchBuyPanel(this.pointToSong.get(new Point(row, col)));
+      this.mainFrame.launchBuyPanel(this.rowToSong.get(row));
     }
   }
 
