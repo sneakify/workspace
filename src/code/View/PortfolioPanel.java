@@ -33,7 +33,7 @@ class PortfolioPanel extends ContentPanel implements MouseListener {
     /**
      * Constructor. Places available funds and total shares info above table of stocks.
      *
-     * @param mainFrame referene to MainFrame used to launch Sell Panel when a song is clicked
+     * @param mainFrame reference to MainFrame used to launch Sell Panel when a song is clicked
      */
     PortfolioPanel(MainFrame mainFrame) {
         super(mainFrame);

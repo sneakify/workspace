@@ -8,15 +8,20 @@ import java.util.HashMap;
 import javax.swing.*;
 
 import code.Model.Song;
-import code.Model.User;
 
 /**
- * TODO
+ * Panel that allows user to sell some number of shares of  song. Launched from Portfolio Panel.
  */
 class SellPanel extends TransactionPanel implements ActionListener {
     JTextField sharesToSell = new JTextField();
     JButton sellButton = new JButton("Sell");
 
+    /**
+     * Constructor. In addition to song information, displays number of shares owned of this.song.
+     *
+     * @param mainFrame reference to MainFrame
+     * @param song song to be sold
+     */
     SellPanel(MainFrame mainFrame, Song song) {
         super(mainFrame, song);
 
@@ -32,6 +37,10 @@ class SellPanel extends TransactionPanel implements ActionListener {
         this.makeSellSubPanel();
     }
 
+    /**
+     * Sub-panel that displays labels, input field for number of shares, total earnings, and sell
+     * button.
+     */
     private void makeSellSubPanel() {
         // make panel and constraints
         JPanel sellSubPanel = new JPanel(new GridBagLayout());
@@ -66,6 +75,9 @@ class SellPanel extends TransactionPanel implements ActionListener {
         sellSubPanel.add(this.sellButton, constraints);
     }
 
+    /**
+     * Attempts to make sale if Sell Button is clicked. Displays popup error window otherwise.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.sellButton) {
@@ -77,6 +89,10 @@ class SellPanel extends TransactionPanel implements ActionListener {
         }
     }
 
+    /**
+     * Attempts to parse input field.
+     * @return 0 or valid number
+     */
     private int parseTextField() {
         int i = 0;
         try {

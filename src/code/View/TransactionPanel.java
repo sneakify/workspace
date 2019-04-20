@@ -8,12 +8,18 @@ import code.Model.Song;
 import code.Model.User;
 
 /**
- * TODO
+ * Represents a panel that allows the user to make a transaction (either buy or sell shares)
  */
 abstract class TransactionPanel extends ContentPanel {
   User user;
   Song song;
 
+  /**
+   * Constructor. Initializes this.mainFrame with given MainFrame.
+   *
+   * @param mainFrame reference to MainFrame used to launch buy/sell panels
+   * @param song song to be purchased/sold
+   */
   TransactionPanel(MainFrame mainFrame, Song song) {
     super(mainFrame);
     this.user = this.mainFrame.user;
@@ -41,13 +47,13 @@ abstract class TransactionPanel extends ContentPanel {
     JLabel titleLabel = new JLabel("Title: " + this.song.getTitle());
     titleLabel.setFont(this.labelFont);
     // artist
-    JLabel artistLabel = new JLabel("Artist: " + this.song.getAlbumID()); // fixme use appropriate method
+    JLabel artistLabel = new JLabel("Artist: " + this.dbUtils.song_artist(this.song));
     artistLabel.setFont(this.labelFont);
     // album
-    JLabel albumLabel = new JLabel("Album: " + this.song.getArtistID()); // fixme use appropriate method
+    JLabel albumLabel = new JLabel("Album: " + this.dbUtils.song_album(this.song));
     albumLabel.setFont(this.labelFont);
     // current stock price
-    JLabel currentStockPriceLabel = new JLabel("Current Stock Price: $" + this.song.getSpotifyID()); // fixme use appropriate method
+    JLabel currentStockPriceLabel = new JLabel("Current Stock Price: $" + this.song.getSongValue());
     currentStockPriceLabel.setFont(this.labelFont);
 
     // add labels to info panel

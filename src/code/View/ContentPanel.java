@@ -4,7 +4,6 @@ import java.awt.*;
 import javax.swing.*;
 
 import code.Model.DBUtils;
-import code.Model.Login;
 
 /**
  * Represents a panel that will be placed below the navigation bar.

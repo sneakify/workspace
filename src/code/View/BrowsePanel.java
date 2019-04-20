@@ -10,7 +10,6 @@ import java.util.HashMap;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
 import code.Model.Song;
 
@@ -21,6 +20,7 @@ import code.Model.Song;
 class BrowsePanel extends ContentPanel implements ActionListener, MouseListener {
   // chart to display as table
   private JTable chart;
+  private DefaultTableModel tableModel;
   // row of each song title in table
   private HashMap<Integer, Song> rowToSong;
 
@@ -39,7 +39,7 @@ class BrowsePanel extends ContentPanel implements ActionListener, MouseListener 
    * Constructor. Places filtering options above U.S. Top 50 chart and updates list of selectable
    * genres based on current top 50.
    *
-   * @param mainFrame referene to MainFrame used to launch Buy Panel when a song is clicked
+   * @param mainFrame reference to MainFrame used to launch Buy Panel when a song is clicked
    */
   BrowsePanel(MainFrame mainFrame) {
     super(mainFrame);
@@ -54,7 +54,7 @@ class BrowsePanel extends ContentPanel implements ActionListener, MouseListener 
     String[] columnNames = {"Song", "Artist", "Daily Plays", "Stock Price", "% Change"}; // TODO % change if time permits (unable to figure it out)
 
     // custom table model to make cells uneditable to user
-    DefaultTableModel tableModel = new DefaultTableModel(new Object[50][5], columnNames) {
+    this.tableModel = new DefaultTableModel(new Object[50][5], columnNames) {
       @Override
       public boolean isCellEditable(int row, int column) {
         return false;
@@ -140,7 +140,7 @@ class BrowsePanel extends ContentPanel implements ActionListener, MouseListener 
    */
   private void populateChart(ArrayList<Song> list) {
     this.rowToSong = new HashMap<Integer, Song>();
-    this.chart.removeAll();
+    this.chart = new JTable(this.tableModel);
     for (int row = 0; row < list.size(); row++) {
       Song song = list.get(row);
       for (int col = 0; col <= 4; col++) {
@@ -207,7 +207,7 @@ class BrowsePanel extends ContentPanel implements ActionListener, MouseListener 
    * @param s substring to find in song title
    * @param a substring to find in artist name
    * @param g genre to match
-   * @return list of songs filtered by given paramaters
+   * @return list of songs filtered by given parameters
    */
   private ArrayList<Song> filter(String s, String a, String g) {
     ArrayList<Song> filtered = new ArrayList<Song>();

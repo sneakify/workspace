@@ -9,18 +9,27 @@ import javax.swing.*;
 import code.Model.Song;
 
 /**
- * TODO
+ * Panel that allows user to purchase some number of shares of  song. Launched from Browse Panel.
  */
 class BuyPanel extends TransactionPanel implements ActionListener {
     JTextField sharesToBuy = new JTextField();
     JButton buyButton = new JButton("Buy");
 
+    /**
+     * Constructor.
+     *
+     * @param mainFrame reference to MainFrame
+     * @param song song to be purchased
+     */
     BuyPanel(MainFrame mainFrame, Song song) {
         super(mainFrame, song);
 
         this.makeBuySubPanel();
     }
 
+    /**
+     * Sub-panel that displays labels, input field for number of shares, total cost, and buy button.
+     */
     private void makeBuySubPanel() {
         // make panel and constraints
         JPanel buySubPanel = new JPanel(new GridBagLayout());
@@ -55,6 +64,9 @@ class BuyPanel extends TransactionPanel implements ActionListener {
         buySubPanel.add(this.buyButton, constraints);
     }
 
+    /**
+     * Attempts to make purchase if Buy Button is clicked. Displays popup error window otherwise.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.buyButton) {
@@ -66,6 +78,10 @@ class BuyPanel extends TransactionPanel implements ActionListener {
         }
     }
 
+    /**
+     * Attempts to parse input field.
+     * @return 0 or valid number
+     */
     private int parseTextField() {
         int i = 0;
         try {
