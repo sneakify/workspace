@@ -21,8 +21,7 @@ import code.Model.Song;
 class BrowsePanel extends ContentPanel implements ActionListener, MouseListener {
   // chart to display as table
   private JTable chart;
-  // buttons for each song
-  private HashMap<JButton, Song> songButtons;
+  // coordinate of each song title in table
   private HashMap<Point, Song> pointToSong;
 
   // list of all songs currently in U.S. Top 50
@@ -140,17 +139,12 @@ class BrowsePanel extends ContentPanel implements ActionListener, MouseListener 
    * @param list list of songs to display
    */
   private void populateChart(ArrayList<Song> list) {
-//    this.songButtons = new HashMap<JButton, Song>();
     this.pointToSong = new HashMap<Point, Song>();
     this.chart.removeAll();
     for (int row = 0; row < list.size(); row++) {
       Song song = list.get(row);
       for (int col = 0; col <= 4; col++) {
         if (col == 0) { // clickable song title
-//          JButton button = new JButton(song.getTitle());
-//          button.addActionListener(this);
-//          this.chart.setValueAt(button, row, col); // fixme THIS LINE
-//          this.songButtons.put(button, song);
           this.chart.setValueAt(song.getTitle(), row, col);
           this.pointToSong.put(new Point(row, col), song);
         } else if (col == 1) { // artist
@@ -204,10 +198,6 @@ class BrowsePanel extends ContentPanel implements ActionListener, MouseListener 
       this.artistFilter.setText("");
       this.genreFilter.setSelectedIndex(0);
     }
-//    else if (this.songButtons.containsKey(e.getSource())) {
-//      // clicked a song -> launch a Buy Panel for this song
-//      this.mainFrame.launchBuyPanel(this.songButtons.get(e.getSource()));
-//    }
   }
 
   /**
@@ -238,7 +228,7 @@ class BrowsePanel extends ContentPanel implements ActionListener, MouseListener 
     int col = source.getSelectedColumn();
     if (col == 0) {
       // clicked a song -> launch a Buy Panel for this song
-      this.mainFrame.launchBuyPanel(this.songButtons.get(e.getSource()));
+      this.mainFrame.launchBuyPanel(this.pointToSong.get(new Point(row, col)));
     }
   }
 
@@ -253,22 +243,4 @@ class BrowsePanel extends ContentPanel implements ActionListener, MouseListener 
 
   @Override
   public void mouseExited(MouseEvent e) { }
-
-  private class ButtonRenderer extends JButton implements TableCellRenderer {
-
-    public ButtonRenderer() {
-      this.setOpaque(true);
-    }
-
-    @Override
-    public Component getTableCellRendererComponent(JTable table, Object obj, boolean selected, boolean focued, int rowm, int col) {
-      if (obj == null) {
-        setText("");
-      } else {
-        setText(obj.toString());
-      }
-      return this;
-    }
-
-  }
 }

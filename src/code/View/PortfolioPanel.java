@@ -1,8 +1,8 @@
 package code.View;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -15,11 +15,11 @@ import code.Model.Song;
  * Content Panel that allows user to view their available funds, total number of shares owned,
  * and each owned stock. Clicking any one song launches Sell Panel.
  */
-class PortfolioPanel extends ContentPanel implements ActionListener {
+class PortfolioPanel extends ContentPanel implements MouseListener {
     // chart to display as table
     private JTable stocks;
-    // buttons for each song
-    private HashMap<JButton, Song> songButtons;
+  // coordinate of each song title in table
+  private HashMap<Point, Song> pointToSong;
 
     // user's portfolio
     HashMap<Song, Integer> portfolio;
@@ -104,7 +104,7 @@ class PortfolioPanel extends ContentPanel implements ActionListener {
     }
 
     /**
-     *
+     * TODO
      */
     private void updateTotals() {
         this.totalFunds = this.mainFrame.user.getPurchasing_power();
@@ -129,17 +129,15 @@ class PortfolioPanel extends ContentPanel implements ActionListener {
     }
 
     private void populateTable(HashMap<Song, Integer> hm) {
-        this.songButtons = new HashMap<JButton, Song>();
+        this.pointToSong = new HashMap<Point, Song>();
         this.stocks.removeAll();
         ArrayList<Song> songs = new ArrayList<>(hm.keySet());
         for (int row = 0; row < songs.size(); row++) {
             Song song = songs.get(row);
             for (int col = 0; col <= 4; col++) {
                 if (col == 0) { // clickable song title
-                    JButton button = new JButton(song.getTitle());
-                    button.addActionListener(this);
-                    this.stocks.setValueAt(button, row, col);
-                    this.songButtons.put(button, song);
+                   this.stocks.setValueAt(song.getTitle(), row, col);
+                   this.pointToSong.put(new Point(row, col), song);
                 } else if (col == 1) { // # shares
                     this.stocks.setValueAt(hm.get(song), row, col);
                 } else if (col == 2) { // daily plays
@@ -149,13 +147,38 @@ class PortfolioPanel extends ContentPanel implements ActionListener {
                 } else if (col == 4) { } // % change // TODO % change if time permits (unable to figure it out)
             }
         }
+        this.stocks.getColumnModel().getColumn(0).setCellRenderer(new ButtonRenderer());
+        this.stocks.addMouseListener(this);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (this.songButtons.containsKey(e.getSource())) {
-            this.mainFrame.launchSellPanel(this.songButtons.get(e.getSource()));
-        }
-        this.updateTotals();
+  @Override
+  public void mouseClicked(MouseEvent e) {
+    JTable source = (JTable) e.getSource();
+    int row = source.getSelectedRow();
+    int col = source.getSelectedColumn();
+    if (col == 0) {
+      // clicked a song -> launch a Buy Panel for this song
+      this.mainFrame.launchBuyPanel(this.pointToSong.get(new Point(row, col)));
     }
+  }
+
+  @Override
+  public void mousePressed(MouseEvent e) {
+
+  }
+
+  @Override
+  public void mouseReleased(MouseEvent e) {
+
+  }
+
+  @Override
+  public void mouseEntered(MouseEvent e) {
+
+  }
+
+  @Override
+  public void mouseExited(MouseEvent e) {
+
+  }
 }
