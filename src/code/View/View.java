@@ -1,18 +1,12 @@
 package code.View;
 
+import code.Model.Model;
+
 /**
- * TODO
+ * Launches the application's user interface, given a model.
  */
 public interface View {
-  /**
-   * Once a view is constructed, this method is called to make the view visible to the user.
-   */
-  void makeVisible();
-
-  /**
-   * Repaints the last updated frame.
-   */
-  void refresh();
-
-
+  static void launchUI(Model model) {
+    MainFrame mainFrame = new MainFrame(model);
+  }
 }

@@ -1,5 +1,11 @@
 package code.Model;
 
+/**
+ * This is the Song class, we have Getters and Setters. Convenience Constructors too. Most notably,
+ * we overload equals (and Hashcode) in order to get comparisons of Songs in the View to work properly:
+ *         (Songs are our key in a hashmap, to get a Value of that hashmap properly,
+ *          we need Songs with the same SpotifyID to 'equal' each other)
+ */
 public class Song {
 
     private String spotifyID;
@@ -40,6 +46,27 @@ public class Song {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Song)) {
+            return false;
+        } else {
+            Song song = (Song) o;
+            return song.spotifyID.equals(this.spotifyID);
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        int code = 0;
+        try {
+            code = Integer.parseInt(this.spotifyID);
+        } catch (NumberFormatException e){
+            System.err.println("Invalid Spotify ID ::" + e.getMessage());
+        }
+        return code;
+    }
+
     public String getSpotifyID() {
         return spotifyID;
     }
@@ -49,7 +76,6 @@ public class Song {
     }
 
     public String getTitle() {
-        System.out.println(this.title);
         return title;
     }
 
@@ -81,27 +107,4 @@ public class Song {
         this.albumID = albumID;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof Song)) {
-            return false;
-        } else {
-            Song song = (Song) o;
-            return song.spotifyID.equals(this.spotifyID);
-        }
-    }
-
-    @Override
-    public int hashCode() {
-        int code = 0;
-        try {
-            code = Integer.parseInt(this.spotifyID);
-        } catch (NumberFormatException e){
-            System.err.println("Invalid Spotify ID ::" + e.getMessage());
-        }
-        return code;
-    }
-
-
-    
 }

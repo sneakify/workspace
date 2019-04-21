@@ -1,5 +1,8 @@
 package code.Model;
 
+/**
+ * This is the User Class. We have Getters and Setters and a ToString. Enjoy.
+ */
 public class User {
 
     private int userID;

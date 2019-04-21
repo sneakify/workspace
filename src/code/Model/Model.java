@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This is our Model class, which implements DatabaseAPI. It has sort of become a lot of things, but we store
+ * an instance of DBUtils, a User (useful for the View, as the View operates on the assumption of a single user at a time).
+ * There's also a Hashmap of all the Songs mapped to an Integer representing their
+ */
 public class Model implements DatabaseAPI {
     public DBUtils dbu;
     public User myUser;
@@ -111,15 +116,15 @@ public class Model implements DatabaseAPI {
                 String spotify_id = rs.getString("spotify_id");
                 String title = rs.getString("title");
                 String artist_id = rs.getString("artist_id");
+                int song_value = rs.getInt("song_value");
                 String album_id = rs.getString("album_id");
-                String song_value = rs.getString("song_value");
 
-                Song newSong = new Song(
-                        rs.getString("spotify_id"),
-                        rs.getString("title"),
-                        rs.getString("artist_id"),
-                        rs.getInt("song_value"), // rank
-                        rs.getString("song_value"));
+                Song newSong  = new Song(
+                        spotify_id,
+                        title,
+                        artist_id,
+                        song_value,
+                        album_id);
 
                 // add stuff
                 mylist.add(newSong);
@@ -133,6 +138,45 @@ public class Model implements DatabaseAPI {
             System.exit(1);
         }
         return mylist;
+    }
+
+    /**
+     * Returns the Song as stored in the mysql, given a spotify_id String.
+     * @param spot_id the String representing the Song's spotify_id
+     * @return the Song object
+     */
+    public Song getThisSongPlease(String spot_id) {
+        Song mySong = null;
+        try {
+            Connection conn = dbu.getConnection();
+            Statement st = conn.createStatement();
+            String sqlGet = "SELECT * FROM song where spotify_id = " + spot_id + ";";
+
+            ResultSet rs = st.executeQuery(sqlGet);
+
+            while (rs.next()) {
+                String spotify_id = rs.getString("spotify_id");
+                String title = rs.getString("title");
+                String artist_id = rs.getString("artist_id");
+                int song_value = rs.getInt("song_value");
+                String album_id = rs.getString("album_id");
+
+                mySong = new Song(
+                        spotify_id,
+                        title,
+                        artist_id,
+                        song_value,
+                        album_id);
+            }
+
+            rs.close();
+            st.close();
+
+        } catch(SQLException e) {
+            System.err.println(e.getMessage());
+            System.exit(1);
+        }
+        return mySong;
     }
 
     /**
@@ -395,6 +439,13 @@ public class Model implements DatabaseAPI {
     }
 
     // returns given user's current portfolio
+
+    /**
+     * Returns the portfolio of the given User in the form of a HashMap of Songs to Integer, The Integer represents the
+     * Number of shares for that Song (for that user).
+     * @param u the given user, active-buyer-person
+     * @return The Hashmap of Song to number of shares
+     */
     public HashMap<Song, Integer> user_port(User u) {
 
         HashMap<Song, Integer> h = new HashMap<Song, Integer>();

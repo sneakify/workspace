@@ -15,7 +15,7 @@ import code.Model.User;
 /**
  * Overall frame that contains a navigation panel and displays the appropriate content panel.
  */
-public class MainFrame extends JFrame implements ActionListener {
+class MainFrame extends JFrame implements ActionListener {
   User user;
   Model model;
 
