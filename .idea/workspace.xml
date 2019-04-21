@@ -3,12 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="c821b5a8-9e86-4842-b176-547e131b5500" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/code/Controller/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/Controller/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/code/Model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/Model/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/code/Model/Song.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/Model/Song.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/code/Model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/Model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/code/View/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/View/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/code/View/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/View/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/code/Model/DBUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/Model/DBUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/code/Model/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/code/Model/Login.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -73,11 +69,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/code/Model/Model.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-246">
-              <caret line="446" column="54" selection-start-line="446" selection-start-column="54" selection-end-line="446" selection-end-column="54" />
+            <state relative-caret-position="4126">
+              <caret line="445" column="51" lean-forward="true" selection-start-line="445" selection-start-column="51" selection-end-line="445" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/code/Model/Login.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
             </state>
           </provider>
         </entry>
@@ -143,14 +148,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/code/Model/DBUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="77">
-              <caret line="106" column="43" selection-start-line="106" selection-start-column="43" selection-end-line="106" selection-end-column="43" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="340">
+              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
             </state>
           </provider>
         </entry>
@@ -167,7 +169,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>labelfont</find>
       <find>authentica</find>
       <find>existingS</find>
       <find>insertU</find>
@@ -197,6 +198,7 @@
       <find>funds</find>
       <find>existingSo</find>
       <find>user_port</find>
+      <find>System.out</find>
     </findStrings>
     <replaceStrings>
       <replace>this.labelFont</replace>
@@ -233,7 +235,6 @@
         <option value="$PROJECT_DIR$/src/code/Model/ModelSQLInterface.java" />
         <option value="$PROJECT_DIR$/src/BrowsePanel.java" />
         <option value="$PROJECT_DIR$/src/code/Model/DatabaseMySQL.java" />
-        <option value="$PROJECT_DIR$/src/code/Model/DBUtils.java" />
         <option value="$PROJECT_DIR$/src/code/Model/DatabaseAPI.java" />
         <option value="$PROJECT_DIR$/src/code/View/ContentPanel.java" />
         <option value="$PROJECT_DIR$/src/code/View/SettingsPanel.java" />
@@ -251,6 +252,8 @@
         <option value="$PROJECT_DIR$/src/code/Controller/Main.java" />
         <option value="$PROJECT_DIR$/src/code/Model/Song.java" />
         <option value="$PROJECT_DIR$/src/code/Model/Model.java" />
+        <option value="$PROJECT_DIR$/src/code/Model/Login.java" />
+        <option value="$PROJECT_DIR$/src/code/Model/DBUtils.java" />
       </list>
     </option>
   </component>
@@ -381,7 +384,7 @@
       <workItem from="1555696331118" duration="3693000" />
       <workItem from="1555711300391" duration="83000" />
       <workItem from="1555784259055" duration="5899000" />
-      <workItem from="1555860452151" duration="14584000" />
+      <workItem from="1555860452151" duration="15444000" />
     </task>
     <task id="LOCAL-00001" summary="added some boilerplate">
       <created>1555001331389</created>
@@ -558,11 +561,18 @@
       <option name="project" value="LOCAL" />
       <updated>1555871932229</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="made prettier">
+      <created>1555875062794</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1555875062794</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54713000" />
+    <option name="totallyTimeSpent" value="55573000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -636,7 +646,8 @@
     <MESSAGE value="some progess" />
     <MESSAGE value="stuff" />
     <MESSAGE value="made pretty" />
-    <option name="LAST_COMMIT_MESSAGE" value="made pretty" />
+    <MESSAGE value="made prettier" />
+    <option name="LAST_COMMIT_MESSAGE" value="made prettier" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="antWorkspaceConfiguration">
@@ -672,13 +683,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/code/Model/DatabaseMySQL.java" />
-    <entry file="file://$PROJECT_DIR$/src/code/Model/Login.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/code/View/ContentPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -789,16 +793,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/code/Model/DBUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="77">
-          <caret line="106" column="43" selection-start-line="106" selection-start-column="43" selection-end-line="106" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/code/Model/DatabaseAPI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -891,8 +885,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/code/Model/Model.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-246">
-          <caret line="446" column="54" selection-start-line="446" selection-start-column="54" selection-end-line="446" selection-end-column="54" />
+        <state relative-caret-position="4126">
+          <caret line="445" column="51" lean-forward="true" selection-start-line="445" selection-start-column="51" selection-end-line="445" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/code/Model/Login.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/code/Model/DBUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
         </state>
       </provider>
     </entry>

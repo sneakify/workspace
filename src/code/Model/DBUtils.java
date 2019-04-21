@@ -1,9 +1,17 @@
 package code.Model;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
 
+/**
+ * This class is a utility class which we use mainly to deal with connecting to the MySQL database.
+ * We have a Constructor, a method ConnectedHuh that was mostly useful for debugging purposes, ways to insert one record
+ * and also open and close the connection.
+ *
+ * NOTE - DEPENDENCY - Need to have set up the mysql-connector dependency in
+ *     Project Structure
+ *       for Reference:
+ *       https://stackoverflow.com/questions/30651830/use-jdbc-mysql-connector-in-intellij-idea
+ */
 public class DBUtils {
 
 private String url;
@@ -11,6 +19,12 @@ private String url;
   private String password;
   private Connection con = null;
 
+  /**
+   * Constructor
+   * @param url String, a url we are connecting to
+   * @param user String, the MySQL username we are using
+   * @param password String, the MySQL user's password
+   */
   public DBUtils(String url, String user, String password) {
     this.url = url;
     this.user = user;
@@ -18,8 +32,8 @@ private String url;
   }
 
   /**
-   * Temp fn, want to know if connected
-   * @return
+   * Returns a String representing whether we are connected. Should always be a Yes if the Constructor is set up properly.
+   * @return a string, representing 'yea' or 'naw'
    */
   public String connectedHuh() {
     if (this.user == null || this.password == null || this.url == null) {
@@ -29,11 +43,10 @@ private String url;
     }
   }
 
-    // TODO - for this to work, need to set up the mysql-connector dependency in
-    // Project Structure
-    // for Reference:
-    // https://stackoverflow.com/questions/30651830/use-jdbc-mysql-connector-in-intellij-idea
-
+  /**
+   * Gets a connection!
+   * @return the connection
+   */
   public Connection getConnection() {
     if (con == null) {
       try {
@@ -44,11 +57,12 @@ private String url;
         System.exit(1);
       }
     }
-
-    System.out.println("GetConnectionGettingGot::" + con.toString());
     return con;
   }
 
+  /**
+   * Closes the Connection!
+   */
   public void closeConnection() {
     try {
       if (con != null) {
@@ -58,12 +72,16 @@ private String url;
       System.err.println("closeConnection" + e.getMessage());
       e.printStackTrace();
     } finally {
-      System.out.println("Closed that connedtion yo. Or it Was Null already");
+      System.out.println("Closed that connection yo");
     }
   }
 
+  /**
+   * Inserts one Record, given an insert query-String
+   * @param insertSQL the insert query-String
+   * @return the status (as int)
+   */
   public int insertOneRecord(String insertSQL) {
-    System.out.println("INSERT STATEMENT: " + insertSQL);
     int key = -1;
     try {
 
