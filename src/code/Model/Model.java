@@ -260,7 +260,14 @@ public class Model implements DatabaseAPI {
 
 
 
-    //inserts new user into database
+    /**
+     * inserts new user into database
+     * @param name
+     * @param username
+     * @param email
+     * @param password
+     * inserts a new row into the user table based off of the new user created
+     */
     public void new_user(String name, String username, String email, String password) {
         String sql = "INSERT INTO user Value (" + name + "," + username + "," + email + "," + password + ", CURDATE(), 5000)";
         try {
@@ -280,8 +287,14 @@ public class Model implements DatabaseAPI {
     }
 
 
-    // inserts purchases from users into database
-    @SuppressWarnings("Duplicates")
+    /**
+     * inserts purchases from users into database
+     * @param u, given user
+     * @param s, given song
+     * @param n, number of shares
+     * inserts into the buy table a new row that logs the info about the purchase made
+     */
+   
     public void buy_shares(User u, Song s, int n) {
         System.out.println("This is the thing" + u.toString() + s.toString() + String.valueOf(n));
 
@@ -306,7 +319,13 @@ public class Model implements DatabaseAPI {
         }
     }
 
-    // inserts sales from users into database
+    /**
+     * inserts sales from users into database
+     * @param u, given user
+     * @param s, given song
+     * @param n, number of shares
+     * inserts into the sell table a new row that logs the info about the sale
+     */
     public void sell_shares(User u, Song s, int n) {
         System.out.println("This is the thing" + u.toString() + s.toString() + String.valueOf(n));
 
@@ -331,7 +350,11 @@ public class Model implements DatabaseAPI {
         }
     }
 
-    // returns album name of given song
+    /**
+     *  returns album name of given song
+     * @param s, the given song
+     * @return the album of the song as a String
+     */
     public String song_album(Song s) {
 
         String value = null;
@@ -359,7 +382,11 @@ public class Model implements DatabaseAPI {
         return value;
     }
 
-    //returns artist name of given song
+    /**
+     *  returns artist name of given song
+     * @param s, the given song
+     * @return the artist of the song as a String
+     */
     public String song_artist(Song s) {
 
         String value = null;
@@ -385,6 +412,12 @@ public class Model implements DatabaseAPI {
     }
 
     // returns the past 7 days of the given song's history
+    /**
+     * Returns the song value history of the given Song in the form of a HashMap of String(date) to Integer, The Integer represents the
+     * song value for that date (for that user).
+     * @param s the given song
+     * @return The Hashmap of date to portfolio value
+     */
     public HashMap<String, Integer> song7(Song s) {
 
         HashMap<String, Integer> h = new HashMap<String, Integer>();
@@ -412,6 +445,12 @@ public class Model implements DatabaseAPI {
     }
 
     //returns the past 7 days of the given user's portfolio
+    /**
+     * Returns the portfolio value history of the given User in the form of a HashMap of String(date) to Integer, The Integer represents the
+     * portfolio value for that date (for that user).
+     * @param u the given user, active-buyer-person
+     * @return The Hashmap of date to portfolio value
+     */
     public HashMap<String, Integer> user7(User u) {
 
         HashMap<String, Integer> h = new HashMap<String, Integer>();
@@ -488,7 +527,11 @@ public class Model implements DatabaseAPI {
         return h;
     }
 
-    //returns the value of the given user's portfolio
+    /**
+     * returns the value of the given user's portfolio
+     * @param u, the given user
+     * @return the value of the given user's portfolio as an int
+     */
     public int port_value(User u) {
 
         Integer n = null;
@@ -529,7 +572,10 @@ public class Model implements DatabaseAPI {
         return n;
     }
 
-    //returns list of all songs
+    /**
+     * returns list of all songs
+     * @return an ArrayList that contains all songs
+     */
     public ArrayList<Song> all_songs() {
         ArrayList<Song> mylist = new ArrayList<Song>();
 
@@ -561,7 +607,11 @@ public class Model implements DatabaseAPI {
         return mylist;
     }
 
-    //returns the genre of the given song
+    /**
+     * returns the genre of the given song
+     * @param s, the given song object
+     * @return the genre of the song as a String
+     */
     public String song_genre(Song s) {
 
         String value = null;
@@ -589,7 +639,12 @@ public class Model implements DatabaseAPI {
     }
 
 
-    // updates the email and password of given user
+    /**
+     *  updates the email and password of given user
+     * @param u, given user
+     * @param email, the new email the user would like to use
+     * @param password, the new password the user wants
+     */
     public void update_user(User u, String email, String password) {
         String sql = "Update user " +
                 "Set email = "+ email+", password = "+password +
