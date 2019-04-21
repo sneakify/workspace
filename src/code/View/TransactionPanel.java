@@ -22,6 +22,7 @@ abstract class TransactionPanel extends ContentPanel {
    */
   TransactionPanel(MainFrame mainFrame, Song song) {
     super(mainFrame);
+    this.setLayout(new BorderLayout());
     this.user = this.mainFrame.user;
     this.song = song;
 
@@ -45,16 +46,16 @@ abstract class TransactionPanel extends ContentPanel {
     // labels
     // title
     JLabel titleLabel = new JLabel("Title: " + this.song.getTitle());
-    titleLabel.setFont(this.labelFont);
+    titleLabel.setFont(this.font);
     // artist
     JLabel artistLabel = new JLabel("Artist: " + this.mainFrame.model.song_artist(this.song));
-    artistLabel.setFont(this.labelFont);
+    artistLabel.setFont(this.font);
     // album
     JLabel albumLabel = new JLabel("Album: " + this.mainFrame.model.song_album(this.song));
-    albumLabel.setFont(this.labelFont);
+    albumLabel.setFont(this.font);
     // current stock price
     JLabel currentStockPriceLabel = new JLabel("Current Stock Price: $" + this.song.getSongValue());
-    currentStockPriceLabel.setFont(this.labelFont);
+    currentStockPriceLabel.setFont(this.font);
 
     // add labels to info panel
     constraints.gridx = 0;
@@ -64,6 +65,7 @@ abstract class TransactionPanel extends ContentPanel {
     infoPanel.add(artistLabel, constraints);
     constraints.gridy++;
     infoPanel.add(albumLabel, constraints);
+    constraints.gridy++;
     infoPanel.add(currentStockPriceLabel, constraints);
   }
 }

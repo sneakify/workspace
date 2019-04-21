@@ -3,6 +3,8 @@ package code.View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.*;
 
@@ -13,6 +15,7 @@ import code.Model.Song;
  */
 public class BuyPanel extends TransactionPanel implements ActionListener {
     JTextField sharesToBuy = new JTextField();
+    JLabel costLabel;
     JButton buyButton = new JButton("Buy");
 
     /**
@@ -23,7 +26,6 @@ public class BuyPanel extends TransactionPanel implements ActionListener {
      */
     public BuyPanel(MainFrame mainFrame, Song song) {
         super(mainFrame, song);
-
         this.makeBuySubPanel();
     }
 
@@ -43,13 +45,34 @@ public class BuyPanel extends TransactionPanel implements ActionListener {
         JLabel buyLabel = new JLabel("Buy");
         buyLabel.setFont(this.labelFont);
 
-        this.sharesToBuy.setText("# shares");
+        // user's purchasing power
+        JLabel purchasingPower = new JLabel("Your Purchasing Power: $" + this.user.getPurchasing_power());
+        purchasingPower.setFont(this.labelFont);
+
+        this.sharesToBuy.setText("enter # shares to purchase");
+        this.sharesToBuy.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                int parsed = parseTextField();
+                updateTotalCost(parsed);
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                this.keyTyped(e);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
 
         int sharesToBuyInt = this.parseTextField();
 
-        double cost = (double) sharesToBuyInt * this.song.getSongValue();
-        JLabel costLabel = new JLabel("Total Cost: $" + cost);
-        costLabel.setFont(this.labelFont);
+        this.costLabel = new JLabel();
+        this.costLabel.setFont(this.labelFont);
+        this.updateTotalCost(sharesToBuyInt);
 
         this.buyButton.addActionListener(this);
 
@@ -57,9 +80,11 @@ public class BuyPanel extends TransactionPanel implements ActionListener {
         constraints.gridy = 0;
         buySubPanel.add(buyLabel, constraints);
         constraints.gridy++;
+        buySubPanel.add(purchasingPower, constraints);
+        constraints.gridy++;
         buySubPanel.add(this.sharesToBuy, constraints);
         constraints.gridx++;
-        buySubPanel.add(costLabel, constraints);
+        buySubPanel.add(this.costLabel, constraints);
         constraints.gridx++;
         buySubPanel.add(this.buyButton, constraints);
     }
@@ -79,6 +104,16 @@ public class BuyPanel extends TransactionPanel implements ActionListener {
     }
 
     /**
+     * Updates label showing total cost of purchase.
+     *
+     * @param numShares number of shares to purchase
+     */
+    private void updateTotalCost(int numShares) {
+        double cost = (double) numShares * this.song.getSongValue();
+        this.costLabel.setText("  Total Cost: $" + cost + "  ");
+    }
+
+    /**
      * Attempts to parse input field.
      * @return 0 or valid number
      */
@@ -87,6 +122,6 @@ public class BuyPanel extends TransactionPanel implements ActionListener {
         try {
             i = Integer.parseInt(this.sharesToBuy.getText());
         } catch (NumberFormatException e) { }
-        return 0;
+        return i;
     }
 }

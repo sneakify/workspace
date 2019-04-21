@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import code.Model.Song;
 
 /**
- * Content Panel that allows user to view their available funds, total number of shares owned,
+ * Content Panel that allows user to view their portfolio vlue, total number of shares owned,
  * and each owned stock. Clicking any one song launches Sell Panel.
  */
 class PortfolioPanel extends ContentPanel implements MouseListener {
@@ -26,14 +26,14 @@ class PortfolioPanel extends ContentPanel implements MouseListener {
     // user's portfolio
     HashMap<Song, Integer> portfolio;
 
-    private double totalFunds;
+    private int portfolioValue;
     private int totalShares;
 
-    private JLabel totalFundsLabel = new JLabel();
+    private JLabel portfolioValueLabel = new JLabel();
     private JLabel totalSharesLabel = new JLabel();
 
     /**
-     * Constructor. Places available funds and total shares info above table of stocks.
+     * Constructor. Places portfolio value and total shares info above table of stocks.
      *
      * @param mainFrame reference to MainFrame used to launch Sell Panel when a song is clicked
      */
@@ -68,7 +68,7 @@ class PortfolioPanel extends ContentPanel implements MouseListener {
     }
 
     /**
-     * Makes sub-panel to display user's total funds available and total number of shares owned.
+     * Makes sub-panel to display user's portfolio value available and total number of shares owned.
      */
     private void makeTotalsPanel() {
         // make panel and constraints
@@ -81,27 +81,18 @@ class PortfolioPanel extends ContentPanel implements MouseListener {
         this.add(totalsPanelContainer, BorderLayout.NORTH);
 
         // labels
-        // total funds
-        JLabel fundsLabel = new JLabel("Total Funds: ");
-        fundsLabel.setFont(this.labelFont);
-        this.totalFundsLabel.setFont(this.labelFont);
-        // total # shares
-        JLabel sharesLabel = new JLabel("Total Shares: ");
-        sharesLabel.setFont(this.labelFont);
+        // portfolio value
+        this.updateTotalLabels();
+        this.portfolioValueLabel.setFont(this.labelFont);
         this.totalSharesLabel.setFont(this.labelFont);
 
         // add components to totals panel
-        // total funds
+        // portfolio value
         constraints.gridx = 0;
         constraints.gridy = 0;
-        totalsPanel.add(fundsLabel, constraints);
-        constraints.gridx++;
-        totalsPanel.add(this.totalFundsLabel, constraints);
+        totalsPanel.add(this.portfolioValueLabel, constraints);
         // total # shares
-        constraints.gridx = 0;
         constraints.gridy++;
-        totalsPanel.add(sharesLabel, constraints);
-        constraints.gridx++;
         totalsPanel.add(this.totalSharesLabel, constraints);
     }
 
@@ -109,17 +100,17 @@ class PortfolioPanel extends ContentPanel implements MouseListener {
      * Retrieves updated purchasing power and total number of shares for this user from database.
      */
     private void updateTotals() {
-        this.totalFunds = this.mainFrame.user.getPurchasing_power();
+        this.portfolioValue = this.mainFrame.model.port_value(this.mainFrame.user);
         this.totalShares = this.calculateTotalShares();
     }
 
     /**
-     * Updates label displaying user's total funds available and total number of shares owned.
+     * Updates label displaying user's portfolio value and total number of shares owned.
      */
     private void updateTotalLabels() {
         this.updateTotals();
-        this.totalFundsLabel.setText("$" + this.totalFunds);
-        this.totalSharesLabel.setText(this.totalShares + " shares");
+        this.portfolioValueLabel.setText("Your Portfolio Value: $" + this.portfolioValue);
+        this.totalSharesLabel.setText("Total Shares: " + this.totalShares + " shares");
     }
 
     private int calculateTotalShares() {

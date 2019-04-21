@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import code.Model.DBUtils;
 import code.Model.Model;
 import code.Model.Song;
 import code.Model.User;

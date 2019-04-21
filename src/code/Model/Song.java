@@ -80,5 +80,28 @@ public class Song {
     public void setAlbumID(String albumID) {
         this.albumID = albumID;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Song)) {
+            return false;
+        } else {
+            Song song = (Song) o;
+            return song.spotifyID.equals(this.spotifyID);
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        int code = 0;
+        try {
+            code = Integer.parseInt(this.spotifyID);
+        } catch (NumberFormatException e){
+            System.err.println("Invalid Spotify ID ::" + e.getMessage());
+        }
+        return code;
+    }
+
+
     
 }

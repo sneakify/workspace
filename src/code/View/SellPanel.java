@@ -3,6 +3,8 @@ package code.View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.HashMap;
 
 import javax.swing.*;
@@ -14,6 +16,7 @@ import code.Model.Song;
  */
 class SellPanel extends TransactionPanel implements ActionListener {
     JTextField sharesToSell = new JTextField();
+    JLabel earningsLabel;
     JButton sellButton = new JButton("Sell");
 
     /**
@@ -24,15 +27,6 @@ class SellPanel extends TransactionPanel implements ActionListener {
      */
     SellPanel(MainFrame mainFrame, Song song) {
         super(mainFrame, song);
-
-        JPanel shareInfoPanel = new JPanel(new BorderLayout());
-
-        HashMap<Song, Integer> portfolio = this.mainFrame.model.user_port(this.user);
-        int sharesOwned = portfolio.get(this.song);
-        JLabel numShares = new JLabel("# Shares: " + sharesOwned + " shares");
-        numShares.setFont(this.labelFont);
-        shareInfoPanel.add(numShares, BorderLayout.WEST);
-        this.add(shareInfoPanel);
 
         this.makeSellSubPanel();
     }
@@ -54,13 +48,35 @@ class SellPanel extends TransactionPanel implements ActionListener {
         JLabel sellLabel = new JLabel("Sell");
         sellLabel.setFont(this.labelFont);
 
+        HashMap<Song, Integer> portfolio = this.mainFrame.model.user_port(this.user);
+        int sharesOwned = portfolio.get(this.song);
+        JLabel numShares = new JLabel("Shares Owned: " + sharesOwned + " shares");
+        numShares.setFont(this.labelFont);
+
         this.sharesToSell.setText("# shares");
+        this.sharesToSell.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                int parsed = parseTextField();
+                updateTotalEarnings(parsed);
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                this.keyTyped(e);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
 
         int sharesToSellInt = this.parseTextField();
 
         double earnings = (double) sharesToSellInt * this.song.getSongValue();
-        JLabel earningsLabel = new JLabel("Total Earnings: $" + earnings);
-        earningsLabel.setFont(this.labelFont);
+        this.earningsLabel = new JLabel("  Total Earnings: $" + earnings + "  ");
+        this.earningsLabel.setFont(this.labelFont);
 
         this.sellButton.addActionListener(this);
 
@@ -68,9 +84,11 @@ class SellPanel extends TransactionPanel implements ActionListener {
         constraints.gridy = 0;
         sellSubPanel.add(sellLabel, constraints);
         constraints.gridy++;
+        sellSubPanel.add(numShares, constraints);
+        constraints.gridy++;
         sellSubPanel.add(this.sharesToSell, constraints);
         constraints.gridx++;
-        sellSubPanel.add(earningsLabel, constraints);
+        sellSubPanel.add(this.earningsLabel, constraints);
         constraints.gridx++;
         sellSubPanel.add(this.sellButton, constraints);
     }
@@ -90,6 +108,16 @@ class SellPanel extends TransactionPanel implements ActionListener {
     }
 
     /**
+     * Updates label showing total earnings.
+     *
+     * @param numShares number of shares to sell
+     */
+    private void updateTotalEarnings(int numShares) {
+        double earnings = (double) numShares * this.song.getSongValue();
+        this.earningsLabel.setText("  Total Earnings: $" + earnings + "  ");
+    }
+
+    /**
      * Attempts to parse input field.
      * @return 0 or valid number
      */
@@ -98,6 +126,6 @@ class SellPanel extends TransactionPanel implements ActionListener {
         try {
             i = Integer.parseInt(this.sharesToSell.getText());
         } catch (NumberFormatException e) { }
-        return 0;
+        return i;
     }
 }
