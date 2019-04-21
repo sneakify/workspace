@@ -15,6 +15,10 @@ public class Model implements DatabaseAPI {
     public User myUser;
     private HashMap<Song, Integer> allTheSongs;
 
+    /**
+     * Constructor, calls authenticate and stores values
+     * @param userID the UserID of the user you want to select
+     */
     public Model(int userID) {
         // Authenticate your access to the server.
         this.authenticate(Login.usr, Login.pword);
@@ -29,14 +33,17 @@ public class Model implements DatabaseAPI {
         // get all them songs
         List<Song> all = this.existingSongs(today);
 
-        System.out.println("list o all songs" + all.toString()); // TODO - delete this
-
         // put all them songs in a hashmap
         for (Song s: all) {
             allTheSongs.putIfAbsent(s, s.getSongValue());
         }
     }
 
+    /**
+     * Get's a User from the database given a userID
+     * @param userID
+     * @return
+     */
     private User getUser(int userID) {
         User u = null;
         try {
@@ -66,31 +73,22 @@ public class Model implements DatabaseAPI {
         return u;
     }
 
-    ////////////////////
-
+    @Override
     public void authenticate(String user, String password) {
-        System.out.println(user + "::" + password);
-        dbu = new DBUtils("jdbc:mysql://localhost:3306/spootify?serverTimezone=EST5EDT", user, password);
+        dbu = new DBUtils(Login.url, user, password);
         System.out.println(dbu.connectedHuh());
     }
 
-
+    /**
+     * Gets today's date in the java.sql.Date format and returns it
+     * @return today's java.sql.Date
+     */
     public java.sql.Date todayDateSQL() {
         // get today's date in the correct format yo
         java.util.Date utilDate = new java.util.Date();
         java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 
         return sqlDate;
-    }
-
-
-    /**
-     * Insert The Songs for This Day
-     * @param loSongYo Song
-     */
-    public void insertTodaySongs(List<Song> loSongYo) {
-        // TODO stuff pls stub
-        System.out.println("Oops tried to do a dummy method");
     }
 
     /**
@@ -199,7 +197,6 @@ public class Model implements DatabaseAPI {
                     "," + "'" + u.getPassword() + "'" +
                     "," + "'" + u.getCreatedDate() + "'" +
                     "," + u.getPurchasing_power() + ");";
-            System.out.println(sqlInsert);
 
             status = st.executeUpdate(sqlInsert);
 
@@ -213,61 +210,22 @@ public class Model implements DatabaseAPI {
         return status;
     }
 
-//    /**
-//     * Register a new day of charts
-//     * @param date The date of the chart to be input
-//     * @return The newly created chart ID or -1 if chart already exists at that date
-//     */
-//    public int registerNewDayOfCharts(String date) {
-//        // TODO stuff pls stub
-//        return 1;
-//
-//    }
-
-
     /**
      * Get or insert on album
      * @param albumName The albumName
      * @return ID of a new or existing album.
      */
     public int getOrInsertAlbumID(String albumName) {
-        // TODO stuff pls stub
         return dbu.getOrInsertTerm("album", "album_id", "album_name", albumName);
     }
-
-
-    ///////////////////////////////////////////////////////////////////////
-
 
     /**
      * Close the connection when application finishes
      */
     public void closeConnection() { dbu.closeConnection(); }
-    //
-//    /**
-//     * Register a new patient
-//     * @param p The patient
-//     * @return The newly created patient ID or -1 if patient already exists
-//     */
-//    public int registerPatient(Patient p)
-//    {
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        String sql = "INSERT INTO patient (lastname,firstname,sex,dob) VALUES" +
-//                    "('"+p.getLastName()+"','"+p.getFirstName()+"','"+p.getSex()+"','"+sdf.format(p.getDob())+"')";
-//        return dbu.insertOneRecord(sql);
-//    }
-//
 
 
-
-    /**
-     * inserts new user into database
-     * @param name
-     * @param username
-     * @param email
-     * @param password
-     * inserts a new row into the user table based off of the new user created
-     */
+    @Override
     public void new_user(String name, String username, String email, String password) {
         String sql = "INSERT INTO user Value (" + name + "," + username + "," + email + "," + password + ", CURDATE(), 5000)";
         try {
@@ -286,25 +244,13 @@ public class Model implements DatabaseAPI {
         }
     }
 
-
-    /**
-     * inserts purchases from users into database
-     * @param u, given user
-     * @param s, given song
-     * @param n, number of shares
-     * inserts into the buy table a new row that logs the info about the purchase made
-     */
-   
+    @Override
     public void buy_shares(User u, Song s, int n) {
-        System.out.println("This is the thing" + u.toString() + s.toString() + String.valueOf(n));
-
-
         String sql = "INSERT INTO buy (user_id, spotify_id, price, n_shares, purchase_time) VALUES"
                 + "('" + u.getUserID() + "," + s.getSpotifyID() + ","
                 + "SELECT song_value FROM song WHERE spotify_id =" + s.getSpotifyID() + ","
                 + "CURRENT_TIMESTAMP)";
         try {
-
             // get connection and initialize statement
             Connection con = dbu.getConnection();
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -319,30 +265,21 @@ public class Model implements DatabaseAPI {
         }
     }
 
-    /**
-     * inserts sales from users into database
-     * @param u, given user
-     * @param s, given song
-     * @param n, number of shares
-     * inserts into the sell table a new row that logs the info about the sale
-     */
+    @Override
     public void sell_shares(User u, Song s, int n) {
-        System.out.println("This is the thing" + u.toString() + s.toString() + String.valueOf(n));
-
         String sql = "INSERT INTO sell (user_id, spotify_id, price, n_shares, sale_time) VALUES" + "('"
                 + u.getUserID() + "," + s.getSpotifyID() + ","
                 + ", SELECT song_value FROM song WHERE spotify_id =" + s.getSpotifyID() + ","
                 + "CURRENT_TIMESTAMP)";
 
         try {
-
             // get connection and initialize statement
             Connection con = dbu.getConnection();
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.executeUpdate(sql);
-
             // cleanup
             stmt.close();
+
         } catch (SQLException e) {
             System.err.println("ERROR: Coult not complete sale:" + sql);
             System.err.println(e.getMessage());
@@ -350,11 +287,7 @@ public class Model implements DatabaseAPI {
         }
     }
 
-    /**
-     *  returns album name of given song
-     * @param s, the given song
-     * @return the album of the song as a String
-     */
+    @Override
     public String song_album(Song s) {
 
         String value = null;
@@ -382,13 +315,8 @@ public class Model implements DatabaseAPI {
         return value;
     }
 
-    /**
-     *  returns artist name of given song
-     * @param s, the given song
-     * @return the artist of the song as a String
-     */
+    @Override
     public String song_artist(Song s) {
-
         String value = null;
         try {
             Connection con = dbu.getConnection();
@@ -411,13 +339,7 @@ public class Model implements DatabaseAPI {
         return value;
     }
 
-    // returns the past 7 days of the given song's history
-    /**
-     * Returns the song value history of the given Song in the form of a HashMap of String(date) to Integer, The Integer represents the
-     * song value for that date (for that user).
-     * @param s the given song
-     * @return The Hashmap of date to portfolio value
-     */
+    @Override
     public HashMap<String, Integer> song7(Song s) {
 
         HashMap<String, Integer> h = new HashMap<String, Integer>();
@@ -444,13 +366,7 @@ public class Model implements DatabaseAPI {
         return h;
     }
 
-    //returns the past 7 days of the given user's portfolio
-    /**
-     * Returns the portfolio value history of the given User in the form of a HashMap of String(date) to Integer, The Integer represents the
-     * portfolio value for that date (for that user).
-     * @param u the given user, active-buyer-person
-     * @return The Hashmap of date to portfolio value
-     */
+    @Override
     public HashMap<String, Integer> user7(User u) {
 
         HashMap<String, Integer> h = new HashMap<String, Integer>();
@@ -477,14 +393,7 @@ public class Model implements DatabaseAPI {
         return h;
     }
 
-    // returns given user's current portfolio
-
-    /**
-     * Returns the portfolio of the given User in the form of a HashMap of Songs to Integer, The Integer represents the
-     * Number of shares for that Song (for that user).
-     * @param u the given user, active-buyer-person
-     * @return The Hashmap of Song to number of shares
-     */
+    @Override
     public HashMap<Song, Integer> user_port(User u) {
 
         HashMap<Song, Integer> h = new HashMap<Song, Integer>();
@@ -516,7 +425,6 @@ public class Model implements DatabaseAPI {
                 Song temp = new Song(spotify_id, title, artist_id, song_value, album_id);
 
                 h.put(temp, owned);
-
             }
             rs.close();
             stmt.close();
@@ -527,11 +435,7 @@ public class Model implements DatabaseAPI {
         return h;
     }
 
-    /**
-     * returns the value of the given user's portfolio
-     * @param u, the given user
-     * @return the value of the given user's portfolio as an int
-     */
+    @Override
     public int port_value(User u) {
 
         Integer n = null;
@@ -572,10 +476,7 @@ public class Model implements DatabaseAPI {
         return n;
     }
 
-    /**
-     * returns list of all songs
-     * @return an ArrayList that contains all songs
-     */
+    @Override
     public ArrayList<Song> all_songs() {
         ArrayList<Song> mylist = new ArrayList<Song>();
 
@@ -607,11 +508,7 @@ public class Model implements DatabaseAPI {
         return mylist;
     }
 
-    /**
-     * returns the genre of the given song
-     * @param s, the given song object
-     * @return the genre of the song as a String
-     */
+    @Override
     public String song_genre(Song s) {
 
         String value = null;
@@ -638,19 +535,12 @@ public class Model implements DatabaseAPI {
         return value;
     }
 
-
-    /**
-     *  updates the email and password of given user
-     * @param u, given user
-     * @param email, the new email the user would like to use
-     * @param password, the new password the user wants
-     */
+    @Override
     public void update_user(User u, String email, String password) {
         String sql = "Update user " +
                 "Set email = "+ email+", password = "+password +
                 " Where user_id = "+ u.getUserID()+";";
         try {
-
             // get connection and initialize statement
             Connection con = dbu.getConnection();
             PreparedStatement stmt = con.prepareStatement(sql);
