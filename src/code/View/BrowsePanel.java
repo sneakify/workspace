@@ -20,7 +20,10 @@ import code.Model.Song;
 class BrowsePanel extends ContentPanel implements ActionListener, MouseListener {
   // chart to display as table
   private JTable chart;
-  private DefaultTableModel tableModel;
+  // column headers
+  String[] columnNames;
+  // custom table mode
+  TableModel tableModel;
   // row of each song title in table
   private HashMap<Integer, Song> rowToSong;
 
@@ -51,10 +54,10 @@ class BrowsePanel extends ContentPanel implements ActionListener, MouseListener 
     JLabel chartTitle = new JLabel("U.S. Top 50");
     chartTitle.setFont(this.font);
     this.add(chartTitle, BorderLayout.CENTER);
-    String[] columnNames = {"Song", "Artist", "Daily Plays", "Stock Price", "% Change"}; // TODO % change if time permits (unable to figure it out)
+    this.columnNames = new String[]{"Song", "Artist", "Daily Plays", "Stock Price", "% Change"}; // TODO % change if time permits (unable to figure it out)
 
     // custom table model to make cells uneditable to user
-    this.tableModel = new DefaultTableModel(new Object[50][5], columnNames) {
+    DefaultTableModel tableModel = new DefaultTableModel(new Object[50][5], this.columnNames) {
       @Override
       public boolean isCellEditable(int row, int column) {
         return false;
@@ -140,7 +143,7 @@ class BrowsePanel extends ContentPanel implements ActionListener, MouseListener 
    */
   private void populateChart(ArrayList<Song> list) {
     this.rowToSong = new HashMap<Integer, Song>();
-    this.chart = new JTable(this.tableModel);
+    this.chart.removeAll();
     for (int row = 0; row < list.size(); row++) {
       Song song = list.get(row);
       for (int col = 0; col <= 4; col++) {

@@ -18,6 +18,8 @@ import code.Model.Song;
 class PortfolioPanel extends ContentPanel implements MouseListener {
     // chart to display as table
     private JTable stocks;
+    // column headers
+    String[] columnNames;
   // row of each song title in table
   private HashMap<Integer, Song> rowToSong;
 
@@ -48,10 +50,10 @@ class PortfolioPanel extends ContentPanel implements MouseListener {
         JLabel tableTitle = new JLabel("Your Stocks");
         tableTitle.setFont(this.font);
         this.add(tableTitle, BorderLayout.CENTER);
-        String[] columnNames = {"Song", "# Shares", "Daily Plays", "Stock Price", "% Change"}; // TODO % change if time permits (unable to figure it out)
+        this.columnNames = new String[]{"Song", "# Shares", "Daily Plays", "Stock Price", "% Change"}; // TODO % change if time permits (unable to figure it out)
 
         // custom table model to make cells uneditable to user
-        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0) {
+        DefaultTableModel tableModel = new DefaultTableModel(new Object[50][5], this.columnNames) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
